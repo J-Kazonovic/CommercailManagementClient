@@ -21,8 +21,12 @@ export class LoginFormComponent implements OnInit {
   doLogin() {
     let resp = this.loginService.login(this.username, this.password);
     resp.subscribe(data => {
-      console.log(data);
-      this.router.navigate(["/stuf-dashboard"]);
+      console.log(data[0]["authority"]);
+      if(data[0]["authority"]==="ROLE_CHEF"){
+        this.router.navigate(["/chef-dashboard"]);
+      }else if(data[0]["authority"]==="ROLE_STUF"){
+        this.router.navigate(["/stuf-dashboard"]);
+      }
     
     });
   }

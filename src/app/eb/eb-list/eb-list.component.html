@@ -1,10 +1,10 @@
 <div class="card shadow mt-3 mb-3">
     <div class="card-header">
-        Today's Demande des besoin
+        Tout les Expressions Des Besoin 
     </div>
     <div class="card-body table-responsive">
         <table class="table table-dark">
-            <thead class="thead-inverse">
+            <thead>
                 <tr>
                     <th>Title</th>
                     <th>Created At</th>
@@ -35,8 +35,9 @@
             </tbody>
         </table>
     </div>
-    <div class="card-footer bg-dark text-muted">
+    <div class="card-footer text-muted" style="background-color: darkgray;">
         <app-ebp-list></app-ebp-list>
+        <button style="float: right;" type="button" class="btn btn-outline-light" (click)="onEbpUpdate()">Save</button>
     </div>
 </div>
 

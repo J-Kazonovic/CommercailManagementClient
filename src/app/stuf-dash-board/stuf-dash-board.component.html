@@ -1,29 +1,32 @@
 <div class="d-flex" id="wrapper">
 
-    <!-- Sidebar -->
-    <div class="bg-dark border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading" style="color: white;">DashBoard</div>
-      <hr style="color: white;">
-      <div class="list-group list-group-flush">
-        <a style="color: white;" [routerLink]="[{ outlets: {dashboard:['eb-create'] } }]"  class="list-group-item list-group-item-action bg-dark"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter Une Nouvelle Expression</a>
-        <a style="color: white;" [routerLink]="[{ outlets: {dashboard:['eb-list'] } }]"  class="list-group-item list-group-item-action bg-dark"><i class="fa fa-list" aria-hidden="true"></i> List Des Expression</a>
-        
-      </div>
-    </div>
-    <!-- /#sidebar-wrapper -->
+  <!-- Sidebar -->
+  <div class="bg-dark border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading" style="color: white;">DashBoard</div>
+    <hr style="color: white;">
+    <div class="list-group list-group-flush">
+      <a style="color: white;" [routerLink]="[{ outlets: {dashboard:['eb-create'] } }]"
+        class="list-group-item list-group-item-action bg-dark"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter Une
+        Nouvelle Expression</a>
+      <a style="color: white;" [routerLink]="[{ outlets: {dashboard:['eb-list'] } }]"
+        class="list-group-item list-group-item-action bg-dark"><i class="fa fa-list" aria-hidden="true"></i> List Des
+        Expression</a>
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-      <app-top-nav></app-top-nav>
-      <div class="container-fluid">
-        <router-outlet  name="dashboard"></router-outlet>
-      </div>
     </div>
-    <!-- /#page-content-wrapper -->
-
   </div>
-  <!-- /#wrapper -->
+  <!-- /#sidebar-wrapper -->
 
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom mb-3">
+      <button class="btn btn-primary mr-2" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></button>
+      <span>  <h2 style="color: white;">STUF DashBoard, Welcom {{username}}</h2></span>
+    </nav>
+    <div class="container-fluid">
+      <router-outlet name="dashboard"></router-outlet>
+    </div>
+  </div>
+  <!-- /#page-content-wrapper -->
 
-
- 
+</div>
+<!-- /#wrapper -->

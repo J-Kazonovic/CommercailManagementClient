@@ -13,7 +13,6 @@ import { HttpClientModule } from '@angular/common/http';
 /*Component*/
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './Login/login-form/login-form.component';
-import { TopNavComponent } from './stuf-dash-board/top-nav/top-nav.component';
 import { SignupFormComponent } from './Login/signup-form/signup-form.component';
 import { EbCreateComponent } from './eb/eb-create/eb-create.component';
 import { EbListComponent } from './eb/eb-list/eb-list.component';
@@ -29,7 +28,6 @@ import { StufDashBoardComponent } from './stuf-dash-board/stuf-dash-board.compon
   declarations: [ 
     AppComponent,
     LoginFormComponent,
-    TopNavComponent,
     SignupFormComponent,
     EbCreateComponent,
     EbListComponent,

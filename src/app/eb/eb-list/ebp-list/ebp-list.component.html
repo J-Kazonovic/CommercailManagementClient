@@ -1,5 +1,5 @@
-<table class="table table-light table-hover">
-    <thead class="">
+<table class="table table-bordered table-hover">
+    <thead >
         <tr>
             <th>Produit</th> 
             <th>Desc</th>
@@ -17,8 +17,8 @@
             <tr *ngFor="let ebp of ebpList">
                 <td>{{ebp.produit}}</td>
                 <td>{{ebp.product_desc}}</td>
-                <td>{{ebp.qteDemande}}</td>
-                <td>{{ebp.qteDemande}}</td>
+                <td><input type="number" [(ngModel)]=ebp.qteDemande class="form-control"></td>
+                <td><input type="number" [(ngModel)]=ebp.qteAccorde class="form-control"></td>
                 <td> <button class="btn btn-danger fa fa-trash" (click)="onEbpDelete(ebp)" type="button"></button></td>   
             </tr>
         </tbody>

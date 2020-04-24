@@ -8,17 +8,20 @@ import { StufDashBoardComponent } from './stuf-dash-board/stuf-dash-board.compon
 
 
 const routes: Routes = [
-  {path:"",redirectTo:"login",pathMatch:"full"},
-  {path:"login",component:LoginFormComponent},
- 
-  {path:"chef-dashboard",component:ChefDashBoardComponent,children:[
-     {path:"eb-create",component:EbCreateComponent,outlet:"dashboard"},
-  {path:"eb-list",component:EbListComponent,outlet:"dashboard"},
-  ]},
-  {path:"stuf-dashboard",component:StufDashBoardComponent,children:[
-    {path:"eb-create",component:EbCreateComponent,outlet:"dashboard"},
-    {path:"eb-list",component:EbListComponent,outlet:"dashboard"},
-  ]}
+  { path: "", redirectTo: "login", pathMatch: "full" },
+  { path: "login", component: LoginFormComponent },
+
+  {
+    path: "chef-dashboard", component: ChefDashBoardComponent, children: [
+      { path: "eb-list", component: EbListComponent, outlet: "dashboard" },
+    ]
+  },
+  {
+    path: "stuf-dashboard", component: StufDashBoardComponent, children: [
+      { path: "eb-create", component: EbCreateComponent, outlet: "dashboard" },
+      { path: "eb-list", component: EbListComponent, outlet: "dashboard" },
+    ]
+  }
 ];
 
 @NgModule({
