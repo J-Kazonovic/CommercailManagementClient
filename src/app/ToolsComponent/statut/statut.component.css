@@ -1,0 +1,10 @@
+span{
+    color: white;
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.Achat {background-color: #4CAF50;} /* Green */
+.Valider {background-color: #2196F3;} /* Blue */
+.Decision {background-color: #ff9800;} /* Orange */
+.Refuser{background-color: red;}

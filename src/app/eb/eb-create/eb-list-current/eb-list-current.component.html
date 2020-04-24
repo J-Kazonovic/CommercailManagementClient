@@ -1,0 +1,34 @@
+<div class="card shadow">
+    <div class="card-header">
+        Today's Demande des besoin
+    </div>
+    <div class="card-body">
+        <table class="table table-dark table-respnsive">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Title</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="ebListCurrent.length==0">
+                    <td class="alert alert-secondary" colspan="4" role="alert">
+                        No data to display.
+                    </td>
+                </tr>
+                <tr *ngFor="let eb of ebListCurrent">
+                    <td>{{eb.title}}</td>
+                    <td>
+                        <button class="btn btn-danger fa fa-trash mr-2" (click)="onEbDelete(eb)"></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer text-muted">
+        Footer
+    </div>
+</div>
+
+
+

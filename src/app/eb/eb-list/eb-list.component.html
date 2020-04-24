@@ -1,0 +1,45 @@
+<div class="card shadow mt-3 mb-3">
+    <div class="card-header">
+        Today's Demande des besoin
+    </div>
+    <div class="card-body table-responsive">
+        <table class="table table-dark">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Title</th>
+                    <th>Created At</th>
+                    <th>Last Update</th>
+                    <th>Statu</th>
+                    <th>Departement</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="ebList.length==0">
+                    <td class="alert alert-secondary" colspan="6" role="alert">
+                        No data to display.
+                    </td>
+                </tr>
+                <tr *ngFor="let eb of ebList">
+                    <td>{{eb.title}}</td>
+                    <td>{{eb.saveDate}}</td>
+                    <td>{{eb.lastUpDate}}</td>
+                    <td><app-statut [statut]="eb.statut"></app-statut></td>
+                    <td>{{eb.dept.libelle}}</td>
+                    <td>
+                        <button class="btn btn-danger fa fa-trash mr-2" (click)="onEbDelete(eb)"></button>
+                        <button class="btn btn-primary fa fa-eye mr-2" (click)="onEbShow(eb)" ></button>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer bg-dark text-muted">
+        <app-ebp-list></app-ebp-list>
+    </div>
+</div>
+
+
+
+

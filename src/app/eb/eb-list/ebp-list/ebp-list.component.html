@@ -1,0 +1,25 @@
+<table class="table table-light table-hover">
+    <thead class="">
+        <tr>
+            <th>Produit</th> 
+            <th>Desc</th>
+            <th>Q-Demander</th>
+            <th>Q-Accorder</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="ebpList.length==0">
+                <td class="alert alert-secondary" colspan="5" role="alert">
+                    No data to display.
+                </td>
+            </tr>
+            <tr *ngFor="let ebp of ebpList">
+                <td>{{ebp.produit}}</td>
+                <td>{{ebp.product_desc}}</td>
+                <td>{{ebp.qteDemande}}</td>
+                <td>{{ebp.qteDemande}}</td>
+                <td> <button class="btn btn-danger fa fa-trash" (click)="onEbpDelete(ebp)" type="button"></button></td>   
+            </tr>
+        </tbody>
+</table>
