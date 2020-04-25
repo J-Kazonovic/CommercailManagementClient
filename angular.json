@@ -28,7 +28,7 @@
               "node_modules/font-awesome/css/font-awesome.css",
               "src/styles.css"
             ],
-            "scripts": [      
+            "scripts": [
               "node_modules/jquery/dist/jquery.min.js"
             ]
           },
@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "GestionCommercail"
+    }
+  },
+  "defaultProject": "GestionCommercail",
+  "cli": {
+    "analytics": "8a23f377-e4f3-4bad-b632-9dfedae1363b"
+  }
 }

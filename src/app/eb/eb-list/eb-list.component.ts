@@ -10,7 +10,9 @@ import { Ebp } from 'src/app/controller/entity/ebp.model';
   styleUrls: ['./eb-list.component.css']
 })
 export class EbListComponent implements OnInit {
-
+  date: string;
+  libelle: string
+  cin: string
   public ebUpdate: Eb;
   public ebDate: Date;
 
@@ -46,7 +48,15 @@ export class EbListComponent implements OnInit {
   }
   /**Events */
 
-
+  getEbBySaveDate() {
+    return this.ebService.getEbBySaveDate(this.date);
+  }
+  getEbByEntite() {
+    this.ebService.getEbByEntite(this.libelle);
+  }
+  getEbByPersonnel() {
+    this.ebService.getEbByPersonnel(this.cin);
+  }
   /** Getter */
   get eb(): Eb {
     return this.ebService.eb;

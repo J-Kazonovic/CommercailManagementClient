@@ -32,7 +32,21 @@ export class EbpService {
   set ebpList(value: Array<Ebp>) {
 		this._ebpList = value;
   }
- 
+  onEbpDelete(ebp:Ebp){
+    const i=this.ebpList.findIndex(e=>e.produit===ebp.produit);
+    if(i!==-1){
+      this.ebpList.splice(i,1);
+    }
+  }
+  public deleteProduct(ebp:Ebp) {
+    this.ebHttp.delete<number>(this.url+ebp.produit).subscribe(
+      data => {
+        this.onEbpDelete(ebp);
+      }, error => {
+        console.log('erreur');
+      }
+    );
+  }
   /** Getter & Setter*/
 
 

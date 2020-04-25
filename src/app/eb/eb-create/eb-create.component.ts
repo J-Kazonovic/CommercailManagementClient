@@ -9,7 +9,6 @@ import {formatDate} from '@angular/common';
   styleUrls: ['./eb-create.component.css']
 })
 export class EbCreateComponent implements OnInit {
-
   constructor(private ebService:EbService) { }
 
   ngOnInit(): void {

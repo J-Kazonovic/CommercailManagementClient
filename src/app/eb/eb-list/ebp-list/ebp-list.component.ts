@@ -18,11 +18,8 @@ export class EbpListComponent implements OnInit {
     return this.ebpService.ebpList;
   }
 
-  onEbpDelete(ebp:Ebp){
-    const i=this.ebpList.findIndex(e=>e.produit===ebp.produit);
-    if(i!==-1){
-      this.ebpList.splice(i,1);
-    }
+  public deleteProduct(ebp:Ebp) {
+    this.ebpService.deleteProduct(ebp);
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Ebp } from 'src/app/controller/entity/ebp.model';
 import { EbService } from 'src/app/controller/service/eb.service';
+import { EbpService } from 'src/app/controller/service/ebp.service';
 declare var $:any;
 @Component({
   selector: 'app-ebp-list-current',
@@ -10,7 +11,7 @@ declare var $:any;
 export class EbpListCurrentComponent implements OnInit {
  
 
-  constructor(private ebService:EbService) { }
+  constructor(private ebService:EbService, private ebpService:EbpService) { }
 
   ngOnInit(): void {
    
@@ -20,11 +21,9 @@ export class EbpListCurrentComponent implements OnInit {
     return this.ebService.ebpListCurrent;
   }
 
-  onEbpDelete(ebp:Ebp){
-    const i=this.ebpListCurrent.findIndex(e=>e.produit===ebp.produit);
-    if(i!==-1){
-      this.ebpListCurrent.splice(i,1);
-    }
+  public deleteProduct(ebp:Ebp) {
+    this.ebpService.deleteProduct(ebp);
   }
+
 
 }

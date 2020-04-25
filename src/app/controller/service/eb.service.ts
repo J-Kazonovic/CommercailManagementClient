@@ -71,7 +71,7 @@ export class EbService {
   }
 
   getEbByEntite(libelle: string) {
-    this.ebHttp.get<Array<Eb>>(this.url + "/entite/" + libelle).subscribe(
+    this.ebHttp.get<Array<Eb>>(this.url + "entite/" + libelle).subscribe(
       data => {
         this.ebList = data;
       }, error => {
@@ -81,7 +81,7 @@ export class EbService {
   }
 
   getEbByPersonnel(cin: string) {
-    this.ebHttp.get<Array<Eb>>(this.url + "/personnel/" + cin).subscribe(
+    this.ebHttp.get<Array<Eb>>(this.url + "personnel/" + cin).subscribe(
       data => {
         this.ebList = data;
       }, error => {
@@ -93,7 +93,7 @@ export class EbService {
   getEbBySaveDate(date: String) {
     return this.ebHttp.get<Array<Eb>>(this.url + "date/" + date).subscribe(
       data => {
-        this.ebListCurrent = data;
+        this.ebList = data;
       }, error => {
         console.log("error" + error);
       }
