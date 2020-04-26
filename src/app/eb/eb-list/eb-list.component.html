@@ -1,17 +1,14 @@
 <div class="card shadow mt-3 mb-3">
     <div class="container">
-        <div class="row">
+        <div class="row" >
           <div class="col-md-4">
-            <input type="text" class="form-control"  placeholder="enter la date " [(ngModel)]=date>
-            <button id="btn1" class="btn btn-block  fa fa-calendar" (click)="getEbBySaveDate()"></button>
+            <input type="date" class="form-control" (change)="getEbBySaveDate()"  [(ngModel)]=date>
           </div>
           <div class="col-md-4">
-            <input type="text" class="form-control"  placeholder="enter le libelle" [(ngModel)]=libelle>
-            <button id="btn1" class="btn btn-block fa fa-archive" (click)="getEbByEntite()" ></button>
+            <input type="text" class="form-control" (change)="getEbByEntite()"  placeholder="enter le libelle" [(ngModel)]=libelle>
           </div>
           <div class="col-md-4">
-            <input type="text" class="form-control"  placeholder="enter le cin du chef" [(ngModel)]=cin>
-            <button id="btn1" class="btn btn-block  fa fa-address-book" (click)="getEbByPersonnel()" ></button>
+            <input type="text" class="form-control" (change)="getEbByPersonnel()"  placeholder="enter le cin du chef" [(ngModel)]=cin>
           </div>
         </div>
       </div>

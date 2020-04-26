@@ -3,16 +3,15 @@ import { EbService } from 'src/app/controller/service/eb.service';
 import { EbpService } from 'src/app/controller/service/ebp.service';
 import { Eb } from 'src/app/controller/entity/eb.model';
 import { Ebp } from 'src/app/controller/entity/ebp.model';
-
 @Component({
   selector: 'app-eb-list',
   templateUrl: './eb-list.component.html',
   styleUrls: ['./eb-list.component.css']
 })
 export class EbListComponent implements OnInit {
-  date: string;
-  libelle: string
-  cin: string
+   date: string;
+   libelle: string
+   cin: string
   public ebUpdate: Eb;
   public ebDate: Date;
 
@@ -57,6 +56,7 @@ export class EbListComponent implements OnInit {
   getEbByPersonnel() {
     this.ebService.getEbByPersonnel(this.cin);
   }
+
   /** Getter */
   get eb(): Eb {
     return this.ebService.eb;
