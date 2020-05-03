@@ -13,6 +13,8 @@ import { Personnel } from 'src/app/controller/entity/personnel.model';
   styleUrls: ['./eb-list.component.css']
 })
 export class EbListComponent implements OnInit {
+
+  valider = "Valider";
   date: string;
   libelle: string;
   cin: string;
@@ -21,8 +23,8 @@ export class EbListComponent implements OnInit {
 
   constructor(private ebService: EbService
     , private ebpService: EbpService
-    ,private deptService:DeptService
-    ,private personnelService:PersonnelService) { }
+    , private deptService: DeptService
+    , private personnelService: PersonnelService) { }
 
   ngOnInit() {
     this.onShowAll();
@@ -47,6 +49,7 @@ export class EbListComponent implements OnInit {
 
   onEbpUpdate() {
     this.ebUpdate.ebp = this.ebpList;
+    this.ebUpdate.statut = this.valider;
     this.ebService.updateEb(this.ebUpdate);
   }
 
@@ -77,13 +80,13 @@ export class EbListComponent implements OnInit {
   }
 
   public get deptList(): Array<Dept> {
-		return this.deptService.deptList;
+    return this.deptService.deptList;
   }
-  
+
   public get personnelList(): Array<Personnel> {
 
-		return this.personnelService.personnelList;
-	}
+    return this.personnelService.personnelList;
+  }
   /** Getter */
 
 

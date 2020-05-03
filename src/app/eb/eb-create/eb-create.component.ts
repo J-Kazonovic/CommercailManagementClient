@@ -11,7 +11,8 @@ import {formatDate} from '@angular/common';
 export class EbCreateComponent implements OnInit {
 
   decision="Decision";
-  valider="Valider";
+
+ 
   constructor(private ebService:EbService) { }
 
   ngOnInit(): void {

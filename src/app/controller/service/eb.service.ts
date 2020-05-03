@@ -39,8 +39,7 @@ export class EbService {
     this.ebHttp.put<number>(this.url, eb).subscribe(
       data => {
         if (data == 1) {
-          //this.cin=eb.personnel.cin;
-          //this.getEbByPersonnel(this.cin);
+          this.getAllEb();
         }
       }, error => {
         console.log(error);
