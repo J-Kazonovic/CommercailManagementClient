@@ -9,6 +9,9 @@ import {formatDate} from '@angular/common';
   styleUrls: ['./eb-create.component.css']
 })
 export class EbCreateComponent implements OnInit {
+
+  decision="Decision";
+  valider="Valider";
   constructor(private ebService:EbService) { }
 
   ngOnInit(): void {
@@ -17,7 +20,7 @@ export class EbCreateComponent implements OnInit {
 
   /**Events */
   onSaveEb() {
-    this.eb.statut="Decision";
+    this.eb.statut=this.decision;
     this.ebService.onSaveEb();
     this.ebService.getEbBySaveDate(formatDate(new Date(), 'yyyy-MM-dd', 'en'));
 

@@ -7,7 +7,9 @@ import { Ebp } from '../entity/ebp.model';
   providedIn: 'root'
 })
 export class EbService {
+
   private url = "http://localhost:8090/ebs/";
+
 
 
   private _eb: Eb;
@@ -23,8 +25,6 @@ export class EbService {
     this.ebHttp.post<number>(this.url, eb).subscribe(
       data => {
         if (data == 1) {
-          //this.cin=eb.personnel.cin;
-          //this.getEbByPersonnel(this.cin);
           this.ebpListCurrent = null;
           this.eb = null;
         }
@@ -151,13 +151,10 @@ export class EbService {
     }
 		return this._ebListCurrent;
 	}
-
    
 	public set ebListCurrent(value: Array<Eb>) {
 		this._ebListCurrent = value;
 	}
-
-
 
   get ebp(): Ebp {
     if (this._ebp == null) {
@@ -176,7 +173,6 @@ export class EbService {
     }
     return this._ebpListCurrent;
   }
-
 
   public set ebpListCurrent(value: Array<Ebp>) {
     this._ebpListCurrent = value;
