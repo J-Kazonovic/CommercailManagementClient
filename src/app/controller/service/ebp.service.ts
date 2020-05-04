@@ -15,11 +15,21 @@ export class EbpService {
 
 
   
-  /**Http Requests/Response*/
+  /**Http*/
   getEbpByEb(ebID:number){
     return this.ebHttp.get<Array<Ebp>>(this.url+ebID);
   }
-  /**Http Requests/Response*/
+
+  deleteProduct(ebp:Ebp) {
+    this.ebHttp.delete<number>(this.url+"libelle/"+ ebp.produit.libelle).subscribe(
+      data => {
+        this.onEbpDelete(ebp,this.ebpList);
+      }, error => {
+        console.log(error);
+      }
+    );
+  }
+  /**Http*/
  
   /** Getter & Setter*/
   get ebpList(): Array<Ebp> {
@@ -27,27 +37,18 @@ export class EbpService {
       this._ebpList=new Array<Ebp>();
     }
 		return this._ebpList;
-  }
-  
+  } 
   set ebpList(value: Array<Ebp>) {
 		this._ebpList = value;
   }
-  onEbpDelete(ebp:Ebp){
-    const i=this.ebpList.findIndex(e=>e.produit===ebp.produit);
+  /** Getter & Setter*/
+
+  onEbpDelete(ebp:Ebp,ebpList:Array<Ebp>){
+    const i=ebpList.findIndex(e=>e.produit.libelle===ebp.produit.libelle);
     if(i!==-1){
-      this.ebpList.splice(i,1);
+      ebpList.splice(i,1);
     }
   }
-  public deleteProduct(ebp:Ebp) {
-    this.ebHttp.delete<number>(this.url+ebp.produit).subscribe(
-      data => {
-        this.onEbpDelete(ebp);
-      }, error => {
-        console.log('erreur');
-      }
-    );
-  }
-  /** Getter & Setter*/
 
 
 }

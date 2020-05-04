@@ -2,7 +2,7 @@ import { Eb } from './eb.model';
 import { Product } from './product.model';
 
 export class Ebp {
-    produit:String;
+    produit=new Product();
 	eb:Eb;
 	qteDemande:number;
 	qteAccorde:number;

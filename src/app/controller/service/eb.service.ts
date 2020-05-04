@@ -10,8 +10,6 @@ export class EbService {
 
   private url = "http://localhost:8090/ebs/";
 
-
-
   private _eb: Eb;
   private _ebListCurrent:Array<Eb>;
   private _ebp: Ebp;
@@ -115,11 +113,11 @@ export class EbService {
 
 
   /**Util & Validation*/
-  public ebValidation(): boolean {
+  ebValidation(): boolean {
     return this.eb.title != null && this.ebpListCurrent.length > 0;
   }
 
-  public ebpValidation(): boolean {
+  ebpValidation(): boolean {
     return this.ebp !== null;
   }
 
@@ -166,14 +164,14 @@ export class EbService {
     this._ebp = value;
   }
 
-  public get ebpListCurrent(): Array<Ebp> {
+  get ebpListCurrent(): Array<Ebp> {
     if (this._ebpListCurrent == null) {
       this._ebpListCurrent = new Array<Ebp>();
     }
     return this._ebpListCurrent;
   }
 
-  public set ebpListCurrent(value: Array<Ebp>) {
+  set ebpListCurrent(value: Array<Ebp>) {
     this._ebpListCurrent = value;
   }
 

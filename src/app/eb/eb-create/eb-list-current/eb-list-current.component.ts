@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Eb } from 'src/app/controller/entity/eb.model';
 import { EbService } from 'src/app/controller/service/eb.service';
 import { EbpService } from 'src/app/controller/service/ebp.service';
-import {formatDate} from '@angular/common';
+import { formatDate } from '@angular/common';
 
 
 @Component({
@@ -13,7 +13,7 @@ import {formatDate} from '@angular/common';
 export class EbListCurrentComponent implements OnInit {
 
   public ebUpdate: Eb;
-  public ebDate:Date;
+  public ebDate: Date;
 
   constructor(private ebService: EbService
     , private ebpService: EbpService) { }
@@ -23,17 +23,13 @@ export class EbListCurrentComponent implements OnInit {
   }
 
   /**Events */
-
-  onShowAll(){
-       this.ebService.getEbBySaveDate(formatDate(new Date(), 'yyyy-MM-dd', 'en'));
+  onShowAll() {
+    this.ebService.getEbBySaveDate(formatDate(new Date(), 'yyyy-MM-dd', 'en'));
   }
 
-  
   onEbDelete(eb: Eb) {
     this.ebService.deleteEb(eb.id);
   }
-
-
   /**Events */
 
 
@@ -42,12 +38,10 @@ export class EbListCurrentComponent implements OnInit {
   get eb(): Eb {
     return this.ebService.eb;
   }
-  public get ebListCurrent(): Array<Eb> {
-    
-		return this.ebService.ebListCurrent;
-	}
+  get ebListCurrent(): Array<Eb> {
+    return this.ebService.ebListCurrent;
+  }
 
-  
   /** Getter */
 
 

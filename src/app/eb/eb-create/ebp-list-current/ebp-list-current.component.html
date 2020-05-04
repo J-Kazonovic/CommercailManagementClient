@@ -19,7 +19,7 @@
                     </td>
                 </tr>
                 <tr *ngFor="let ebp of ebpListCurrent">
-                    <td>{{ebp.produit}}</td>
+                    <td>{{ebp.produit.libelle}}</td>
                     <td>{{ebp.qteDemande}}</td>
                     <td>{{ebp.product_desc}}</td>
                     <td> <button class="btn btn-danger fa fa-trash" (click)="deleteProduct(ebp)" type="button"></button>
@@ -29,6 +29,5 @@
         </table>
     </div>
     <div class="card-footer text-muted">
-        Footer
     </div>
 </div>

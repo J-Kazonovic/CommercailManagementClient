@@ -16,14 +16,14 @@ export class EbpListCurrentComponent implements OnInit {
   ngOnInit(): void {
    
   }
-
+  deleteProduct(ebp:Ebp) {
+    this.ebpService.onEbpDelete(ebp,this.ebpListCurrent);
+  }
   public get ebpListCurrent(): Array<Ebp> {
     return this.ebService.ebpListCurrent;
   }
 
-  public deleteProduct(ebp:Ebp) {
-    this.ebpService.deleteProduct(ebp);
-  }
+  
 
 
 }

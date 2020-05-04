@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Category } from '../entity/category.model';
-import { Product } from '../entity/product.model';
-import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-  private url:"http://localhost:8090/category/";
+  url="http://localhost:8090/category/";
   private _cat: Category;
   private _cats: Array<Category>;
 
@@ -22,6 +21,7 @@ export class CategoryService {
   set cat(value: Category) {
     this._cat = value;
   }
+
   get cats(): Array<Category> {
     if (this._cats == null) {
       this._cats = new Array<Category>();
@@ -44,12 +44,13 @@ export class CategoryService {
       }
     );
   }
-  public findAll() {
+
+  findAll() {
     this.catHttp.get<Array<Category>>(this.url).subscribe(
       data => {
         this.cats = data;
       }, error => {
-        console.log('erreur');
+        console.log("error:"+error);
       }
     );
   }
