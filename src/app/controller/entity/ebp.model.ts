@@ -1,7 +1,8 @@
 import { Eb } from './eb.model';
+import { Product } from './product.model';
 
 export class Ebp {
-    produit:string;
+    produit:String;
 	eb:Eb;
 	qteDemande:number;
 	qteAccorde:number;
