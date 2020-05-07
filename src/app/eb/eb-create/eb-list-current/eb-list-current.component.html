@@ -11,12 +11,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngIf="ebListCurrent.length==0">
+                <tr *ngIf="ebList.length==0">
                     <td class="alert alert-secondary" colspan="4" role="alert">
                         No data to display.
                     </td>
                 </tr>
-                <tr *ngFor="let eb of ebListCurrent">
+                <tr *ngFor="let eb of ebList">
                     <td>{{eb.title}}</td>
                     <td>
                         <button class="btn btn-danger fa fa-trash mr-2" (click)="onEbDelete(eb)"></button>

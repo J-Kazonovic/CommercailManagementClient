@@ -38,8 +38,8 @@ export class EbListCurrentComponent implements OnInit {
   get eb(): Eb {
     return this.ebService.eb;
   }
-  get ebListCurrent(): Array<Eb> {
-    return this.ebService.ebListCurrent;
+  public get ebList(): Array<Eb> {
+    return this.ebService.ebList;
   }
 
   /** Getter */

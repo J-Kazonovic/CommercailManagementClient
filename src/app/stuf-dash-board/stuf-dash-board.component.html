@@ -5,6 +5,8 @@
     <div class="sidebar-heading" style="color: white;">DashBoard</div>
     <hr style="color: white;">
     <div class="list-group list-group-flush">
+      <a style="color: white;" [routerLink]="['/login']"
+        class="list-group-item list-group-item-action bg-dark"><i class="fa fa-user" aria-hidden="true"></i>Profile</a>
       <a style="color: white;" [routerLink]="[{ outlets: {dashboard:['eb-create'] } }]"
         class="list-group-item list-group-item-action bg-dark"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter Une
         Nouvelle Expression</a>
