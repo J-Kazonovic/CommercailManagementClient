@@ -1,0 +1,31 @@
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-dark border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading"><img src="https://www.supmaroc.com/wp-content/uploads/FST-marrakech.jpg" alt="" height="90px" width="200px"></div>
+      <hr style="color: white;">
+      <div class="list-group list-group-flush">
+        <a style="color: white;" [routerLink]="['/login']"
+          class="list-group-item list-group-item-action bg-dark"><i class="fa fa-user" aria-hidden="true"></i>Profile</a>
+        <a style="color: white;" [routerLink]="[{ outlets: {dashboard:['eb-list-comptable'] } }]"
+        class="list-group-item list-group-item-action bg-dark"><i class="fa fa-list" aria-hidden="true"></i> List Des
+        Expression</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+  
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom mb-3">
+        <button class="btn btn-primary  mr-2" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></button>
+        <span>  <h2 style="color: white;">Comptable, Welcom {{username}}</h2></span>
+       
+      </nav>
+      <div class="container-fluid">
+        <router-outlet name="dashboard"></router-outlet>
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+  
+  </div>
+  <!-- /#wrapper -->

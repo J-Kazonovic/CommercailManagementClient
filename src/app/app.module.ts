@@ -23,6 +23,8 @@ import { EbpFormComponent } from './eb/eb-create/ebp-form/ebp-form.component';
 import { StatutComponent } from './ToolsComponent/statut/statut.component';
 import { ChefDashBoardComponent } from './chef-dash-board/chef-dash-board.component';
 import { StufDashBoardComponent } from './stuf-dash-board/stuf-dash-board.component';
+import { ComptableComponent } from './comptable/comptable.component';
+import { EbListComptableComponent } from './eb/eb-list/eb-list-comptable/eb-list-comptable.component';
 
 @NgModule({
   declarations: [ 
@@ -38,6 +40,8 @@ import { StufDashBoardComponent } from './stuf-dash-board/stuf-dash-board.compon
     StatutComponent,
     ChefDashBoardComponent,
     StufDashBoardComponent,
+    ComptableComponent,
+    EbListComptableComponent,
 
     
   ],

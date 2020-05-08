@@ -26,6 +26,8 @@ export class LoginFormComponent implements OnInit {
         this.router.navigate(["/chef-dashboard"]);
       }else if(data[0]["authority"]==="ROLE_STUF"){
         this.router.navigate(["/stuf-dashboard"]);
+      }else if(data[0]["authority"]==="ROLE_COMPTABLE"){
+        this.router.navigate(["/comptable"]);
       }
     
     });

@@ -8,11 +8,11 @@ import { Dept } from 'src/app/controller/entity/dept.model';
 import { PersonnelService } from 'src/app/controller/service/personnel.service';
 import { Personnel } from 'src/app/controller/entity/personnel.model';
 @Component({
-  selector: 'app-eb-list',
-  templateUrl: './eb-list.component.html',
-  styleUrls: ['./eb-list.component.css']
+  selector: 'app-eb-list-comptable',
+  templateUrl: './eb-list-comptable.component.html',
+  styleUrls: ['./eb-list-comptable.component.css']
 })
-export class EbListComponent implements OnInit {
+export class EbListComptableComponent implements OnInit {
 
   valider = "Valider";
   date: string;
@@ -69,7 +69,7 @@ export class EbListComponent implements OnInit {
   }
 
   /** Getter */
-  public get ebi(): Eb {
+  public get eb(): Eb {
     return this.ebService.eb;
   }
   public get ebList(): Array<Eb> {
@@ -87,13 +87,5 @@ export class EbListComponent implements OnInit {
 
     return this.personnelService.personnelList;
   }
-  /** Getter */
-
-
-  /** Util */
-
-  /** Util */
-
-
 
 }
