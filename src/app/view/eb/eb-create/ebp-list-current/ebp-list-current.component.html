@@ -1,0 +1,36 @@
+<div class="shadow card">
+    <div class="card-header">
+        Produit
+    </div>
+    <div class="card-body table-wrap">
+        <table class="table table-dark">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Produit</th>
+                    <th>Quantite</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="ebpListCurrent.length==0">
+                    <td colspan="4" role="alert">
+                        No data to display.
+                    </td>
+                </tr>
+                <tr *ngFor="let ebp of ebpListCurrent">
+                    <td>{{ebp.produit.libelle}}</td>
+                    <td>{{ebp.qteDemande}}</td>
+                    <td>{{ebp.product_desc}}</td>
+                    <td> <button class="btn btn-danger fa fa-trash" (click)="deleteProduct(ebp)" type="button"></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer text-muted">
+       
+
+        
+    </div>
+</div>

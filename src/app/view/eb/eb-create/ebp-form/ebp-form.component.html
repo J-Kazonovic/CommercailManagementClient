@@ -1,0 +1,49 @@
+<div class="card shadow">
+    <div class="card-header">
+        Ajouter Un Produit
+    </div>
+    <div class="card-body">
+        <div class="form-group">
+            <div class="form-group">
+                <label for="cat">Catégorie</label>
+                <select class="form-control" id="cat" [(ngModel)]="catLib" (change)="getProductBycat()">
+                    <option *ngFor="let cat of cats" value="{{cat.libelle}}">
+                        {{cat.libelle}}
+                    </option>
+                </select>
+            </div>
+        </div> <!-- form-group// -->
+
+        <div class="form-group">
+            <div class="form-group">
+                <label for="cat">Produits</label>
+                <select class="form-control" id="cat" [(ngModel)]="ebp.produit.libelle" >
+                    <option *ngFor="let produit of catProduitsList" value="{{produit.libelle}}">
+                        {{produit.libelle}}
+                    </option>
+                </select>
+            </div>
+        </div> <!-- form-group// -->
+
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-shopping-basket" aria-hidden="true"></i></span>
+            </div>
+            <input min="0" [(ngModel)]=ebp.qteDemande name="" class="form-control" placeholder="Quantiter Demander"
+                type="number">
+        </div> <!-- form-group// -->
+
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-commenting" aria-hidden="true"></i> </span>
+            </div>
+            <textarea [(ngModel)]=ebp.product_desc name="" class="form-control" placeholder="Descreption"
+                type="text"></textarea>
+        </div> <!-- form-group// -->
+    </div>
+    <div class="card-footer text-muted">
+        <button [disabled]="!ebpValidation(ebp.produit.libelle,ebp.qteDemande)" (click)="onProductAdd()" style="float: right;" type="button"
+            class="btn btn-outline-primary"><i class="fa fa-plus" aria-hidden="true"></i></button>
+    </div>
+
+</div>

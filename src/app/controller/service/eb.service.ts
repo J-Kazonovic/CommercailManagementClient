@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Eb } from '../entity/eb.model';
 import { Ebp } from '../entity/ebp.model';
+import { UtilStatuts } from 'src/app/util/utilstatuts.module';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,8 @@ export class EbService {
   private url = "http://localhost:8090/ebs/";
 
   private _eb: Eb;
-  private _ebListCurrent:Array<Eb>;
   private _ebp: Ebp;
   private _ebpListCurrent: Array<Ebp>;
-  private _ebList: Array<Eb>;
 
   constructor(private ebHttp: HttpClient) { }
 
@@ -33,74 +32,34 @@ export class EbService {
   }
 
   updateEb(eb: Eb) {
-    console.log(eb);
-    this.ebHttp.put<number>(this.url, eb).subscribe(
-      data => {
-        if (data == 1) {
-          this.getAllEb();
-        }
-      }, error => {
-        console.log(error);
-      }
-    );
+    return this.ebHttp.put<number>(this.url, eb);
   }
 
   deleteEb(id: number) {
-    this.ebHttp.delete<number>(this.url + "eb/" + id).subscribe(
-      data => {
-        if (data == 1) {
-          this.deleteFromEbList(id, this.ebListCurrent);
-          this.deleteFromEbList(id, this.ebList);
-        }
-      }
-    );
+    return this.ebHttp.delete<number>(this.url + "eb/" + id);
   }
 
   getAllEb() {
-    this.ebHttp.get<Array<Eb>>(this.url).subscribe(
-      data => {
-        this.ebList = data;
-
-      }, error => {
-        console.log("error" + error);
-      }
-    );
+   return  this.ebHttp.get<Array<Eb>>(this.url);
   }
 
   getEbByEntite(libelle: string) {
-    this.ebHttp.get<Array<Eb>>(this.url + "entite/" + libelle).subscribe(
-      data => {
-        this.ebList = data;
-      }, error => {
-        console.log("error" + error);
-      }
-    );
+    return this.ebHttp.get<Array<Eb>>(this.url + "entite/" + libelle);
   }
 
   getEbByPersonnel(cin: string) {
-    this.ebHttp.get<Array<Eb>>(this.url + "personnel/" + cin).subscribe(
-      data => {
-        this.ebList = data;
-      }, error => {
-        console.log("error" + error);
-      }
-    );
+    return this.ebHttp.get<Array<Eb>>(this.url + "personnel/" + cin);
   }
 
   getEbBySaveDate(date: String) {
-    return this.ebHttp.get<Array<Eb>>(this.url + "date/" + date).subscribe(
-      data => {
-        this.ebList = data;
-      }, error => {
-        console.log("error" + error);
-      }
-    );
+    return this.ebHttp.get<Array<Eb>>(this.url + "date/" + date);
   }
   /**Http Requests-Response*/
 
 
   /**Events */
   onAddEbp() {
+    this.ebp.besoin_statut=UtilStatuts.EnAttend;
     this.ebpListCurrent.push(this.ebp);
     this.ebp = new Ebp();
   }
@@ -112,21 +71,9 @@ export class EbService {
   /**Events */
 
 
-  /**Util & Validation*/
-  ebValidation(): boolean {
-    return this.eb.title != null && this.ebpListCurrent.length > 0;
-  }
 
-  ebpValidation(): boolean {
-    return this.ebp !== null;
-  }
 
-  deleteFromEbList(id: number, ebList: Array<Eb>) {
-    const i = ebList.findIndex(e => e.id === id);
-    if (i !== -1) {
-      ebList.splice(i, 1);
-    }
-  }
+  
   /**Util & Validation*/
 
 
@@ -141,17 +88,6 @@ export class EbService {
   set eb(value: Eb) {
     this._eb = value;
   }
-
-	public get ebListCurrent(): Array<Eb> {
-    if (this._ebListCurrent == null) {
-      this._ebListCurrent = new Array<Eb>();
-    }
-		return this._ebListCurrent;
-	}
-   
-	public set ebListCurrent(value: Array<Eb>) {
-		this._ebListCurrent = value;
-	}
 
   get ebp(): Ebp {
     if (this._ebp == null) {
@@ -175,16 +111,7 @@ export class EbService {
     this._ebpListCurrent = value;
   }
 
-  public get ebList(): Array<Eb> {
-    if (this._ebList == null) {
-      this._ebList = new Array<Eb>();
-    }
-    return this._ebList;
-  }
-
-  public set ebList(value: Array<Eb>) {
-    this._ebList = value;
-  }
+  
   /** Getter & Setter*/
 
 

@@ -20,14 +20,8 @@ export class EbpService {
     return this.ebHttp.get<Array<Ebp>>(this.url+ebID);
   }
 
-  deleteProduct(ebp:Ebp) {
-    this.ebHttp.delete<number>(this.url+"libelle/"+ ebp.produit.libelle).subscribe(
-      data => {
-        this.onEbpDelete(ebp,this.ebpList);
-      }, error => {
-        console.log(error);
-      }
-    );
+  deleteEbp(ebp:Ebp) {
+    return this.ebHttp.delete<number>(this.url + ebp.id);
   }
   /**Http*/
  
@@ -43,12 +37,6 @@ export class EbpService {
   }
   /** Getter & Setter*/
 
-  onEbpDelete(ebp:Ebp,ebpList:Array<Ebp>){
-    const i=ebpList.findIndex(e=>e.produit.libelle===ebp.produit.libelle);
-    if(i!==-1){
-      ebpList.splice(i,1);
-    }
-  }
-
+  
 
 }
