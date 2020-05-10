@@ -42,9 +42,9 @@ export class EbListCurrentComponent implements OnInit {
     this.ebUpdate.ebp = this.ebpList;
     this.ebService.updateEb(this.ebUpdate).subscribe(
       data=>{
-        this.onEbShow(this.eb);
+
       },error=>{
-        console.log("Error:"+error);
+        console.log(error);
       }
     );
   }

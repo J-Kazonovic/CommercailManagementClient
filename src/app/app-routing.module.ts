@@ -28,7 +28,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: "comptable_dashboard", component: ComptableDashBoardComponent, children: [
+    path: "comptable-dashboard", component: ComptableDashBoardComponent, children: [
       { path: "eb-list-comptable", component: EbListComptableComponent, outlet: "dashboard" },
     ]
   }

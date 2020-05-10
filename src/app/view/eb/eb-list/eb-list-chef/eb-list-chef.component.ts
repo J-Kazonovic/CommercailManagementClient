@@ -9,12 +9,16 @@ import { PersonnelService } from 'src/app/controller/service/personnel.service';
 import { UtilStatuts } from 'src/app/util/utilstatuts.module';
 import { Personnel } from 'src/app/controller/entity/personnel.model';
 import { UtilList } from 'src/app/util/utillist.module';
+declare var $: any;
 @Component({
   selector: 'app-eb-list-chef',
   templateUrl: './eb-list-chef.component.html',
   styleUrls: ['./eb-list-chef.component.css']
 })
 export class EbListChefComponent implements OnInit {
+
+  isSortedByTitleAsc = false;
+  isSortedByDateAsc = false;
 
 
   /*Filter/Search Attribute*/
@@ -23,15 +27,15 @@ export class EbListChefComponent implements OnInit {
   cin: string;
 
   /*Radios*/
-  statuts=[UtilStatuts.Accorder,UtilStatuts.Refuser];
+  statuts = [UtilStatuts.Accorder, UtilStatuts.Refuser];
 
   /**Updated Eb*/
   public ebUpdate: Eb;
   public ebDate: Date;
 
   /*Eb List*/
-  ebList= new Array<Eb>();
-  ebpList= new Array<Ebp>();
+  ebList = new Array<Eb>();
+  ebpList = new Array<Ebp>();
 
   constructor(private ebService: EbService
     , private ebpService: EbpService
@@ -44,14 +48,40 @@ export class EbListChefComponent implements OnInit {
     this.personnelService.getAllPersonnel();
   }
 
+
+  onSortByTitleClick() {
+    $("th").css("background-color", "");
+    $("#eb-title").css("background-color", "blue");
+    if (!this.isSortedByTitleAsc) {
+      UtilList.stringSortAsc(this.ebList, "title");
+      this.isSortedByTitleAsc = true;
+    }else{
+      UtilList.stringSortDesc(this.ebList, "title");
+      this.isSortedByTitleAsc = false;
+    }
+  }
+
+  onSortByCreatedDate(){
+    $("th").css("background-color", "");
+    $("#eb-date").css("background-color", "blue");
+    if (!this.isSortedByDateAsc) {
+      UtilList.dateSortAsc(this.ebList, "saveDate");
+      this.isSortedByDateAsc = true;
+    }else{
+      UtilList.dateSortDesc(this.ebList, "saveDate");
+      this.isSortedByDateAsc = false;
+    }
+
+  }
+
   /**Events */
 
   onShowAll() {
     this.ebService.getAllEb().subscribe(
-      data=>{
-        this.ebList=data;
-      },error=>{
-        console.log("Error:"+error);
+      data => {
+        this.ebList = data;
+      }, error => {
+        console.log("Error:" + error);
       }
     );
   }
@@ -66,33 +96,32 @@ export class EbListChefComponent implements OnInit {
   onEbpUpdate() {
     this.ebUpdate.ebp = this.ebpList;
     this.ebService.updateEb(this.ebUpdate).subscribe(
-      data=>{
-        this.onEbShow(this.eb);
-      },error=>{
-        console.log("Error:"+error);
+      data => {
+      }, error => {
+        console.log("Error:" + error);
       }
     );
   }
   onEbDelete(eb: Eb) {
     this.ebService.deleteEb(eb.id).subscribe(
-      data=>{
-        if(data==1){
-          UtilList.deleteFromListById(eb.id,this.ebList);
+      data => {
+        if (data == 1) {
+          UtilList.deleteFromListById(eb.id, this.ebList);
         }
-      },error=>{
-        console.log("Error:"+error);
+      }, error => {
+        console.log("Error:" + error);
       }
     )
   }
 
   onEbpDelete(ebp: Ebp) {
     this.ebpService.deleteEbp(ebp).subscribe(
-      data=>{
-        if(data==1){
-          UtilList.deleteFromListById(ebp.id,this.ebpList);
+      data => {
+        if (data == 1) {
+          UtilList.deleteFromListById(ebp.id, this.ebpList);
         }
-      },error=>{
-        console.log("Error:"+error);
+      }, error => {
+        console.log("Error:" + error);
       }
     )
   }
@@ -102,32 +131,32 @@ export class EbListChefComponent implements OnInit {
 
   getEbBySaveDate() {
     return this.ebService.getEbBySaveDate(this.date).subscribe(
-      data=>{
-        this.ebList=data;
-      },error=>{
-        console.log("Error:"+error);
+      data => {
+        this.ebList = data;
+      }, error => {
+        console.log("Error:" + error);
       }
     );
   }
   getEbByEntite() {
     this.ebService.getEbByEntite(this.libelle).subscribe(
-      data=>{
-        this.ebList=data;
-      },error=>{
-        console.log("Error:"+error);
+      data => {
+        this.ebList = data;
+      }, error => {
+        console.log("Error:" + error);
       }
     );
   }
   getEbByPersonnel() {
     this.ebService.getEbByPersonnel(this.cin).subscribe(
-      data=>{
-        this.ebList=data;
-      },error=>{
-        console.log("Error:"+error);
+      data => {
+        this.ebList = data;
+      }, error => {
+        console.log("Error:" + error);
       }
     );
   }
- 
+
 
   /** Getter */
   public get eb(): Eb {

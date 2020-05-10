@@ -47,9 +47,11 @@ export class EbListStufComponent implements OnInit {
     this.ebUpdate.ebp = this.ebpList;
     this.ebService.updateEb(this.ebUpdate).subscribe(
       data=>{
-        this.onEbShow(this.eb);
+        if(data==1){
+          
+        }
       },error=>{
-        console.log("Error:"+error);
+        console.log(error);
       }
     );
   }
@@ -60,7 +62,7 @@ export class EbListStufComponent implements OnInit {
           UtilList.deleteFromListById(eb.id,this.ebList);
         }
       },error=>{
-        console.log("Error:"+error);
+        console.log(error);
       }
     );
   }
@@ -71,7 +73,7 @@ export class EbListStufComponent implements OnInit {
           UtilList.deleteFromListById(ebp.id,this.ebpList);
         }
       },error=>{
-        console.log("Error:"+error);
+        console.log(error);
       }
     );
   }

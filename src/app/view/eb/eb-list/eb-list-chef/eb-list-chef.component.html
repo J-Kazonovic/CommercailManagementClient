@@ -35,9 +35,9 @@
         <table class="table table-dark">
             <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>Created At</th>
-                    <th>Statut</th>
+                    <th id="eb-title" (click)="onSortByTitleClick()">Title <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th id="eb-date" (click)="onSortByCreatedDate()">Created  <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th id="eb-statu">Statut</th>
                     <th>Personnel</th>
                     <th>Departement</th>
                     <th>Action</th>
@@ -83,7 +83,7 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>Produit</th>
+                            <th >Produit </th>
                             <th>Desc</th>
                             <th>Statut</th>
                             <th>Q-Demander</th>
