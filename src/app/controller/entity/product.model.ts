@@ -4,5 +4,5 @@ export class Product {
     public id:number;
     public libelle:string;
     public prix:number;
-    public cat:Category;
+    public cat=new Category();
 }

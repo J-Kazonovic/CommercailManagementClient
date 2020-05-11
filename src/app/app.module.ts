@@ -29,6 +29,7 @@ import { EbListCurrentComponent } from './view/eb/eb-create/eb-list-current/eb-l
 import { EbpFormComponent } from './view/eb/eb-create/ebp-form/ebp-form.component';
 import { EbListChefComponent } from './view/eb/eb-list/eb-list-chef/eb-list-chef.component';
 import { ComptableDashBoardComponent } from './view/dashboard/comptable-dash-board/comptable-dash-board.component';
+import { DemmandeListCreateComponent } from './view/eb/eb-list/eb-list-comptable/demmande-list-create/demmande-list-create.component';
 
 @NgModule({
   declarations: [ 
@@ -46,6 +47,7 @@ import { ComptableDashBoardComponent } from './view/dashboard/comptable-dash-boa
     EbListComptableComponent,
     EbListStufComponent,
     ComptableDashBoardComponent,
+    DemmandeListCreateComponent,
 
     
   ],

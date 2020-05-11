@@ -4,7 +4,7 @@ import { Product } from './product.model';
 export class Ebp {
 	id:number;
     produit=new Product();
-	eb:Eb;
+	eb=new Eb();
 	qteDemande:number;
 	qteAccorde:number;
 	qteAchete:number;
