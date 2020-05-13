@@ -30,5 +30,9 @@ export class FournisseurService {
    
 	public set fournList(value: Array<Fournisseur>) {
 		this._fournList = value;
-	}
+  }
+  getfournByNom(nom: string) {
+    return this.http.get<Fournisseur>(this.url + "nom/" + nom);
+  }
 }
+

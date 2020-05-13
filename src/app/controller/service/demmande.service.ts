@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { DemmandeDesPrix } from '../entity/demmande-des-prix.model';
 import { DemmandeDesPrixItem } from '../entity/demmande-des-prix-item.model';
 import { HttpClient } from '@angular/common/http';
+import { Ebp } from '../entity/ebp.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,20 @@ export class DemmandeService {
   private _demmande: DemmandeDesPrix;
   private _dmI: DemmandeDesPrixItem;
   private _demItems: Array<DemmandeDesPrixItem>;
+  private _ebp:Ebp;
 
   constructor(private demhttp:HttpClient) { }
+  get ebp(): Ebp {
+    if (this._ebp == null) {
+      this._ebp= new Ebp();
+    }
+    return this._ebp;
+  }
 
+  set ebp(value: Ebp) {
+    this._ebp = value;
+  }
+  ge
   get demmande(): DemmandeDesPrix {
     if (this._demmande == null) {
       this._demmande = new DemmandeDesPrix();
@@ -57,7 +69,22 @@ export class DemmandeService {
     );
   }
   onAddEbp() {
+    this.dmI.qteCommander+=this.ebp.qteAccorde;
     this.demItems.push(this.dmI);
     this.dmI = new DemmandeDesPrixItem();
+  }
+  public addProduit() {
+    this.demmande.demmandeItem.push(this.cloneProduitAchat(this.dmI));
+    this.dmI = null;
+  }
+  
+  private cloneProduitAchat(dmI:DemmandeDesPrixItem) {
+    const myClone = new DemmandeDesPrixItem();
+    myClone.id = dmI.id;
+    myClone.demmande = dmI.demmande;
+    myClone.produit= dmI.produit;
+    myClone.qteCommander = dmI.qteCommander;
+    myClone.qteLivrer = dmI.qteLivrer;
+    return myClone;
   }
 }

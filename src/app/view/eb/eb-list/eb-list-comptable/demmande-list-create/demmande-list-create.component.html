@@ -6,7 +6,7 @@
         <input [(ngModel)]=demmande.ref name="" class="form-control mr-sm-2" placeholder="Reference Du Demmande" type="text">
             <div class="form-group">
                 <label for="personnel">Fournisseur</label>
-                <select class="form-control" id="fournisseur" [(ngModel)]="cin">
+                <select class="form-control" id="fournisseur" [(ngModel)]="cin" (change)="getfournByNom()">
                     <option *ngFor="let fr of fournList" value="{{fr.cin}}">
                         {{fr.nom}}
                     </option>
@@ -109,7 +109,7 @@
         <div class="form-group">
             <div class="form-group">
                 <label for="cat">Produits</label>
-                <select class="form-control" id="cat" [(ngModel)]="ebp.produit.libelle" >
+                <select class="form-control" id="cat" [(ngModel)]="dmI.produit.libelle" >
                     <option *ngFor="let produit of catProduitsList" value="{{produit.libelle}}">
                         {{produit.libelle}}
                     </option>

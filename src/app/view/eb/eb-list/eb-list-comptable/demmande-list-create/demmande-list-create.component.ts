@@ -15,6 +15,7 @@ import { Product } from 'src/app/controller/entity/product.model';
 import { DemmandeDesPrixItem } from 'src/app/controller/entity/demmande-des-prix-item.model';
 import { FournisseurService } from 'src/app/controller/service/fournisseur.service';
 import { Fournisseur } from 'src/app/controller/entity/fournisseur.model';
+import { DemmandeItemService } from 'src/app/controller/service/demmande-item.service';
 
 @Component({
   selector: 'app-demmande-list-create',
@@ -22,15 +23,18 @@ import { Fournisseur } from 'src/app/controller/entity/fournisseur.model';
   styleUrls: ['./demmande-list-create.component.css']
 })
 export class DemmandeListCreateComponent implements OnInit {
+  qteCommander:number;
   cin: string;
   public ebUpdate: Eb;
   public ebDate: Date;
   catLib:string;
+  nom: string
+  fourn:Fournisseur;
   public ebList=new Array<Eb>();
   public ebpList=new Array<Ebp>();
   constructor(private demService: DemmandeService,private ebService: EbService
     , private ebpService: EbpService,private catService: CategoryService
-    ,private prService:ProductService,private frService: FournisseurService) { }
+    ,private prService:ProductService,private frService: FournisseurService,private demItService: DemmandeItemService) { }
 
     ngOnInit() {
       this.onShowPersonnelEb();
@@ -91,6 +95,7 @@ export class DemmandeListCreateComponent implements OnInit {
   }
 
   public addProduit() {
+    this.dmI.qteCommander=this.qteCommander;
     this.demService.onAddEbp();
   }
 
@@ -106,6 +111,10 @@ export class DemmandeListCreateComponent implements OnInit {
   get demItems(): Array<DemmandeDesPrixItem> {
     return this.demService.demItems;
   }
+  get demmandeItems(): Array<DemmandeDesPrixItem> {
+    return this.demItService.demmandeItems;
+  }
+  
   get ebp(): Ebp {
     return this.ebService.ebp;
   }
@@ -129,5 +138,14 @@ export class DemmandeListCreateComponent implements OnInit {
   }
   saveDemmande(demmande: DemmandeDesPrix) {
    this.demService.saveDemmande(demmande);
+  }
+  getfournByNom() {
+    this.frService.getfournByNom(this.nom).subscribe(
+      data=>{
+        this.fourn=data;
+      },error=>{
+        console.log("Error:"+error);
+      }
+    );
   }
 }
