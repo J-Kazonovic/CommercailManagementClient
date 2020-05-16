@@ -30,6 +30,8 @@ import { EbpFormComponent } from './view/eb/eb-create/ebp-form/ebp-form.componen
 import { EbListChefComponent } from './view/eb/eb-list/eb-list-chef/eb-list-chef.component';
 import { ComptableDashBoardComponent } from './view/dashboard/comptable-dash-board/comptable-dash-board.component';
 import { DemmandeListCreateComponent } from './view/eb/eb-list/eb-list-comptable/demmande-list-create/demmande-list-create.component';
+import { ProductCreateComponent } from './view/product/product-create/product-create.component';
+import { ProductListComponent } from './view/product/product-list/product-list.component';
 
 @NgModule({
   declarations: [ 
@@ -48,6 +50,8 @@ import { DemmandeListCreateComponent } from './view/eb/eb-list/eb-list-comptable
     EbListStufComponent,
     ComptableDashBoardComponent,
     DemmandeListCreateComponent,
+    ProductCreateComponent,
+    ProductListComponent,
 
     
   ],

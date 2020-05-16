@@ -15,6 +15,19 @@ export class ProductService {
 
   constructor(private produitHttp:HttpClient) { }
 
+  saveProduct() {
+    this.produitHttp.post<number>(this.url, this.product).subscribe(
+      data => {
+        if (data == 1) {
+          this.product = null;
+        }
+      }, error => {
+        console.log(error);
+      }
+    );
+  }
+
+
   public getAllCatProduct(libelle:string){
     this.produitHttp.get<Array<Product>>(this.url+"cat/libelle/"+libelle).subscribe(
       data=>{
