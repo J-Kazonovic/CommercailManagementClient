@@ -3,6 +3,8 @@ import { Unite } from './unite.model';
 
 export class Product {
     public id:number;
+    public ref:string;
+    public qte:number;
     public libelle:string;
     public ref:string;
     public qteStock:number;

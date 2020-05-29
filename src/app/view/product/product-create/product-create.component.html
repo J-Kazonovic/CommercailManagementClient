@@ -1,0 +1,33 @@
+<div class="card shadow">
+    <div class="card-header">
+        Ajouter Un Produit
+    </div>
+    <div class="card-body">
+        <div class="form-group">
+            <div class="form-group">
+                <label for="cat">Catégorie</label>
+                <select class="form-control" id="cat" [(ngModel)]="catLib" (change)="findCategoryByLibelle()">
+                    <option *ngFor="let cat of cats" value="{{cat.libelle}}">
+                        {{cat.libelle}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <label>Reference:</label>
+                <input type="text" placeholder="entrer la ref du produit" class="form-control" [(ngModel)]=product.ref>
+                <label>Designation:</label>
+                <input type="text" placeholder="entrer la designation du produit" class="form-control" [(ngModel)]=product.libelle>
+                <label>Quantite:</label>
+                <input type="number" placeholder="entrer la qte du produit" class="form-control" [(ngModel)]=product.qte>
+                <label>Prix:</label>
+                <input type="number" placeholder="entrer le prix du produit" class="form-control" [(ngModel)]=product.prix>
+            </div>
+        </div>
+    </div>
+<div class="card-footer" >
+    <button (click)="saveProduct()" type="submit" class="btn btn-primary ">add Product</button>
+</div>
+
+</div>
