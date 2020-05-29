@@ -12,10 +12,13 @@ export class EbpService {
 
 
   constructor(private ebHttp:HttpClient) { }
-
-
   
   /**Http*/
+
+  getAllEbp(){
+    return this.ebHttp.get<Array<Ebp>>(this.url);
+  }
+
   getEbpByEb(ebID:number){
     return this.ebHttp.get<Array<Ebp>>(this.url+ebID);
   }

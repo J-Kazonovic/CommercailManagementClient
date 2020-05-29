@@ -1,42 +1,84 @@
 <div class="d-flex" id="wrapper">
 
-  <!-- Sidebar -->
-  <div class="bg-dark border-right" id="sidebar-wrapper">
-    <div class="sidebar-heading"><img src="https://www.supmaroc.com/wp-content/uploads/FST-marrakech.jpg" alt="" height="90px" width="200px"></div>
-    <hr style="color: white;">
-    <div class="list-group list-group-flush">
-      <a style="color: white;" [routerLink]="['/login']"
-        class="list-group-item list-group-item-action bg-dark"><i class="fa fa-user" aria-hidden="true"></i>Profile</a>
-      <a style="color: white;" [routerLink]="[{ outlets: {dashboard:['eb-list-chef'] } }]"
-      class="list-group-item list-group-item-action bg-dark"><i class="fa fa-list" aria-hidden="true"></i>Expression Du Besoin</a>
-     
-      <a style="color: white;" [routerLink]="[{ outlets: {dashboard:[''] } }]"
-      class="list-group-item list-group-item-action bg-dark">Devis</a>
+    <!-- Sidebar -->
+    <div class="bg-dark border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading"><img src="https://www.supmaroc.com/wp-content/uploads/FST-marrakech.jpg" alt="" height="90px" width="200px"></div>
+        <hr style="color: white;">
+        <div class="list-group list-group-flush">
+            <!--Expression-->
+            <div class="dropdown">
+                <a style="color: white;" class="list-group-item list-group-item-action bg-dark dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-question" aria-hidden="true"></i>Expression
 
-      <a style="color: white;" [routerLink]="[{ outlets: {dashboard:[''] } }]"
-      class="list-group-item list-group-item-action bg-dark">Factures</a>
+                </a>
+                <div class="collapse  dropdown-menu" style="background-color: black;">
+                    <a style="color: white; background-color: black;" [routerLink]="['ebs']" class="list-group-item list-group-item-action"><i class="fa fa-list" aria-hidden="true"></i>
+                        List Des Expression</a>
+                </div>
+            </div>
 
-      <a style="color: white;" [routerLink]="[{ outlets: {dashboard:[''] } }]"
-      class="list-group-item list-group-item-action bg-dark">Achats</a>
+            <!--Achat-->
+            <div class="dropdown">
+                <a style="color: white;" class="list-group-item list-group-item-action bg-dark dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                    Achat
+                </a>
+                <div class="collapse  dropdown-menu" style="background-color: black;">
+                    <a style="color: white; background-color: black;" [routerLink]="['achat']" class="list-group-item list-group-item-action">
+                        <i class="fa fa-plus" aria-hidden="true"></i>Ajouter Une Demande</a>
 
-      <a style="color: white;" [routerLink]="[{ outlets: {dashboard:[''] } }]"
-      class="list-group-item list-group-item-action bg-dark">Stock</a>
+
+                    <a style="color: white; background-color: black;" [routerLink]="['achats']" class="list-group-item list-group-item-action">
+                        <i class="fa fa-list" aria-hidden="true"></i>List Des Achat</a>
+
+
+                </div>
+            </div>
+
+            <!--Fournisseur-->
+            <div class="dropdown">
+                <a style="color: white;" class="list-group-item list-group-item-action bg-dark dropdown-toggle" data-toggle="dropdown"><i class="fa fa-handshake-o" aria-hidden="true"></i>
+                    Fournisseur
+                </a>
+                <div class="collapse  dropdown-menu" style="background-color: black;">
+                    <a style="color: white; background-color: black;" [routerLink]="['fournisseur']" class=" list-group-item list-group-item-action">
+                        <i class="fa fa-handshake-o" aria-hidden="true"></i> Ajouter un Fournisseur</a>
+
+                    <a style="color: white; background-color: black;" [routerLink]="['fournisseurs']" class="list-group-item list-group-item-action">
+                        <i class="fa fa-list" aria-hidden="true"></i> List Des Fournisseur</a>
+                </div>
+            </div>
+
+            <!--Produits-->
+            <div class="dropdown">
+                <a style="color: white;" class="list-group-item list-group-item-action bg-dark dropdown-toggle" data-toggle="dropdown"><i class="fa fa-product-hunt" aria-hidden="true"></i>
+                    Produits
+                </a>
+                <div class="collapse  dropdown-menu" style="background-color: black;">
+                    <a style="color: white;" style="color: white; background-color: black;" [routerLink]="['produit']" class=" list-group-item list-group-item-action">
+                        <i class="fa fa-plus-square" aria-hidden="true"></i> Ajouter un Produit</a>
+
+
+
+                    <a style="color: white; background-color: black;" [routerLink]="['produits']" class="list-group-item list-group-item-action bg-dar">
+                        <i class="fa fa-list" aria-hidden="true"></i>List Des Produit</a>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <!-- /#sidebar-wrapper -->
+    <!-- /#sidebar-wrapper -->
 
-  <!-- Page Content -->
-  <div id="page-content-wrapper">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom mb-3">
-      <button class="btn btn-primary  mr-2" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></button>
-      <span>  <h2 style="color: white;">CHEF DashBoard, Welcom {{username}}</h2></span>
-     
-    </nav>
-    <div class="container-fluid">
-      <router-outlet name="dashboard"></router-outlet>
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom mb-3">
+            <button class="btn btn-primary  mr-2" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></button>
+            <span>  <h2 style="color: white;">CHEF DashBoard, Welcom {{username}}</h2></span>
+
+        </nav>
+        <div class="container-fluid">
+            <router-outlet></router-outlet>
+        </div>
     </div>
-  </div>
-  <!-- /#page-content-wrapper -->
+    <!-- /#page-content-wrapper -->
 
 </div>
 <!-- /#wrapper -->

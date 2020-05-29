@@ -25,7 +25,7 @@ export class EbpFormComponent implements OnInit {
 
 
   ngOnInit() {
-    this.findAll();
+    this.findAllCats();
   }
 
   getProductBycat(){
@@ -36,7 +36,7 @@ export class EbpFormComponent implements OnInit {
     this.ebService.onAddEbp();
   }
 
-  findAll( ) {
+  findAllCats( ) {
     this.catService.findAll();  
   }
 

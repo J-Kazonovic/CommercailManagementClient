@@ -17,14 +17,22 @@ declare var $: any;
 })
 export class EbListChefComponent implements OnInit {
 
-  isSortedByTitleAsc = false;
-  isSortedByDateAsc = false;
+
+  page=0;
+  pages:Array<number>;
+
+  isSortedByAsc = -1;
+  isSortedByDateAsc = -1;
+
+  sortAsc=true;
+  sortBy:number;
 
 
   /*Filter/Search Attribute*/
-  date: string;
-  libelle: string;
-  cin: string;
+  title ="";
+  date="";
+  dept="";
+  personnel="";
 
   /*Radios*/
   statuts = [UtilStatuts.Accorder, UtilStatuts.Refuser];
@@ -35,6 +43,7 @@ export class EbListChefComponent implements OnInit {
 
   /*Eb List*/
   ebList = new Array<Eb>();
+  ebListFiltered = new Array<Eb>();
   ebpList = new Array<Ebp>();
 
   constructor(private ebService: EbService
@@ -49,39 +58,59 @@ export class EbListChefComponent implements OnInit {
   }
 
 
-  onSortByTitleClick() {
-    $("th").css("background-color", "");
-    $("#eb-title").css("background-color", "blue");
-    if (!this.isSortedByTitleAsc) {
-      UtilList.stringSortAsc(this.ebList, "title");
-      this.isSortedByTitleAsc = true;
-    }else{
-      UtilList.stringSortDesc(this.ebList, "title");
-      this.isSortedByTitleAsc = false;
+  onFilterAction() {
+    
+    this.ebListFiltered = this.ebList;
+    this.ebListFiltered=this.ebService.searchByTitle(this.ebListFiltered,this.title);
+    this.ebListFiltered = this.ebService.filterByDept(this.ebListFiltered, this.dept);
+    this.ebListFiltered = this.ebService.filterByPersonnel(this.ebListFiltered, this.personnel);
+    this.ebListFiltered = this.ebService.filterByDate(this.ebListFiltered, this.date);
+
+  }
+
+  onSortAction(){
+    if(this.sortBy==1){
+      this.sortByString("title")
+    }else if(this.sortBy==0){
+      this.sortByCreatedDate()
     }
   }
 
-  onSortByCreatedDate(){
-    $("th").css("background-color", "");
-    $("#eb-date").css("background-color", "blue");
-    if (!this.isSortedByDateAsc) {
-      UtilList.dateSortAsc(this.ebList, "saveDate");
-      this.isSortedByDateAsc = true;
-    }else{
-      UtilList.dateSortDesc(this.ebList, "saveDate");
-      this.isSortedByDateAsc = false;
-    }
 
+
+  sortByString(caseSort:string) {
+    if (this.isSortedByAsc==1) {
+      UtilList.stringSort(this.ebListFiltered, caseSort,0);
+      this.isSortedByAsc = 0;
+    } else {
+      UtilList.stringSort(this.ebListFiltered, caseSort,1);
+      this.isSortedByAsc = 1;
+    }
   }
+
+  sortByCreatedDate(){
+    if (this.isSortedByDateAsc==1) {
+      UtilList.dateSort(this.ebListFiltered, "saveDate",0);
+      this.isSortedByDateAsc= 0;
+    } else {
+      UtilList.dateSort(this.ebListFiltered, "saveDate",1);
+      this.isSortedByDateAsc = 1;
+    }
+  }
+
 
   /**Events */
 
   onShowAll() {
-    this.ebService.getAllEb().subscribe(
+    this.ebService.getAllEb(this.page).subscribe(
       data => {
-        this.ebList = data;
+        console.log(data);
+        this.ebList = data["content"];
+        this.ebListFiltered = data["content"];
+        this.pages=new Array(data["totalPages"]);
+
       }, error => {
-        console.log("Error:" + error);
+        console.log(error);
       }
     );
   }
@@ -113,7 +142,6 @@ export class EbListChefComponent implements OnInit {
       }
     )
   }
-
   onEbpDelete(ebp: Ebp) {
     this.ebpService.deleteEbp(ebp).subscribe(
       data => {
@@ -127,34 +155,10 @@ export class EbListChefComponent implements OnInit {
   }
 
 
-  /**Events */
-
-  getEbBySaveDate() {
-    return this.ebService.getEbBySaveDate(this.date).subscribe(
-      data => {
-        this.ebList = data;
-      }, error => {
-        console.log("Error:" + error);
-      }
-    );
-  }
-  getEbByEntite() {
-    this.ebService.getEbByEntite(this.libelle).subscribe(
-      data => {
-        this.ebList = data;
-      }, error => {
-        console.log("Error:" + error);
-      }
-    );
-  }
-  getEbByPersonnel() {
-    this.ebService.getEbByPersonnel(this.cin).subscribe(
-      data => {
-        this.ebList = data;
-      }, error => {
-        console.log("Error:" + error);
-      }
-    );
+  setPage(i:number,event:any){
+    event.preventDefault()
+    this.page=i;
+    this.onShowAll();
   }
 
 
@@ -171,13 +175,7 @@ export class EbListChefComponent implements OnInit {
 
     return this.personnelService.personnelList;
   }
-
-
   /** Getter */
 
-
-  /** Util */
-
-  /** Util */
 
 }

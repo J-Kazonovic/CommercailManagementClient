@@ -7,9 +7,52 @@ import { Category } from '../entity/category.model';
   providedIn: 'root'
 })
 export class CategoryService {
+
   url="http://localhost:8090/category/";
   private _cat: Category;
   private _cats: Array<Category>;
+
+  constructor(private catHttp:HttpClient) { }
+
+  save() {
+    this.catHttp.post<number>(this.url, this.cat).subscribe(
+      data => {
+        if (data == 1) {
+          this.cat = null;
+          this.findAll();
+        }
+      }, error => {
+        console.log(error);
+      }
+    );
+  }
+
+  findAll() {
+    this.catHttp.get<Array<Category>>(this.url).subscribe(
+      data => {
+        this.cats = data;
+      }, error => {
+        console.log("error:"+error);
+      }
+    );
+  }
+
+  findCategoryByLibelle(category: Category ) {
+    this.catHttp.get<Category>(this.url+"libelle/"+category.libelle).subscribe(
+      data => {
+        this.cat = data;
+        }, error => {
+        console.log(error);
+      }
+    );
+  }
+
+
+
+
+
+
+
 
   get cat(): Category {
     if (this._cat == null) {
@@ -33,27 +76,7 @@ export class CategoryService {
     this._cats = value;
   }
 
-  constructor(private catHttp:HttpClient) { }
-
-  findCategoryByLibelle(category: Category ) {
-    this.catHttp.get<Category>(this.url+"libelle/"+category.libelle).subscribe(
-      data => {
-        this.cat = data;
-        }, error => {
-        console.log(error);
-      }
-    );
-  }
-
-  findAll() {
-    this.catHttp.get<Array<Category>>(this.url).subscribe(
-      data => {
-        this.cats = data;
-      }, error => {
-        console.log("error:"+error);
-      }
-    );
-  }
+ 
 
 }
 

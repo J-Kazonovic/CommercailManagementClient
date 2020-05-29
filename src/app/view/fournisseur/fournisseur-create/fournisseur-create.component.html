@@ -1,0 +1,32 @@
+<div class="card text-white bg-dark">
+    <div class="card-header">
+        Ajouter Un Fournisseur
+    </div>
+    <div class="card-body">
+        <div class="form-group">
+            <label for="f-name">Name</label>
+            <input [(ngModel)]=fournisseur.nom type="text" class="form-control" name="" id="f-name" aria-describedby="helpId" placeholder="example fournisseur ...">
+        </div>
+        <div class="form-group">
+            <label for="f-email">Email</label>
+            <input [(ngModel)]=fournisseur.email type="email" name="" id="f-email" class="form-control" placeholder="example@foo.pr" aria-describedby="helpId">
+        </div>
+        <div class="form-group">
+            <label for="f-tel">Tel</label>
+            <input [(ngModel)]=fournisseur.tel type="tel" name="" id="f-tel" class="form-control" placeholder="0600000032" aria-describedby="helpId">
+        </div>
+        <div class="form-group">
+            <label for="f-address">Address</label>
+            <input [(ngModel)]=fournisseur.adress type="text" class="form-control" name="" id="f-address" aria-describedby="helpId" placeholder="B123 rue ...">
+        </div>
+
+        <div class="form-group">
+            <label for="f-website">WebSite</label>
+            <input [(ngModel)]=fournisseur.website type="url" class="form-control" name="" id="f-website" aria-describedby="helpId" placeholder="www.example.you">
+        </div>
+
+    </div>
+    <div class="card-footer text-muted">
+        <button [hidden]="isForUpdate" (click)="onFournisseurCreated()" type="button" class="btn btn-outline-light">Submit</button>
+    </div>
+</div>

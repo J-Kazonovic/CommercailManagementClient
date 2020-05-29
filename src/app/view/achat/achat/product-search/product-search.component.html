@@ -1,0 +1,51 @@
+<div id="demo">
+    <div class="card  text-white bg-dark ">
+        <div class="card-header">
+            <div class="form-row">
+                <div class="input-group col-md-6">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Search</span>
+                    </div>
+                    <input placeholder="ref..." (keyup)="searchProduitByKey()" [(ngModel)]="key" type="text" class="form-control" id="inputCity">
+                </div>
+
+                <div class="input-group  col-md-6">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Catégorie</span>
+                    </div>
+                    <select class="form-control" id="cat" [(ngModel)]="catLib" (change)="getProductBycat()">
+                        <option selected>All</option>
+                        <option *ngFor="let cat of cats" value="{{cat.libelle}}">
+                            {{cat.libelle}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table bg-light table-hover table-inverse">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>Produit</th>
+                        <th>Category</th>
+                        <th>Quantite Total Accorder</th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let ebp of ebpListFilter">
+                        <td>{{ebp.produit.libelle}}</td>
+                        <td>{{ebp.produit.cat.libelle}}</td>
+                        <td>{{ebp.qteCommander}}</td>
+                        <td>
+                            <button (click)="addEbpToDemmande(ebp)" type="button" class="btn btn-success">+</button>
+                        </td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -12,4 +12,11 @@ export class UtilStatuts{
     static readonly EnAttend="En Attend";
 
 
+    // Statut De L'expression de Besoin
+	static readonly DEMMANDE_BROUILLON = "Demmande De Prix Brouillon";
+	static readonly DEMMANDE= "Demmande De Prix";
+	static readonly DEVI_RECU = "Devis Récu";
+	static readonly COMMANDE = "Bon De Commande";
+
+
 }

@@ -39,7 +39,7 @@ export class EbListComptableComponent implements OnInit {
   /**Events */
 
   onShowAll() {
-    this.ebService.getAllEb().subscribe(
+    this.ebService.getAllE().subscribe(
       data=>{
         this.ebList=data;
       },error=>{
@@ -76,7 +76,6 @@ export class EbListComptableComponent implements OnInit {
       }
     )
   }
-
 
   onEbpDelete(ebp: Ebp) {
     this.ebpService.deleteEbp(ebp).subscribe(

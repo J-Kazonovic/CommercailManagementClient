@@ -15,11 +15,11 @@ export class EbService {
   private _ebp: Ebp;
   private _ebpListCurrent: Array<Ebp>;
 
-  constructor(private ebHttp: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   /**Http Requests-Response*/
   saveEb(eb: Eb) {
-    this.ebHttp.post<number>(this.url, eb).subscribe(
+    this.http.post<number>(this.url, eb).subscribe(
       data => {
         if (data == 1) {
           this.ebpListCurrent = null;
@@ -30,36 +30,36 @@ export class EbService {
       }
     );
   }
-
   updateEb(eb: Eb) {
-    return this.ebHttp.put<number>(this.url, eb);
+    return this.http.put<number>(this.url, eb);
   }
-
   deleteEb(id: number) {
-    return this.ebHttp.delete<number>(this.url + "eb/" + id);
+    return this.http.delete<number>(this.url + "/eb/" + id);
   }
 
-  getAllEb() {
-   return  this.ebHttp.get<Array<Eb>>(this.url);
+  getAllE() {
+    return this.http.get<Array<Eb>>(this.url);
   }
+  
 
+  getAllEb(page:number) {
+    return this.http.get<Array<Eb>>(this.url+"?page="+page);
+  }
   getEbByEntite(libelle: string) {
-    return this.ebHttp.get<Array<Eb>>(this.url + "entite/" + libelle);
+    return this.http.get<Array<Eb>>(this.url + "entite/" + libelle);
   }
-
   getEbByPersonnel(cin: string) {
-    return this.ebHttp.get<Array<Eb>>(this.url + "personnel/" + cin);
+    return this.http.get<Array<Eb>>(this.url + "personnel/" + cin);
   }
-
   getEbBySaveDate(date: String) {
-    return this.ebHttp.get<Array<Eb>>(this.url + "date/" + date);
+    return this.http.get<Array<Eb>>(this.url + "date/" + date);
   }
   /**Http Requests-Response*/
 
 
   /**Events */
   onAddEbp() {
-    this.ebp.besoin_statut=UtilStatuts.EnAttend;
+    this.ebp.besoin_statut = UtilStatuts.EnAttend;
     this.ebpListCurrent.push(this.ebp);
     this.ebp = new Ebp();
   }
@@ -69,12 +69,6 @@ export class EbService {
     this.saveEb(this.eb);
   }
   /**Events */
-
-
-
-
-  
-  /**Util & Validation*/
 
 
   /** Getter & Setter*/
@@ -110,11 +104,52 @@ export class EbService {
   set ebpListCurrent(value: Array<Ebp>) {
     this._ebpListCurrent = value;
   }
-
-  
   /** Getter & Setter*/
 
 
 
+  /*Filtring & Searching*/
+
+  searchByTitle(ebList: Array<Eb>, title: string) {
+    if (title.length > 0) {
+      return ebList.filter(eb => eb.title.trim().toLowerCase().indexOf(title) > -1);
+    } else {
+      return ebList;
+    }
+  }
+
+  filterByDept(ebList: Array<Eb>, dept: string) {
+    if (dept.length > 0) {
+      return ebList.filter(eb => eb.dept.libelle === dept);
+    } else {
+      return ebList;
+    }
+  }
+
+  filterByPersonnel(ebList: Array<Eb>, personnel: string) {
+    if (personnel.length > 0) {
+      return ebList.filter(eb => eb.personnel.name === personnel);
+    } else {
+      return ebList;
+    }
+  }
+
+  filterByStatut(ebList: Array<Eb>, statut: string) {
+    if (statut.length > 0) {
+      return ebList.filter(eb => eb.statut === statut);
+    } else {
+      return ebList;
+    }
+  }
+
+  filterByDate(ebList: Array<Eb>, date: string) {
+    if (date.length > 0) {
+      return ebList.filter(eb => eb.saveDate === date);
+    } else {
+      return ebList;
+    }
+  }
+
+  /*Filtring & Searching*/
 
 }

@@ -1,0 +1,96 @@
+<div class="container-fluid">
+    <h2>{{achat.statut}}</h2>
+    <div class="shadow card text-white bg-dark mb-3">
+        <div class="card-body">
+            <button [hidden]="achat.statut!==statuts[0]" style="float: right;" (click)="saveDemmande()" type="button" class="btn btn-success">Save</button>
+            <button [hidden]="achat.statut!==statuts[1]" style="float: right;" (click)="updateDemmande()" type="button" class="btn btn-primary">Devis Recu</button>
+            <button style="float: left;" [hidden]="achat.statut===statuts[0]" type="button" class="btn btn-primary fa fa-file-pdf-o mr-2"></button>
+            <button style="float: left;" [hidden]="achat.statut===statuts[0]" type="button" class="btn btn-primary fa fa-download mr-2"></button>
+            <button style="float: left;" [hidden]="achat.statut===statuts[0]" type="button" class="btn btn-primary fa fa-envelope"></button>
+
+        </div>
+    </div>
+    <!--Info-->
+    <div class="row mt-3 mb-2">
+        <div class="col-md-6">
+            <div class="shadow card text-white bg-dark" style="height: 22rem">
+                <div class="card-header">
+                    Ajouter Les Information Du Demmande
+                </div>
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <label for="date-input">Réfernece</label>
+                        <input [disabled]="achat.statut===statuts[1]" class="form-control" type="text" id="date-input" [(ngModel)]=achat.ref>
+                    </div>
+                    <div class="form-group">
+                        <label for="pay">Mode De Paiement</label>
+                        <select class="form-control" id="pay" [(ngModel)]=achat.modePaiment>
+                            <option>Chéque</option>
+                            <option>Virement</option>
+                            <option>Paypal</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date-input">Date De Livraison</label>
+                        <input [(ngModel)]=achat.dateLivraison class="form-control" type="date" id="date-input">
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="shadow card text-white bg-dark" style="height: 22rem">
+                <div class="card-header">
+                    Chooisir un Fournisseur
+                </div>
+                <div class="card-body">
+                    <label for="fournisseur">Fournisseur</label>
+                    <button style="float: right;" class="btn btn-primary fa fa-plus mb-2" data-toggle="modal" data-target="#modal-fourni"></button>
+                    <select (change)="getfournByNom()" class="form-control" id="fournisseur" [(ngModel)]=achat.fournisseur.nom>
+                        <option *ngFor="let fr of fournisseurs" value="{{fr.nom}}">
+                            {{fr.nom}}
+                        </option>
+                    </select><br>
+                    <h3>{{fourn.nom}}</h3>
+                    <p>{{fourn.email}}</p>
+                    <p>{{fourn.tel}}</p>
+                    <p>{{fourn.adress}}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--Info-->
+
+    <!--List-->
+    <div class="row mb-2">
+
+        <div class="col-md-12">
+            <app-demande-prix-items></app-demande-prix-items>
+        </div>
+    </div>
+    <!--List-->
+
+
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="modal-fourni" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nouvelle Fournisseur</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-fournisseur-create></app-fournisseur-create>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
