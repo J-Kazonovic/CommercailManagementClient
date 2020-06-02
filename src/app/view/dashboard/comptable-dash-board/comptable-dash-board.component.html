@@ -61,6 +61,21 @@
                         <i class="fa fa-list" aria-hidden="true"></i>List Des Produit</a>
                 </div>
             </div>
+             <!--Stock-->
+             <div class="dropdown">
+                <a style="color: white;" class="list-group-item list-group-item-action bg-dark dropdown-toggle" data-toggle="dropdown"><i class="fa fa-product-hunt" aria-hidden="true"></i>
+                    Stocks
+                </a>
+                <div class="collapse  dropdown-menu" style="background-color: black;">
+                    <a style="color: white;" style="color: white; background-color: black;" [routerLink]="['stock']" class=" list-group-item list-group-item-action">
+                        <i class="fa fa-plus-square" aria-hidden="true"></i> Ajouter un Stock</a>
+                            <a style="color: white; background-color: black;" [routerLink]="['stockItem']" class="list-group-item list-group-item-action bg-dar">
+                                <i class="fa fa-list" aria-hidden="true"></i>Product of Stock</a>
+                                <a style="color: white; background-color: black;" [routerLink]="['stocks']" class="list-group-item list-group-item-action bg-dar">
+                                    <i class="fa fa-list" aria-hidden="true"></i>List des Stocks</a>
+                    
+                </div>
+            </div>
         </div>
     </div>
     <!-- /#sidebar-wrapper -->

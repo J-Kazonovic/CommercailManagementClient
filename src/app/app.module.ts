@@ -56,6 +56,10 @@ import { ProductListComponent } from './view/produit/product-list/product-list.c
 import { CategoryCreateComponent } from './view/produit/category-create/category-create.component';
 import { UniteCreateComponent } from './view/produit/unite-create/unite-create.component';
 import { HomeComponent } from './view/home/home.component';
+import { StockComponent } from './view/stock/stock/stock.component';
+import { StockCreateComponent } from './view/stock/stock-create/stock-create.component';
+import { StockItemComponent } from './view/stock/stock-item/stock-item.component';
+import { StockListComponent } from './view/stock/stock-list/stock-list.component';
 
 
 
@@ -90,6 +94,10 @@ import { HomeComponent } from './view/home/home.component';
     CommandeBonItemsComponent,
     AchatComponent,
     HomeComponent,
+    StockComponent,
+    StockCreateComponent,
+    StockItemComponent,
+    StockListComponent,
     
   ],
   imports: [

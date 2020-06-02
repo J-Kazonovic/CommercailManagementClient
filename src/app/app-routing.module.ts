@@ -17,6 +17,9 @@ import { ProductCreateComponent } from './view/produit/product-create/product-cr
 import { ProductListComponent } from './view/produit/product-list/product-list.component';
 import { AchatListComponent } from './view/achat/achat-list/achat-list.component';
 import { AchatComponent } from './view/achat/achat/achat.component';
+import { StockCreateComponent } from './view/stock/stock-create/stock-create.component';
+import { StockItemComponent } from './view/stock/stock-item/stock-item.component';
+import { StockListComponent } from './view/stock/stock-list/stock-list.component';
 
 
 const routes: Routes = [
@@ -44,6 +47,9 @@ const routes: Routes = [
       { path: "fournisseurs", component: FournisseurListComponent},
       { path: "produit", component: ProductCreateComponent},
       { path: "produits", component: ProductListComponent},
+      { path: "stock", component: StockCreateComponent},
+      { path: "stockItem", component: StockItemComponent},
+      { path: "stocks", component: StockListComponent},
     ]
   }
 ];

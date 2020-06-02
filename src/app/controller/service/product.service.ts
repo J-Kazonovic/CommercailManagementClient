@@ -27,6 +27,16 @@ export class ProductService {
       }
     );
   }
+  findProductByRef(produit:Product) {
+    this.produitHttp.get<Product>(this.url+"ref/"+produit.ref).subscribe(
+      data => {
+        console.log(data);
+        this.product = data;
+      }, error => {
+        console.log('erreur');
+      }
+    );
+  }
 
   getAllCatProduct(libelle:string){
     this.produitHttp.get<Array<Product>>(this.url+"cat/libelle/"+libelle).subscribe(

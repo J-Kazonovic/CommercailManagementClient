@@ -1,0 +1,55 @@
+
+<div class="card text-white bg-dark shadow mt-3 mb-3">
+    <div class="card-header">
+        <div class="form-inline form-group input-group">
+            <h2>Gestion du stock</h2>
+            <div class="input-group-prepend">
+                <span class="input-group-text">Reference:</span>
+             </div>
+             <input type="text" placeholder="entrer la ref du stock" class="form-control" [(ngModel)]=stock.ref>
+      
+            <button (click)="saveStock()"  type="submit" class="btn btn-primary " [routerLink]="['/comptable/stocks']">Submit</button>
+        </div>
+    </div>
+    <div class="card-body table-responsive">
+        <table class="table table-light table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Ref</th>
+                    <th>Designation</th>
+                    <th>Unite</th>
+                    <th>Quantite Initial</th>
+                    <th>Quantite Alerte</th>
+                    <th>Quantite Rester</th>
+                    <th>Prix</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="stock.stockItems.length==0">
+                    <td class="alert alert-secondary" colspan="6" role="alert">
+                        No data to display.
+                    </td>
+                </tr>
+                <tr *ngFor="let item of stock.stockItems">
+                    <td>{{item.produit.ref}}</td>
+                    <td>{{item.produit.libelle}}</td>
+                    <td>{{item.produit.unite.libelle}}</td>
+                    <td>{{item.produit.qte}}</td>
+                    <td>{{item.qtAlerte}}</td>
+                    <td>{{item.qtFinal}}</td>
+                    <td>{{item.produit.prix}}</td>
+                    <td><button type="submit" class="btn btn-primary " (click)="findProductByRef(item)" [routerLink]="['/comptable/stockItem']">Submit</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <div class="container">
+            <button [routerLink]="['/comptable/stockItem']" type="submit" class="btn btn-primary ">Nouveau Produit</button>
+            <button data-toggle="modal" data-target="#myModal" class="btn btn-primary fa fa-eye mr-2" >Update Produit</button>
+        </div>
+    </div>
+</div>
+
+
+ 
