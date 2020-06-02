@@ -11,6 +11,7 @@ export class AchatItem {
 	achat=new Achat();
 
 	totalPrice:number;
+	unitPrice:number;
 	qteCommander:number;
 	qteRecu:number;
 

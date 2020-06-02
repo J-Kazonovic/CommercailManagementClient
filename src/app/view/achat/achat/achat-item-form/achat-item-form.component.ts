@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AchatItem } from 'src/app/controller/entity/achat-item.model';
 import { EbService } from 'src/app/controller/service/eb.service';
 import { CategoryService } from 'src/app/controller/service/category.service';
@@ -15,6 +15,7 @@ import { Product } from 'src/app/controller/entity/product.model';
 export class AchatItemFormComponent implements OnInit {
 
   item=new AchatItem();
+  @Input() items=new Array<AchatItem>();
 
   catLib:string;
 
@@ -32,7 +33,9 @@ export class AchatItemFormComponent implements OnInit {
 
   onAddItem(){
     this.item.produit.cat.libelle=this.catLib;
-    this.achatService.onAddItem(this.item);
+      if (this.item != null) {
+        this.items.push(this.item);
+      }
   }
 
   findAllCats( ) {
@@ -46,9 +49,7 @@ export class AchatItemFormComponent implements OnInit {
   get cat(): Category {
     return this.catService.cat;
   }
-
   public get catProduitsList(): Array<Product> {
-    
     return this.prService._catProduitsList;
   }
 

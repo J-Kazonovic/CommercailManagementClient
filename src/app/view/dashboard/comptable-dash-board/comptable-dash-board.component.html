@@ -1,65 +1,72 @@
 <div class="d-flex" id="wrapper">
     <!-- Sidebar -->
     <div class="bg-dark border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading"><img src="https://www.supmaroc.com/wp-content/uploads/FST-marrakech.jpg" alt="" height="90px" width="200px"></div>
+        <div class="sidebar-heading">
+
+        </div>
         <hr style="color: white;">
-        <div class="list-group list-group-flush">
+        <div class="list-group list-group-flush" id="accordion">
 
             <!--Expression-->
-            <div class="dropdown">
-                <a style="color: white;" class="list-group-item list-group-item-action bg-dark dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-question" aria-hidden="true"></i>Expression
 
-                </a>
-                <div class="collapse  dropdown-menu" style="background-color: black;">
-                    <a style="color: white; background-color: black;" [routerLink]="['ebs']" class="list-group-item list-group-item-action"><i class="fa fa-list" aria-hidden="true"></i>
-                        List Des Expression</a>
-                </div>
+            <a style="color: white;" class="list-group-item list-group-item-action bg-info collapsed" data-toggle="collapse" href="#collapseeb">
+                Expression <i style="float: right; bottom: 0;" class="fa fa-angle-down" aria-hidden="true"></i>
+            </a>
+
+            <div id="collapseeb" class="collapse bg-dark" data-parent="#accordion">
+                <a style="color: white; " [routerLink]="['ebs']" class="bg-dark list-group-item list-group-item-action"><i class="fa fa-list" aria-hidden="true"></i>
+                    List Des Expression</a>
             </div>
+
 
             <!--Achat-->
-            <div class="dropdown">
-                <a style="color: white;" class="list-group-item list-group-item-action bg-dark dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                    Achat
-                </a>
-                <div class="collapse  dropdown-menu" style="background-color: black;">
-                    <a style="color: white; background-color: black;" [routerLink]="['achat']" class="list-group-item list-group-item-action">
-                        <i class="fa fa-plus" aria-hidden="true"></i>Ajouter Une Demande</a>
 
 
-                    <a style="color: white; background-color: black;" [routerLink]="['achats']" class="list-group-item list-group-item-action">
-                        <i class="fa fa-list" aria-hidden="true"></i>List Des Achat</a>
-                </div>
+            <a style="color: white;" class="list-group-item list-group-item-action bg-info collapsed" data-toggle="collapse" href="#collapseachat">
+                Achat <i style="float: right; bottom: 0;" class="fa fa-angle-down" aria-hidden="true"></i>
+            </a>
+
+            <div id="collapseachat" class="collapse bg-dark" data-parent="#accordion">
+
+                <a style="color: white;" href="comptable/achats" class="bg-dark list-group-item list-group-item-action">
+                    <i class="fa fa-list" aria-hidden="true"></i> List Des Achats</a>
+                <a style="color: white;" href="comptable/dp" class="bg-dark list-group-item list-group-item-action">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Crée Une Demmande de Prix</a>
+                <a style="color: white;" [routerLink]="['bon-commande']" class="bg-dark list-group-item list-group-item-action">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Crée Bon De Commande</a>
             </div>
 
-            <!--Fournisseur-->
-            <div class="dropdown">
-                <a style="color: white;" class="list-group-item list-group-item-action bg-dark dropdown-toggle" data-toggle="dropdown"><i class="fa fa-handshake-o" aria-hidden="true"></i>
-                    Fournisseur
-                </a>
-                <div class="collapse  dropdown-menu" style="background-color: black;">
-                    <a style="color: white; background-color: black;" [routerLink]="['fournisseur']" class=" list-group-item list-group-item-action">
-                        <i class="fa fa-handshake-o" aria-hidden="true"></i> Ajouter un Fournisseur</a>
 
-                    <a style="color: white; background-color: black;" [routerLink]="['fournisseurs']" class="list-group-item list-group-item-action">
-                        <i class="fa fa-list" aria-hidden="true"></i> List Des Fournisseur</a>
-                </div>
+
+            <!--Fournisseur-->
+            <a style="color: white;" class="list-group-item list-group-item-action bg-info collapsed" data-toggle="collapse" href="#collapsefourni">
+                Fournisseur <i style="float: right; bottom: 0;" class="fa fa-angle-down" aria-hidden="true"></i>
+            </a>
+
+            <div id="collapsefourni" class="collapse bg-dark" data-parent="#accordion">
+
+                <a style="color: white;" [routerLink]="['fournisseur']" class="bg-dark list-group-item list-group-item-action">
+                    <i class="fa fa-handshake-o" aria-hidden="true"></i> Ajouter un Fournisseur</a>
+
+                <a style="color: white;" [routerLink]="['fournisseurs']" class="bg-dark list-group-item list-group-item-action">
+                    <i class="fa fa-list" aria-hidden="true"></i> List Des Fournisseur</a>
             </div>
 
             <!--Produits-->
-            <div class="dropdown">
-                <a style="color: white;" class="list-group-item list-group-item-action bg-dark dropdown-toggle" data-toggle="dropdown"><i class="fa fa-product-hunt" aria-hidden="true"></i>
-                    Produits
-                </a>
-                <div class="collapse  dropdown-menu" style="background-color: black;">
-                    <a style="color: white;" style="color: white; background-color: black;" [routerLink]="['produit']" class=" list-group-item list-group-item-action">
-                        <i class="fa fa-plus-square" aria-hidden="true"></i> Ajouter un Produit</a>
+
+            <a style="color: white;" class="list-group-item list-group-item-action bg-info collapsed" data-toggle="collapse" href="#collapseprod">
+                Produits <i style="float: right; bottom: 0;" class="fa fa-angle-down" aria-hidden="true"></i>
+            </a>
+
+            <div id="collapseprod" class="collapse bg-dark" data-parent="#accordion">
+
+                <a style="color: white;" style="color: white; " [routerLink]="['produit']" class="bg-dark list-group-item list-group-item-action">
+                    <i class="fa fa-plus-square" aria-hidden="true"></i> Ajouter un Produit</a>
 
 
 
-                    <a style="color: white; background-color: black;" [routerLink]="['produits']" class="list-group-item list-group-item-action bg-dar">
-                        <i class="fa fa-list" aria-hidden="true"></i>List Des Produit</a>
-                </div>
+                <a style="color: white;" [routerLink]="['produits']" class="bg-dark list-group-item list-group-item-action bg-dar">
+                    <i class="fa fa-list" aria-hidden="true"></i> List Des Produit</a>
             </div>
         </div>
     </div>
@@ -71,7 +78,7 @@
             <button class="btn btn-primary  mr-2" id="menu-toggle"><i class="fa fa-bars"
                     aria-hidden="true"></i></button>
             <span>
-                <h2 style="color: white;">Comptable, Welcom {{username}}</h2>
+                <h2 style="color: white;">Comptable</h2>
             </span>
 
         </nav>

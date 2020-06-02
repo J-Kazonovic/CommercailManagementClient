@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { UtilStatuts } from 'src/app/util/utilstatuts.module';
 import { Fournisseur } from 'src/app/controller/entity/fournisseur.model';
 import { AchatService } from 'src/app/controller/service/achat.service';
@@ -16,18 +16,19 @@ import { Achat } from 'src/app/controller/entity/achat.model';
   templateUrl: './commande-bon.component.html',
   styleUrls: ['./commande-bon.component.css']
 })
-export class CommandeBonComponent implements OnInit,OnChanges{
+export class CommandeBonComponent implements OnInit, OnChanges {
 
-  statuts=[UtilStatuts.DEMMANDE_BROUILLON
-    ,UtilStatuts.DEMMANDE
-    ,UtilStatuts.DEVI_RECU
-    ,UtilStatuts.COMMANDE];
+  @Input() isNew = 1;
 
-  fournisseurs=Array<Fournisseur>();
+  statuts = [UtilStatuts.DEMMANDE_BROUILLON
+    , UtilStatuts.DEMMANDE
+    , UtilStatuts.DEVI_RECU
+    , UtilStatuts.COMMANDE];
 
-
-  fourn=new Fournisseur();
-  nom:string;
+  fournisseurs = new Array<Fournisseur>();
+  fourn = new Fournisseur();
+  nom: string;
+  
 
 
 
@@ -42,37 +43,33 @@ export class CommandeBonComponent implements OnInit,OnChanges{
 
   ngOnInit() {
     this.getAllFournisseurs();
-    this.achat.achatItems.forEach(item => {
-      item.totalPrice=item.qteCommander*item.produit.prix;
-    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    //this.edit=this.achatService.edit;
-
   }
 
+  onAchatSave() {
+    if (this.isNew == 1) {
+      this.achatService.saveAchat(null);
+    } else {
+      this.updateAchat();
+      this.getAllDBAchatItems();
+    }
+  }
 
   //API Calls
-  updateDemmande(){
-    let total=0;
-    this.items.forEach(item=>{
-      total=total+item.totalPrice;
-    });
-    this.achat.achatItems=new Array<AchatItem>();
-    this.achat.achatItems=this.items;
-    this.achat.total=total;
-    this.achat.statut=UtilStatuts.COMMANDE;
-    console.log(this.achat);
+  updateAchat() {
+    this.achat.achatItems = this.achatItems;
+    this.achat.statut = UtilStatuts.COMMANDE;
+    this.achat.total=this.calculTotal();
     this.achatService.updateAchat(this.achat).subscribe(
       data => {
-        this.achatService.edit=0;
+        this.achatService.edit = 0;
       }, error => {
         console.log(error);
       }
     );
   }
-
   getfournByNom() {
     this.frService.getfournByNom(this.achat.fournisseur.nom).subscribe(
       data => {
@@ -82,7 +79,6 @@ export class CommandeBonComponent implements OnInit,OnChanges{
       }
     );
   }
-
   getAllFournisseurs() {
     this.frService.getAllFournisseur().subscribe(
       data => {
@@ -92,17 +88,38 @@ export class CommandeBonComponent implements OnInit,OnChanges{
       }
     );
   }
+ 
+  getAllDBAchatItems() {
+    this.achatItemService.getAchatItemsByAchat(this.achat.ref).subscribe(
+      data => {
+        this.achatService.achatItems=data;
+      }, error => {
+        console.log(error);
+      }
+    );
+  }
   //API Calls
 
+  calculTotal(){
+    let total=0;
+    this.achatItems.forEach(item=>{
+      total=total+ item.totalPrice;
+    })
+
+    return total;
+  }
+
   
+
+
   /**Getters & Setters */
   get achat(): Achat {
     return this.achatService.achat;
   }
+  get achatItems(): Array<AchatItem> {
+    return this.achatService.achatItems;
+	} 
 
-  get items(): Array<AchatItem> {
-    return this.achatService.items;
-  }
   /**Getters & Setters */
 
 }

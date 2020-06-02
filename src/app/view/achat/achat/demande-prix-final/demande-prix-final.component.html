@@ -1,7 +1,18 @@
 <div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-md-12">
+            <h3 style="display: inline;">Demmande De Prix {{achat.ref}}</h3>
+            <button (click)="updateDemmande()" style="float: right;" type="button" class="btn btn-info">Modifie</button>
+        </div>
+    </div>
     <div class="shadow card text-white bg-dark mb-3">
         <div class="card-body">
-            <button style="float: right;" (click)="saveDemmande()" type="button" class="btn btn-success">Save</button>
+            <button (click)="updateToDevis()" style="float: right;" type="button" class="btn btn-info">Devis
+                Recu</button>
+            <button style="float: left;" type="button" class="btn btn-primary fa fa-file-pdf-o mr-2"></button>
+            <button style="float: left;" type="button" class="btn btn-primary fa fa-download mr-2"></button>
+            <button style="float: left;" type="button" class="btn btn-primary fa fa-envelope"></button>
+
         </div>
     </div>
     <!--Info-->
@@ -61,7 +72,7 @@
     <!--List-->
     <div class="row mb-2">
         <div class="col-md-12">
-            <app-demande-prix-items [items]="achatItemsCurrent"></app-demande-prix-items>
+            <app-demande-prix-items [items]="achatItemsDB"></app-demande-prix-items>
         </div>
     </div>
     <!--List-->

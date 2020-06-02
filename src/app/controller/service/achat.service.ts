@@ -14,21 +14,16 @@ export class AchatService {
 
   edit=1;
   private _achat: Achat;
-  private _items: Array<AchatItem>;
 
-  constructor(private http: HttpClient,private achatItemService:AchatItemService) { }
+  private _achatItems: Array<AchatItem>;
+ 
+
+  constructor(private http: HttpClient
+    ,private achatItemService:AchatItemService) { }
 
 
-  saveAchat() {
-    this.http.post<Achat>(this.url, this.achat).subscribe(
-      data => {
-        if (data != null) {
-          this.achat=data;
-        }
-      }, error => {
-        console.log(error);
-      }
-    );
+  saveAchat(achat:Achat) {
+    return this.http.post<Achat>(this.url, achat);
   }
 
   updateAchat(achat:Achat) {
@@ -39,18 +34,16 @@ export class AchatService {
     return this.http.delete<number>(this.url + "id/" + achatId)
   }
 
+  getAchatByRef(ref:string){
+    return this.http.get<Achat>(this.url + "ref/" + ref);
+
+  }
+
   getAllAchat() {
     return this.http.get<Array<Achat>>(this.url);
   }
 
-  //Events
-  onAddItem(item: AchatItem) {
-    if (item != null) {
-      this.items.push(item);
-    }
-  }
-  //Events
-
+  
 
 
   get achat(): Achat {
@@ -63,16 +56,15 @@ export class AchatService {
     this._achat = value;
   }
 
-  get items(): Array<AchatItem> {
-    if (this._items == null) {
-      this._items = new Array<AchatItem>();
+  get achatItems(): Array<AchatItem> {
+		if(this._achatItems==null){
+      this._achatItems=new Array<AchatItem>();
     }
-    return this._items;
-  }
-  set items(value: Array<AchatItem>) {
-    this._items = value;
-  }
+    return this._achatItems;
+	} 
+	set achatItems(value: Array<AchatItem>) {
+		this._achatItems = value;
+	}
 
-
-
+  
 }

@@ -10,19 +10,23 @@ import { UtilList } from 'src/app/util/utillist.module';
 })
 export class DemandePrixItemsComponent implements OnInit {
   
-  //@Input() items=new Array<AchatItem>();
+  @Input() items=new Array<AchatItem>();
 
   constructor(private achatService:AchatService) { }
 
   ngOnInit(): void {
   }
 
-  removeDemmandeItem(item:AchatItem){
+  onAddItem(item: AchatItem) {
+    if (item != null) {
+      this.items.push(item);
+    }
+  }
+
+  onRemoveItem(item:AchatItem){
     UtilList.deleteFromListByLibelle2(item.produit.libelle,this.items);
   }
 
-  get items(): Array<AchatItem> {
-    return this.achatService.items;
-  }
+  
 
 }

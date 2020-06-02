@@ -2,12 +2,10 @@
     <h1>Bon De Commande</h1>
     <div class="shadow card text-white bg-dark mb-3">
         <div class="card-body">
-            <button style="float: right;" (click)="updateDemmande()" type="button" class="btn btn-primary">Commande Confirmer</button>
+            <button style="float: right;" (click)="onAchatSave()" type="button" class="btn btn-primary">Commande Confirmer</button>
             <button style="float: left;" [hidden]="achat.statut===statuts[0]" type="button" class="btn btn-primary fa fa-file-pdf-o mr-2"></button>
             <button style="float: left;" [hidden]="achat.statut===statuts[0]" type="button" class="btn btn-primary fa fa-download mr-2"></button>
             <button style="float: left;" [hidden]="achat.statut===statuts[0]" type="button" class="btn btn-primary fa fa-envelope"></button>
-
-
         </div>
     </div>
     <!--Info-->
@@ -21,7 +19,7 @@
 
                     <div class="form-group">
                         <label for="ref">Réfernece</label>
-                        <input class="form-control" type="text" id="ref" [(ngModel)]=achat.ref>
+                        <input [disabled]="isNew==0" class="form-control" type="text" id="ref" [(ngModel)]=achat.ref>
                     </div>
                     <div class="form-group">
                         <label for="pay">Mode De Paiement</label>
@@ -47,7 +45,6 @@
                 </div>
                 <div class="card-body">
                     <label for="fournisseur">Fournisseur</label>
-                    <button style="float: right;" class="btn btn-primary fa fa-plus mb-2" data-toggle="modal" data-target="#myModal"></button>
                     <select (change)="getfournByNom()" class="form-control" id="fournisseur" [(ngModel)]=achat.fournisseur.nom>
                         <option *ngFor="let fr of fournisseurs" value="{{fr.nom}}">
                             {{fr.nom}}
@@ -66,31 +63,10 @@
 
     <!--List-->
     <div class="row mb-2">
-
         <div class="col-md-12">
-            <app-commande-bon-items></app-commande-bon-items>
+            <app-commande-bon-items [items]="achatItems"></app-commande-bon-items>
         </div>
+
     </div>
     <!--List-->
-
-
-</div>
-
-<div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Nouvelle Fournisseur</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <app-fournisseur-create></app-fournisseur-create>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-    </div>
 </div>

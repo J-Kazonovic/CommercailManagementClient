@@ -4,6 +4,7 @@ import { Achat } from 'src/app/controller/entity/achat.model';
 import { UtilList } from 'src/app/util/utillist.module';
 import { AchatItem } from 'src/app/controller/entity/achat-item.model';
 import { AchatItemService } from 'src/app/controller/service/achat-item.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-achat-list',
@@ -18,22 +19,19 @@ export class AchatListComponent implements OnInit {
 
 
   constructor(private achatService:AchatService
-    ,private achatItemService:AchatItemService) { }
+    ,private achatItemService:AchatItemService
+    ,private route: ActivatedRoute
+    ,private router: Router) { }
 
   ngOnInit(): void {
     this.getAllAchats()
   }
 
-  oAchatShow(achat:Achat){
+  onAchatShow(achat:Achat){
+    this.router.navigate(['comptable/achats',achat.ref]);
+    this.achatService.achat=achat;
+    console.log(this.achatService.achat);
 
-    this.achatUpdate = achat;
-    this.achatItemService.getAchatItemsByAchat(achat.ref).subscribe(
-      data => {
-        this.items= data;
-      },error=>{
-        console.log(error);
-      }
-    );
   }
 
   onitemUpdate(){
@@ -77,6 +75,14 @@ export class AchatListComponent implements OnInit {
 
   onItemDelete(){
     
+  }
+
+  get achat(): Achat {
+    return this.achatService.achat;
+  }
+
+  set achat(achat: Achat) {
+    this.achatService.achat = achat;
   }
 
 }

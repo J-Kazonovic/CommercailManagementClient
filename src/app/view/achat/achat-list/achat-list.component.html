@@ -1,4 +1,4 @@
-<h2>List De Tout Les Expression Des Besoin</h2>
+<h2>Votre Achats</h2>
 <div class="card text-white bg-dark shadow mt-3 mb-3">
     <div class="card-header">
         <div class="container">
@@ -60,57 +60,9 @@
                     <td>{{achat.dateLivraison}}</td>
                     <td>
                         <button (click)="onAchatDelete(achat)" class="btn btn-danger fa fa-trash mr-2"></button>
-                        <button data-toggle="modal" data-target="#myModal" class="btn btn-primary fa fa-eye mr-2" (click)="oAchatShow(achat)"></button>
+                        <button class="btn btn-primary fa fa-eye mr-2" (click)="onAchatShow(achat)"></button>
                     </td>
             </tbody>
         </table>
-    </div>
-</div>
-
-<div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Produits</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <table class="table table-light table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Produit</th>
-                            <th>Category</th>
-                            <th>Quantiter</th>
-                            <th>Unite</th>
-                            <th>Prix Unite</th>
-                            <th>Prix Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngIf="items.length==0">
-                            <td class="alert alert-secondary" colspan="5" role="alert">
-                                No data to display.
-                            </td>
-                        </tr>
-                        <tr *ngFor="let item of items">
-                            <td>{{item.produit.libelle}}</td>
-                            <td>{{item.produit.cat.libelle}}</td>
-                            <td>{{item.qteCommander}}</td>
-                            <td>{{item.produit.unite.libelle}}</td>
-                            <td>{{item.produit.prix}}</td>
-                            <td>{{item.totalPrice}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onitemUpdate()">Save
-                    changes</button>
-            </div>
-        </div>
     </div>
 </div>

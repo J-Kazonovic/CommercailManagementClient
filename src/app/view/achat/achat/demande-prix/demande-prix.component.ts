@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Eb } from 'src/app/controller/entity/eb.model';
 import { Fournisseur } from 'src/app/controller/entity/fournisseur.model';
 import { Ebp } from 'src/app/controller/entity/ebp.model';
@@ -15,6 +15,8 @@ import { UtilValidation } from 'src/app/util/utilvalidation.module';
 import { AchatItem } from 'src/app/controller/entity/achat-item.model';
 import { Category } from 'src/app/controller/entity/category.model';
 import { Product } from 'src/app/controller/entity/product.model';
+import { DemmandePrixService } from 'src/app/controller/service/demmande-prix.service';
+import { Router } from '@angular/router';
 
 declare var $: any;
 
@@ -23,60 +25,53 @@ declare var $: any;
   templateUrl: './demande-prix.component.html',
   styleUrls: ['./demande-prix.component.css']
 })
-export class DemandePrixComponent implements OnInit {
+export class DemandePrixComponent implements OnInit, OnChanges{
 
-  statuts=[UtilStatuts.DEMMANDE_BROUILLON
-    ,UtilStatuts.DEMMANDE
-    ,UtilStatuts.DEVI_RECU
-    ,UtilStatuts.COMMANDE];
-
-  fournisseurs=Array<Fournisseur>();
+  statuts = [UtilStatuts.DEMMANDE_BROUILLON
+    , UtilStatuts.DEMMANDE
+    , UtilStatuts.DEVI_RECU
+    , UtilStatuts.COMMANDE];
 
 
-  fourn=new Fournisseur();
-  nom:string;
+  fournisseurs = Array<Fournisseur>();
+  fourn = new Fournisseur();
+  nom: string;
 
 
+  items = new Array<AchatItem>();
 
-  constructor(private achatService: AchatService, private ebService: EbService
-    , private ebpService: EbpService
-    , private catService: CategoryService
-    , private prService: ProductService
+
+  constructor(private achatService: AchatService
+    , private dpService: DemmandePrixService
     , private frService: FournisseurService
-    , private achatItemService: AchatItemService) { }
+    , private achatItemService: AchatItemService
+    , private router: Router) { }
 
+  ngOnChanges(changes:SimpleChanges): void {
+  }
 
 
   ngOnInit() {
     this.getAllFournisseurs();
   }
 
-
-
   //API Calls
   saveDemmande() {
-    this.achat.achatItems=this.items;
-    this.achat.statut=UtilStatuts.DEMMANDE;
-    console.log(this.items);
-    this.achatService.saveAchat();
-  }
-
-  updateDemmande(){
-    this.achat.achatItems=new Array<AchatItem>();
-    this.achat.achatItems=this.items;
-    this.achat.dateCommande=this.achat.dateCommande;
-    this.achat.statut=UtilStatuts.DEVI_RECU;
-    console.log(this.achat);
-    this.achatService.updateAchat(this.achat).subscribe(
+    this.achat.achatItems = this.achatItemsCurrent;
+    this.achat.statut = UtilStatuts.DEMMANDE;
+    this.achatService.saveAchat(this.achat).subscribe(
       data => {
-       
+        if (data != null) {
+          this.router.navigate(['comptable/dp/ref',data.ref]);
+        }
       }, error => {
         console.log(error);
       }
     );
+    
   }
 
-  getfournByNom() {
+  getFournByNom() {
     this.frService.getfournByNom(this.achat.fournisseur.nom).subscribe(
       data => {
         this.fourn = data;
@@ -95,17 +90,20 @@ export class DemandePrixComponent implements OnInit {
       }
     );
   }
+
   //API Calls
 
-  
+
   /**Getters & Setters */
   get achat(): Achat {
-    return this.achatService.achat;
+    return this.dpService.achat;
   }
 
-  get items(): Array<AchatItem> {
-    return this.achatService.items;
-  }
+	public get achatItemsCurrent(): Array<AchatItem> {
+		return this.dpService.achatItemsDB;
+	}
+
+
   /**Getters & Setters */
 
 

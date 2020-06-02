@@ -3,3 +3,9 @@
 body {
     overflow-x: hidden;
 }
+
+.dashboard-items {
+    border-bottom-style: solid;
+    padding-left: 20px;
+    font-size: medium;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Ebp } from 'src/app/controller/entity/ebp.model';
 import { EbpService } from 'src/app/controller/service/ebp.service';
 import { UtilList } from 'src/app/util/utillist.module';
@@ -9,11 +9,11 @@ import { CategoryService } from 'src/app/controller/service/category.service';
 import { Category } from 'src/app/controller/entity/category.model';
 
 @Component({
-  selector: 'app-product-search',
-  templateUrl: './product-search.component.html',
-  styleUrls: ['./product-search.component.css']
+  selector: 'app-achat-item-search',
+  templateUrl: './achat-item-search.component.html',
+  styleUrls: ['./achat-item-search.component.css']
 })
-export class ProductSearchComponent implements OnInit {
+export class AchatItemSearchComponent implements OnInit {
 
   ebpList = new Array<Ebp>();
   ebpListFinal = new Array<AchatItem>();
@@ -22,6 +22,7 @@ export class ProductSearchComponent implements OnInit {
   catLib = "All";
   key="";
 
+  @Input() items=new Array<AchatItem>();
 
   constructor(private ebpService: EbpService
     , private dService: AchatService
@@ -34,7 +35,9 @@ export class ProductSearchComponent implements OnInit {
   }
 
   addEbpToDemmande(item: AchatItem) {
-    this.dService.onAddItem(item);
+      if (item != null) {
+        this.items.push(item);
+      }
   }
 
   getAllEbp() {

@@ -1,0 +1,76 @@
+<!--Bon De Commande Final-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 style="display: inline;">Bon De Commande <i><u>{{achat.ref}}</u></i></h3>
+            <button style="float: right;" (click)="onEditClick()" type="button" class="btn btn-secondary ml-1">Modifier</button>
+            <button style="float: right;" type="button" class="btn btn-primary fa fa-file-pdf-o ml-1"></button>
+            <button style="float: right;" type="button" class="btn btn-primary fa fa-download ml-1"></button>
+            <button style="float: right;" type="button" class="btn btn-primary fa fa-envelope ml-1"></button>
+
+        </div>
+
+    </div>
+
+    <!--Info-->
+    <div class="row mt-3 mb-2">
+        <div class="col-md-5 mb-3" style="float: left;">
+            <div class="shadow card text-white bg-dark">
+                <div class="card-body">
+                    <b>Date De Livraison</b> {{achat.dateLivraison}} <br>
+                    <b>Fournisseur</b>
+                    <br> Nom: {{achat.fournisseur.nom}}
+                    <br> Email: {{achat.fournisseur.email}}
+                    <br> Address: {{achat.fournisseur.adress}}
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 mb-2">
+            <div class="shadow card text-white bg-dark">
+                <div class="card-header">
+                    <h4>Commande Items</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table text-white table-border">
+                        <thead class=" thead-inverse ">
+                            <tr>
+                                <th>Produit</th>
+                                <th>Catégorie</th>
+                                <th>Unité</th>
+                                <th>Quantite</th>
+                                <th>Prix Unit (DH)</th>
+                                <th>Sous-Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="achatItems.length==0 ">
+                                <td colspan="4 " role="alert ">
+                                    No data to display.
+                                </td>
+                            </tr>
+                            <tr *ngFor="let item of achatItems">
+                                <td>{{item.produit.libelle}}</td>
+                                <td>{{item.produit.cat.libelle}}</td>
+                                <td>{{item.produit.unite.libelle}}</td>
+                                <td>{{item.qteCommander}}</td>
+                                <td>{{item.unitPrice}}</td>
+                                <td>{{item.totalPrice}} DH</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="shadow card text-white bg-dark" style="float: right;">
+                <div class="card-body">
+                    <b>Total</b>: {{achat.total}} DH <br>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--Info-->
+</div>

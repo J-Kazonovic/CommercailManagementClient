@@ -10,7 +10,7 @@ import { UtilList } from 'src/app/util/utillist.module';
 })
 export class CommandeBonItemsComponent implements OnInit {
   
-  //@Input() items=new Array<AchatItem>();
+  @Input() items=new Array<AchatItem>();
 
   constructor(private achatService:AchatService) { }
 
@@ -18,12 +18,15 @@ export class CommandeBonItemsComponent implements OnInit {
     
   }
 
+  onAddItem(item: AchatItem) {
+    if (item != null) {
+      this.items.push(item);
+    }
+  }
+
   removeDemmandeItem(item:AchatItem){
     UtilList.deleteFromListByLibelle2(item.produit.libelle,this.items);
   }
 
-  get items(): Array<AchatItem> {
-    return this.achatService.items;
-  }
-
+  
 }

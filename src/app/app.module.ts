@@ -38,7 +38,7 @@ import { EbListChefComponent } from './view/eb/eb-list/eb-list-chef/eb-list-chef
 /*Achat*/
 import { DemandePrixComponent } from './view/achat/achat/demande-prix/demande-prix.component';
 import { CommandeBonComponent } from './view/achat/achat/commande-bon/commande-bon.component';
-import { ProductSearchComponent } from './view/achat/achat/product-search/product-search.component';
+import { AchatItemSearchComponent } from './view/achat/achat/achat-item-search/achat-item-search.component';
 import { DemandePrixItemsComponent } from './view/achat/achat/demande-prix-items/demande-prix-items.component';
 import { AchatItemFormComponent } from './view/achat/achat/achat-item-form/achat-item-form.component';
 import { AchatListComponent } from './view/achat/achat-list/achat-list.component';
@@ -56,6 +56,8 @@ import { ProductListComponent } from './view/produit/product-list/product-list.c
 import { CategoryCreateComponent } from './view/produit/category-create/category-create.component';
 import { UniteCreateComponent } from './view/produit/unite-create/unite-create.component';
 import { HomeComponent } from './view/home/home.component';
+import { CommandeBonFinalComponent } from './view/achat/achat/commande-bon-final/commande-bon-final.component';
+import { DemandePrixFinalComponent } from './view/achat/achat/demande-prix-final/demande-prix-final.component';
 
 
 
@@ -78,7 +80,7 @@ import { HomeComponent } from './view/home/home.component';
     CommandeBonComponent,
     FournisseurCreateComponent,
     FournisseurListComponent,
-    ProductSearchComponent,
+    AchatItemSearchComponent,
     DemandePrixItemsComponent,
     ProductCreateComponent,
     ProductListComponent,
@@ -90,6 +92,8 @@ import { HomeComponent } from './view/home/home.component';
     CommandeBonItemsComponent,
     AchatComponent,
     HomeComponent,
+    CommandeBonFinalComponent,
+    DemandePrixFinalComponent,
     
   ],
   imports: [

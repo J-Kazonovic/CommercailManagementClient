@@ -1,8 +1,8 @@
 <div class="shadow card text-white bg-dark">
     <div class="card-header">
         Commande Items
-        <button style="float: right;" type="button" class="btn btn-primary fa fa-search mr-2" data-toggle="modal" data-target="#myModal1"></button>
-        <button style="float: right;" type="button" class="btn btn-primary fa fa-plus mr-2" data-toggle="modal" data-target="#myModal"></button>
+        <button style="float: right;" type="button" class="btn btn-primary fa fa-search mr-2" data-toggle="modal" data-target="#search"></button>
+        <button style="float: right;" type="button" class="btn btn-primary fa fa-plus mr-2" data-toggle="modal" data-target="#add"></button>
     </div>
     <div class="card-body">
         <table class="table text-white table-border">
@@ -27,12 +27,13 @@
                     <td>{{item.produit.libelle}}</td>
                     <td>{{item.produit.cat.libelle}}</td>
                     <td>{{item.produit.unite.libelle}}</td>
-                    <td><input (change)="item.totalPrice=item.qteCommander*item.produit.prix" (keyup)="item.totalPrice=item.qteCommander*item.produit.prix" [min]=1 type="number" [(ngModel)]=item.qteCommander class="form-control col-xs-2"></td>
-                    <td><input (change)="item.totalPrice=item.qteCommander*item.produit.prix" (keyup)="item.totalPrice=item.qteCommander*item.produit.prix" [min]=1 type="number" [(ngModel)]=item.produit.prix class="form-control col-xs-2"></td>
+                    <td><input (change)="item.totalPrice=item.qteCommander*item.unitPrice" (keyup)="item.totalPrice=item.qteCommander*item.unitPrice" [min]=1 type="number" [(ngModel)]=item.qteCommander class="form-control col-xs-2"></td>
+                    <td><input (change)="item.totalPrice=item.qteCommander*item.unitPrice" (keyup)="item.totalPrice=item.qteCommander*item.unitPrice" [min]=1 type="number" [(ngModel)]=item.unitPrice class="form-control col-xs-2"></td>
                     <td>{{item.totalPrice}} DH</td>
 
                     <td>
-                        <button (click)="removeDemmandeItem(item) " type="button " class="btn btn-danger ">-</button>
+                        <button (click)="removeDemmandeItem(item) " type="button " class="btn btn-danger fa fa-trash"></button>
+
                     </td>
                 </tr>
             </tbody>
@@ -40,8 +41,8 @@
     </div>
 </div>
 
-
-<div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--Ajouter Un Nouvelle Item-->
+<div class="modal fade bd-example-modal-lg" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -51,7 +52,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <app-achat-item-form></app-achat-item-form>
+                <app-achat-item-form [items]="items"></app-achat-item-form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -60,7 +61,7 @@
     </div>
 </div>
 
-<div class="modal fade bd-example-modal-lg" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -70,7 +71,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <app-product-search></app-product-search>
+                <app-achat-item-search [items]="items"></app-achat-item-search>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

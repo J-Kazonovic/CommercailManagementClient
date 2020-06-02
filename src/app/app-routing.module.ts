@@ -17,6 +17,8 @@ import { ProductCreateComponent } from './view/produit/product-create/product-cr
 import { ProductListComponent } from './view/produit/product-list/product-list.component';
 import { AchatListComponent } from './view/achat/achat-list/achat-list.component';
 import { AchatComponent } from './view/achat/achat/achat.component';
+import { CommandeBonComponent } from './view/achat/achat/commande-bon/commande-bon.component';
+import { DemandePrixFinalComponent } from './view/achat/achat/demande-prix-final/demande-prix-final.component';
 
 
 const routes: Routes = [
@@ -26,6 +28,9 @@ const routes: Routes = [
   {
     path: "chef", component: ChefDashBoardComponent, children: [
       { path: "ebs", component: EbListChefComponent },
+      { path: "achats", component: AchatListComponent },
+      { path: "fournisseurs", component: FournisseurListComponent},
+      { path: "produits", component: ProductListComponent},
     ]
   },
   {
@@ -39,7 +44,13 @@ const routes: Routes = [
     path: "comptable", component: ComptableDashBoardComponent, children: [
       { path: "ebs", component: EbListComptableComponent},
       { path: "achat", component: AchatComponent},
+      { path: "achats/:ref", component: AchatComponent},
+
+      { path: "dp", component: DemandePrixComponent},
+      { path: "dp/ref/:ref", component: DemandePrixFinalComponent},
+
       { path: "achats", component: AchatListComponent },
+      { path: "commande", component: CommandeBonComponent},
       { path: "fournisseur", component: FournisseurCreateComponent},
       { path: "fournisseurs", component: FournisseurListComponent},
       { path: "produit", component: ProductCreateComponent},
