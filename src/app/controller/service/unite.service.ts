@@ -25,8 +25,8 @@ export class UniteService {
       }
     );
   }
-  findUniteByLibelle(unite: Unite) {
-    this.httpClient.get<Unite>(this.url+"libelle/"+unite.libelle).subscribe(
+  findUniteByLibelle(libelle: string) {
+    this.httpClient.get<Unite>(this.url+"libelle/"+ libelle).subscribe(
       data => {
         this.unite = data;
         }, error => {

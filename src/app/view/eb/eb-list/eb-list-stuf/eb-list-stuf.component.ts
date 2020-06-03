@@ -9,6 +9,8 @@ import { DeptService } from 'src/app/controller/service/dept.service';
 import { PersonnelService } from 'src/app/controller/service/personnel.service';
 import { Dept } from 'src/app/controller/entity/dept.model';
 import { Personnel } from 'src/app/controller/entity/personnel.model';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-eb-list-stuf',
@@ -45,7 +47,8 @@ export class EbListStufComponent implements OnInit {
   constructor(private ebService: EbService
     , private ebpService: EbpService
     , private deptService: DeptService
-    , private personnelService: PersonnelService) { }
+    , private personnelService: PersonnelService
+    , private router:Router) { }
 
   ngOnInit() {
     this.onShowAll();
@@ -71,8 +74,6 @@ export class EbListStufComponent implements OnInit {
       this.sortByCreatedDate()
     }
   }
-
-
 
   sortByString(caseSort:string) {
     if (this.isSortedByAsc==1) {
@@ -150,6 +151,10 @@ export class EbListStufComponent implements OnInit {
 
 
 
+  onNewEbClick(){
+    this.router.navigate(['stuf/eb']);
+
+  }
 
   /** Getter */
   public get eb(): Eb {

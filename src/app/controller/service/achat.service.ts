@@ -39,12 +39,37 @@ export class AchatService {
 
   }
 
-  getAllAchat() {
-    return this.http.get<Array<Achat>>(this.url);
+  getAllAchat(page:number) {
+    return this.http.get<Array<Achat>>(this.url+"?page="+page);
   }
 
   
 
+
+
+  searchByRef(achats: Array<Achat>, ref: string) {
+    if (ref.length > 0) {
+      return achats.filter(achat => achat.ref.trim().toLowerCase().indexOf(ref) > -1);
+    } else {
+      return achats;
+    }
+  }
+
+  filterByStatut(achats: Array<Achat>, statut: string) {
+    if (statut.length > 0) {
+      return achats.filter(achat => achat.statut === statut);
+    } else {
+      return achats;
+    }
+  }
+
+  filterByFourni(achats: Array<Achat>, fourni: string) {
+    if (fourni.length > 0) {
+      return achats.filter(achat => achat.fournisseur.nom === fourni);
+    } else {
+      return achats;
+    }
+  }
 
   get achat(): Achat {
     if (this._achat == null) {
@@ -65,6 +90,7 @@ export class AchatService {
 	set achatItems(value: Array<AchatItem>) {
 		this._achatItems = value;
 	}
+
 
   
 }

@@ -1,76 +1,80 @@
 <!--Bon De Commande Final-->
 <div class="container-fluid">
-    <div class="row">
+
+    <div class="row mb-2">
         <div class="col-md-12">
             <h3 style="display: inline;">Bon De Commande <i><u>{{achat.ref}}</u></i></h3>
-            <button style="float: right;" (click)="onEditClick()" type="button" class="btn btn-secondary ml-1">Modifier</button>
-            <button style="float: right;" type="button" class="btn btn-primary fa fa-file-pdf-o ml-1"></button>
-            <button style="float: right;" type="button" class="btn btn-primary fa fa-download ml-1"></button>
-            <button style="float: right;" type="button" class="btn btn-primary fa fa-envelope ml-1"></button>
-
+            <button style="float: right;" (click)="updateAchat()" type="button" class="btn btn-success ml-1">Modifier</button>
         </div>
-
     </div>
+
+    <div class="shadow card text-white bg-dark mb-3">
+        <div class="card-body">
+            <button style="float: right;" (click)="updateToCommande()" type="button" class="btn btn-info ml-1">Commande Confirmer</button>
+            <button type="button" class="btn btn-primary fa fa-file-pdf-o ml-1"></button>
+            <button type="button" class="btn btn-primary fa fa-download ml-1"></button>
+            <button type="button" class="btn btn-primary fa fa-envelope ml-1"></button>
+        </div>
+    </div>
+
 
     <!--Info-->
     <div class="row mt-3 mb-2">
-        <div class="col-md-5 mb-3" style="float: left;">
-            <div class="shadow card text-white bg-dark">
-                <div class="card-body">
-                    <b>Date De Livraison</b> {{achat.dateLivraison}} <br>
-                    <b>Fournisseur</b>
-                    <br> Nom: {{achat.fournisseur.nom}}
-                    <br> Email: {{achat.fournisseur.email}}
-                    <br> Address: {{achat.fournisseur.adress}}
-                    <br>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12 mb-2">
-            <div class="shadow card text-white bg-dark">
+        <div class="col-md-6">
+            <div class="shadow card text-white bg-dark" style="height: 22rem">
                 <div class="card-header">
-                    <h4>Commande Items</h4>
+                    Ajouter Les Information Du Demmande
                 </div>
                 <div class="card-body">
-                    <table class="table text-white table-border">
-                        <thead class=" thead-inverse ">
-                            <tr>
-                                <th>Produit</th>
-                                <th>Catégorie</th>
-                                <th>Unité</th>
-                                <th>Quantite</th>
-                                <th>Prix Unit (DH)</th>
-                                <th>Sous-Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngIf="achatItems.length==0 ">
-                                <td colspan="4 " role="alert ">
-                                    No data to display.
-                                </td>
-                            </tr>
-                            <tr *ngFor="let item of achatItems">
-                                <td>{{item.produit.libelle}}</td>
-                                <td>{{item.produit.cat.libelle}}</td>
-                                <td>{{item.produit.unite.libelle}}</td>
-                                <td>{{item.qteCommander}}</td>
-                                <td>{{item.unitPrice}}</td>
-                                <td>{{item.totalPrice}} DH</td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+                    <div class="form-group">
+                        <label for="ref">Réfernece</label>
+                        <input class="form-control" type="text" id="ref" [(ngModel)]=achat.ref>
+                    </div>
+                    <div class="form-group">
+                        <label for="pay">Mode De Paiement</label>
+                        <select class="form-control" id="pay" [(ngModel)]=achat.modePaiment>
+                            <option>Chéque</option>
+                            <option>Virement</option>
+                            <option>Paypal</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date-input">Date De Livraison</label>
+                        <input [(ngModel)]=achat.dateLivraison class="form-control" type="date" id="date-input">
+                    </div>
+
                 </div>
+
             </div>
         </div>
-
-        <div class="col-md-12">
-            <div class="shadow card text-white bg-dark" style="float: right;">
+        <div class="col-md-6">
+            <div class="shadow card text-white bg-dark" style="height: 22rem">
+                <div class="card-header">
+                    Chooisir un Fournisseur
+                </div>
                 <div class="card-body">
-                    <b>Total</b>: {{achat.total}} DH <br>
+                    <label for="fournisseur">Fournisseur</label>
+                    <select (change)="getFournByNom()" class="form-control" id="fournisseur" [(ngModel)]=achat.fournisseur.nom>
+                        <option *ngFor="let fr of fournisseurs" value="{{fr.nom}}">
+                            {{fr.nom}}
+                        </option>
+                    </select><br>
+                    <h3>{{achat.fournisseur.nom}}</h3>
+                    <p>{{achat.fournisseur.email}}</p>
+                    <p>{{achat.fournisseur.tel}}</p>
+                    <p>{{achat.fournisseur.adress}}</p>
                 </div>
             </div>
+
+        </div>
+    </div>
+    <!--Info-->
+
+    <!--List-->
+    <div class="row mb-2">
+        <div class="col-md-12">
+            <app-commande-bon-items [items]="achatItemsDB"></app-commande-bon-items>
         </div>
 
     </div>
-    <!--Info-->
-</div>

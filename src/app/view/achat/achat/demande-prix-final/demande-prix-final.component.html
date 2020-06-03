@@ -1,8 +1,8 @@
 <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-md-12">
-            <h3 style="display: inline;">Demmande De Prix {{achat.ref}}</h3>
-            <button (click)="updateDemmande()" style="float: right;" type="button" class="btn btn-info">Modifie</button>
+            <h3 style="display: inline;">Demmande De Prix <b>{{achat.ref}}</b></h3>
+            <button (click)="updateDemmande()" style="float: right;" type="button" class="btn btn-success">Modifie</button>
         </div>
     </div>
     <div class="shadow card text-white bg-dark mb-3">
@@ -19,9 +19,7 @@
     <div class="row mt-3 mb-2">
         <div class="col-md-6">
             <div class="shadow card text-white bg-dark" style="height: 22rem">
-                <div class="card-header bg-info">
-                    <h4>Ajouter Les Information Du Demmande</h4>
-                </div>
+
                 <div class="card-body">
 
                     <div class="form-group">
@@ -47,9 +45,7 @@
         </div>
         <div class="col-md-6">
             <div class="shadow card text-white bg-dark" style="height: 22rem">
-                <div class="card-header bg-info">
-                    <h4>Chooisir un Fournisseur</h4>
-                </div>
+
                 <div class="card-body">
                     <label for="fournisseur">Fournisseur</label>
                     <button style="float: right;" class="btn btn-primary fa fa-plus mb-2" data-toggle="modal" data-target="#modal-fourni"></button>
@@ -58,10 +54,10 @@
                             {{fr.nom}}
                         </option>
                     </select><br>
-                    <h3>{{fourn.nom}}</h3>
-                    <p>{{fourn.email}}</p>
-                    <p>{{fourn.tel}}</p>
-                    <p>{{fourn.adress}}</p>
+                    <h3>{{achat.fournisseur.nom}}</h3>
+                    <p>{{achat.fournisseur.email}}</p>
+                    <p>{{achat.fournisseur.tel}}</p>
+                    <p>{{achat.fournisseur.adress}}</p>
                 </div>
             </div>
 

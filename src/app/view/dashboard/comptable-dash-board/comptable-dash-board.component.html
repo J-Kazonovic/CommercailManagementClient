@@ -32,7 +32,7 @@
                     <i class="fa fa-list" aria-hidden="true"></i> List Des Achats</a>
                 <a style="color: white;" href="comptable/dp" class="bg-dark list-group-item list-group-item-action">
                     <i class="fa fa-plus" aria-hidden="true"></i> Crée Une Demmande de Prix</a>
-                <a style="color: white;" [routerLink]="['bon-commande']" class="bg-dark list-group-item list-group-item-action">
+                <a style="color: white;" href="comptable/bc" class="bg-dark list-group-item list-group-item-action">
                     <i class="fa fa-plus" aria-hidden="true"></i> Crée Bon De Commande</a>
             </div>
 
@@ -60,14 +60,26 @@
 
             <div id="collapseprod" class="collapse bg-dark" data-parent="#accordion">
 
-                <a style="color: white;" style="color: white; " [routerLink]="['produit']" class="bg-dark list-group-item list-group-item-action">
+                <a style="color: white;" style="color: white; " class="bg-dark list-group-item list-group-item-action" [routerLink]="['produit']">
                     <i class="fa fa-plus-square" aria-hidden="true"></i> Ajouter un Produit</a>
-
-
-
-                <a style="color: white;" [routerLink]="['produits']" class="bg-dark list-group-item list-group-item-action bg-dar">
+                <a style="color: white;" [routerLink]="['produits']" class="bg-dark list-group-item list-group-item-action">
                     <i class="fa fa-list" aria-hidden="true"></i> List Des Produit</a>
             </div>
+            <!--Stock-->
+            <a style="color: white;" class="list-group-item list-group-item-action bg-info collapsed" data-toggle="collapse" href="#collapsestock">
+                Stocks <i style="float: right; bottom: 0;" class="fa fa-angle-down" aria-hidden="true"></i>
+            </a>
+
+            <div id="collapsestock" class="collapse bg-dark" data-parent="#accordion">
+
+                <a style="color: white;" style="color: white; " class="bg-dark list-group-item list-group-item-action" [routerLink]="['stock']">
+                    <i class="fa fa-plus-square" aria-hidden="true"></i> Ajouter un Stock</a>
+                <a style="color: white;" style="color: white; " class="bg-dark list-group-item list-group-item-action" [routerLink]="['stockItem']">
+                    <i class="fa fa-list" aria-hidden="true"></i>Product of Stock</a>
+                <a style="color: white;" style="color: white; " class="bg-dark list-group-item list-group-item-action" [routerLink]="['stocks']">
+                    <i class="fa fa-list" aria-hidden="true"></i>List des Stocks</a>
+            </div>
+
         </div>
     </div>
     <!-- /#sidebar-wrapper -->

@@ -1,25 +1,21 @@
 <div class="container-fluid">
-    <h1>Bon De Commande</h1>
+
     <div class="shadow card text-white bg-dark mb-3">
         <div class="card-body">
-            <button style="float: right;" (click)="onAchatSave()" type="button" class="btn btn-primary">Commande Confirmer</button>
-            <button style="float: left;" [hidden]="achat.statut===statuts[0]" type="button" class="btn btn-primary fa fa-file-pdf-o mr-2"></button>
-            <button style="float: left;" [hidden]="achat.statut===statuts[0]" type="button" class="btn btn-primary fa fa-download mr-2"></button>
-            <button style="float: left;" [hidden]="achat.statut===statuts[0]" type="button" class="btn btn-primary fa fa-envelope"></button>
+            <h4 style="display: inline;">Crée Une Bon De Commande</h4>
+            <button style="float: right;" (click)="saveCommande()" type="button" class="btn btn-success">Save</button>
         </div>
     </div>
     <!--Info-->
     <div class="row mt-3 mb-2">
         <div class="col-md-6">
             <div class="shadow card text-white bg-dark" style="height: 22rem">
-                <div class="card-header">
-                    Ajouter Les Information Du Demmande
-                </div>
+
                 <div class="card-body">
 
                     <div class="form-group">
                         <label for="ref">Réfernece</label>
-                        <input [disabled]="isNew==0" class="form-control" type="text" id="ref" [(ngModel)]=achat.ref>
+                        <input class="form-control" type="text" id="ref" [(ngModel)]=achat.ref>
                     </div>
                     <div class="form-group">
                         <label for="pay">Mode De Paiement</label>
@@ -40,9 +36,7 @@
         </div>
         <div class="col-md-6">
             <div class="shadow card text-white bg-dark" style="height: 22rem">
-                <div class="card-header">
-                    Chooisir un Fournisseur
-                </div>
+
                 <div class="card-body">
                     <label for="fournisseur">Fournisseur</label>
                     <select (change)="getfournByNom()" class="form-control" id="fournisseur" [(ngModel)]=achat.fournisseur.nom>
@@ -50,10 +44,10 @@
                             {{fr.nom}}
                         </option>
                     </select><br>
-                    <h3>{{achat.fournisseur.nom}}</h3>
-                    <p>{{achat.fournisseur.email}}</p>
-                    <p>{{achat.fournisseur.tel}}</p>
-                    <p>{{achat.fournisseur.adress}}</p>
+                    <h3>{{fourn.nom}}</h3>
+                    <p>{{fourn.email}}</p>
+                    <p>{{fourn.tel}}</p>
+                    <p>{{fourn.adress}}</p>
                 </div>
             </div>
 
@@ -64,7 +58,7 @@
     <!--List-->
     <div class="row mb-2">
         <div class="col-md-12">
-            <app-commande-bon-items [items]="achatItems"></app-commande-bon-items>
+            <app-commande-bon-items [items]="achatItemsCurrent"></app-commande-bon-items>
         </div>
 
     </div>

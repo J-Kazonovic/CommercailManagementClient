@@ -59,13 +59,11 @@ export class EbListChefComponent implements OnInit {
 
 
   onFilterAction() {
-    
     this.ebListFiltered = this.ebList;
     this.ebListFiltered=this.ebService.searchByTitle(this.ebListFiltered,this.title);
     this.ebListFiltered = this.ebService.filterByDept(this.ebListFiltered, this.dept);
     this.ebListFiltered = this.ebService.filterByPersonnel(this.ebListFiltered, this.personnel);
     this.ebListFiltered = this.ebService.filterByDate(this.ebListFiltered, this.date);
-
   }
 
   onSortAction(){
@@ -75,8 +73,6 @@ export class EbListChefComponent implements OnInit {
       this.sortByCreatedDate()
     }
   }
-
-
 
   sortByString(caseSort:string) {
     if (this.isSortedByAsc==1) {
@@ -114,6 +110,7 @@ export class EbListChefComponent implements OnInit {
       }
     );
   }
+
   onEbShow(eb: Eb) {
     this.ebUpdate = eb;
     this.ebpService.getEbpByEb(eb.id).subscribe(
@@ -122,6 +119,7 @@ export class EbListChefComponent implements OnInit {
       }
     );
   }
+
   onEbpUpdate() {
     this.ebUpdate.ebp = this.ebpList;
     this.ebService.updateEb(this.ebUpdate).subscribe(
@@ -131,6 +129,7 @@ export class EbListChefComponent implements OnInit {
       }
     );
   }
+
   onEbDelete(eb: Eb) {
     this.ebService.deleteEb(eb.id).subscribe(
       data => {
@@ -142,6 +141,7 @@ export class EbListChefComponent implements OnInit {
       }
     )
   }
+  
   onEbpDelete(ebp: Ebp) {
     this.ebpService.deleteEbp(ebp).subscribe(
       data => {

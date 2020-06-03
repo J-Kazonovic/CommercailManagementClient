@@ -19,6 +19,11 @@ import { AchatListComponent } from './view/achat/achat-list/achat-list.component
 import { AchatComponent } from './view/achat/achat/achat.component';
 import { CommandeBonComponent } from './view/achat/achat/commande-bon/commande-bon.component';
 import { DemandePrixFinalComponent } from './view/achat/achat/demande-prix-final/demande-prix-final.component';
+import { StockCreateComponent } from './view/stock/stock-create/stock-create.component';
+import { StockItemComponent } from './view/stock/stock-item/stock-item.component';
+import { StockListComponent } from './view/stock/stock-list/stock-list.component';
+import { BonCommandeService } from './controller/service/bon-commande.service';
+import { CommandeBonFinalComponent } from './view/achat/achat/commande-bon-final/commande-bon-final.component';
 
 
 const routes: Routes = [
@@ -49,12 +54,18 @@ const routes: Routes = [
       { path: "dp", component: DemandePrixComponent},
       { path: "dp/ref/:ref", component: DemandePrixFinalComponent},
 
+      { path: "bc", component: CommandeBonComponent},
+      { path: "bc/ref/:ref", component: CommandeBonFinalComponent},
+
       { path: "achats", component: AchatListComponent },
       { path: "commande", component: CommandeBonComponent},
       { path: "fournisseur", component: FournisseurCreateComponent},
       { path: "fournisseurs", component: FournisseurListComponent},
       { path: "produit", component: ProductCreateComponent},
       { path: "produits", component: ProductListComponent},
+      { path: "stock", component: StockCreateComponent},
+      { path: "stockItem", component: StockItemComponent},
+      { path: "stocks", component: StockListComponent},
     ]
   }
 ];

@@ -1,1 +1,105 @@
-<p>product-list works!</p>
+<h2>Stock Products</h2>
+<div class="card text-white bg-dark">
+    <div class="card-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="cat">Catégorie</label>
+                        <select class="form-control" id="cat" [(ngModel)]="catLib" (change)="onFilterAction()">
+                            <option selected></option>
+                            <option *ngFor="let cat of cats" value="{{cat.libelle}}">
+                                {{cat.libelle}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="cat">Unite</label>
+                        <select class="form-control" id="cat" [(ngModel)]="uniteLib" (change)="onFilterAction()">
+                            <option selected></option>
+                            <option *ngFor="let unite of unites" value="{{unite.libelle}}">
+                                {{unite.libelle}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="s">Search</label>
+                        <input id="s" (keyup)="onFilterAction()" [(ngModel)]="searchKey" type="text" class="form-control" placeholder="forni2...">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <div class="card-body">
+        <table class="table bg-light table table-striped table-inverse">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Ref</th>
+                    <th>Libelle</th>
+                    <th>Category</th>
+                    <th>Unite</th>
+                    <th>Q Stock</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let p of productsFiltered">
+                <tr *ngIf="productsFiltered.length==0">
+                    <td class="alert alert-secondary" colspan="6" role="alert">
+                        No data to display.
+                    </td>
+                </tr>
+                <td>{{p.ref}}</td>
+                <td>{{p.libelle}}</td>
+                <td>{{p.cat.libelle}}</td>
+                <td>{{p.unite.libelle}}</td>
+                <td>{{p.qteStock}}</td>
+                <td>{{p.prix}}</td>
+
+                <td>
+                    <button class="btn btn-danger fa fa-trash mr-2" (click)="onProductDelete(p)"></button>
+                    <button (click)="onProductEdit()" class="btn btn-primary fa fa-edit" data-toggle="modal" data-target="#myModal"></button>
+                </td>
+            </tbody>
+        </table>
+        <ul class="pagination justify-content-center" style="margin:20px 0">
+            <li class="page-item"><a (click)="setPage(page-1,$event)" class="page-link"><i
+                        style="color: rgb(37, 37, 37);" class="fa fa-arrow-left " aria-hidden="true"></i></a></li>
+            <li class="page-item" *ngFor="let p of pages; let i=index" [ngClass]="{'active':i==page}">
+                <a (click)="setPage(i,$event)" class="page-link" href="">{{i}}</a>
+            </li>
+            <li class="page-item"><a (click)="setPage(page+1,$event)" class="page-link"><i
+                        style="color: rgb(37, 37, 37);" class="fa fa-arrow-right " aria-hidden="true"></i></a></li>
+
+        </ul>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Produits</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-fournisseur-create [isForUpdate]="['true']"></app-fournisseur-create>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onProductEdit()">Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
+</div>

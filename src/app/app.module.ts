@@ -58,6 +58,10 @@ import { UniteCreateComponent } from './view/produit/unite-create/unite-create.c
 import { HomeComponent } from './view/home/home.component';
 import { CommandeBonFinalComponent } from './view/achat/achat/commande-bon-final/commande-bon-final.component';
 import { DemandePrixFinalComponent } from './view/achat/achat/demande-prix-final/demande-prix-final.component';
+import { StockComponent } from './view/stock/stock/stock.component';
+import { StockCreateComponent } from './view/stock/stock-create/stock-create.component';
+import { StockItemComponent } from './view/stock/stock-item/stock-item.component';
+import { StockListComponent } from './view/stock/stock-list/stock-list.component';
 
 
 
@@ -94,6 +98,10 @@ import { DemandePrixFinalComponent } from './view/achat/achat/demande-prix-final
     HomeComponent,
     CommandeBonFinalComponent,
     DemandePrixFinalComponent,
+    StockComponent,
+    StockCreateComponent,
+    StockItemComponent,
+    StockListComponent,
     
   ],
   imports: [

@@ -1,0 +1,50 @@
+<h2>List Des Stocks</h2>
+<div class="card text-white bg-dark shadow mt-3 mb-3">
+    <div class="card-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="date">Filter By Date</label>
+                        <input id="date" type="date" class="form-control" (change)="getStockByDate()" [(ngModel)]=date>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="dept">Filter By Ref</label>
+                        <select class="form-control" id="ref" [(ngModel)]=ref (change)="getStockByRef()">
+                            <option selected></option>
+                            <option *ngFor="let stock of stocks" value="{{stock.ref}}">
+                                {{stock.ref}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="card-body table-responsive">
+        <table class="table table-light table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Ref</th>
+                    <th>QteInitial</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let eb of stocks">
+                    <td>{{eb.ref}}</td>
+                    <td>{{eb.qteInitiale}}</td>
+                    <td>{{eb.dateResu}}</td>
+                    <td>
+                        <button (click)="onStockDelete(eb)" class="btn btn-danger fa fa-trash mr-2"></button>
+                        <button (click)="findStockItemByRef(eb.ref)" class="btn btn-danger fa fa-plus mr-2" [routerLink]="['/comptable/stock']"></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+     
+    </div>
+

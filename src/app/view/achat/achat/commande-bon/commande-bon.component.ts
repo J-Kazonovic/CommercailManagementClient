@@ -10,6 +10,8 @@ import { FournisseurService } from 'src/app/controller/service/fournisseur.servi
 import { AchatItemService } from 'src/app/controller/service/achat-item.service';
 import { AchatItem } from 'src/app/controller/entity/achat-item.model';
 import { Achat } from 'src/app/controller/entity/achat.model';
+import { BonCommandeService } from 'src/app/controller/service/bon-commande.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-commande-bon',
@@ -32,12 +34,11 @@ export class CommandeBonComponent implements OnInit, OnChanges {
 
 
 
-  constructor(private achatService: AchatService, private ebService: EbService
-    , private ebpService: EbpService
-    , private catService: CategoryService
-    , private prService: ProductService
+  constructor(private achatService: AchatService
+    , private bcService:BonCommandeService 
     , private frService: FournisseurService
-    , private achatItemService: AchatItemService) { }
+    , private achatItemService: AchatItemService
+    , private router: Router) { }
 
 
 
@@ -48,28 +49,21 @@ export class CommandeBonComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
   }
 
-  onAchatSave() {
-    if (this.isNew == 1) {
-      this.achatService.saveAchat(null);
-    } else {
-      this.updateAchat();
-      this.getAllDBAchatItems();
-    }
-  }
-
-  //API Calls
-  updateAchat() {
-    this.achat.achatItems = this.achatItems;
+  saveCommande() {
+    this.achat.achatItems = this.achatItemsCurrent;
     this.achat.statut = UtilStatuts.COMMANDE;
-    this.achat.total=this.calculTotal();
-    this.achatService.updateAchat(this.achat).subscribe(
+    this.achatService.saveAchat(this.achat).subscribe(
       data => {
-        this.achatService.edit = 0;
+        if (data != null) {
+          this.router.navigate(['comptable/bc/ref',data.ref]);
+        }
       }, error => {
         console.log(error);
       }
     );
+    
   }
+
   getfournByNom() {
     this.frService.getfournByNom(this.achat.fournisseur.nom).subscribe(
       data => {
@@ -79,6 +73,7 @@ export class CommandeBonComponent implements OnInit, OnChanges {
       }
     );
   }
+
   getAllFournisseurs() {
     this.frService.getAllFournisseur().subscribe(
       data => {
@@ -89,20 +84,10 @@ export class CommandeBonComponent implements OnInit, OnChanges {
     );
   }
  
-  getAllDBAchatItems() {
-    this.achatItemService.getAchatItemsByAchat(this.achat.ref).subscribe(
-      data => {
-        this.achatService.achatItems=data;
-      }, error => {
-        console.log(error);
-      }
-    );
-  }
   //API Calls
-
   calculTotal(){
     let total=0;
-    this.achatItems.forEach(item=>{
+    this.achatItemsCurrent.forEach(item=>{
       total=total+ item.totalPrice;
     })
 
@@ -114,10 +99,10 @@ export class CommandeBonComponent implements OnInit, OnChanges {
 
   /**Getters & Setters */
   get achat(): Achat {
-    return this.achatService.achat;
+    return this.bcService.achat;
   }
-  get achatItems(): Array<AchatItem> {
-    return this.achatService.achatItems;
+  get achatItemsCurrent(): Array<AchatItem> {
+    return this.bcService.achatItemsCurrent;
 	} 
 
   /**Getters & Setters */

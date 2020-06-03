@@ -2,17 +2,11 @@
 <div id="page-content-wrapper">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom mb-3">
         <span>
-            <h2 style="color: white;">Stuf DashBoard, Welcom {{username}}</h2>
+            
         </span>
     </nav>
     <div class="container">
-
-        <div class="card" data-toggle="collapse" data-target="#demo">
-            <i class="fa fa-plus" aria-hidden="true"></i> Ajouter Des Nouvelle Besoin</div>
-        <div id="demo" class="collapse">
-            <app-eb-create></app-eb-create>
-        </div>
-        <app-eb-list-stuf></app-eb-list-stuf>
+        <router-outlet></router-outlet>
     </div>
 </div>
 <!-- /#page-content-wrapper -->

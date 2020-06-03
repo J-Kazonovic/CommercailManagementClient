@@ -1,4 +1,4 @@
-<h2>Votre Achats</h2>
+<h2>Votre achats</h2>
 <div class="card text-white bg-dark shadow mt-3 mb-3">
     <div class="card-header">
         <div class="container">
@@ -6,17 +6,17 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="dept">Search By Ref</label>
-                        <input placeholder="eb title..." id="key" type="text" class="form-control">
+                        <input [(ngModel)]=searchKey (keyup)="onFilterAction()" placeholder="eb title..." id="key" type="text" class="form-control">
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="personnel">Statut</label>
-                        <select class="form-control" id="personnel" (change)="onFilterAction()">
+                        <select [(ngModel)]=statut class="form-control" id="personnel" (change)="onFilterAction()">
                             <option selected></option>
-                            <option *ngFor="" value="">
-
+                            <option *ngFor="let s of statuts" value="{{s}}">
+                               {{s}}
                             </option>
                         </select>
                     </div>
@@ -24,10 +24,10 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="dept">Fournisseur</label>
-                        <select class="form-control" id="dept" (change)="onFilterAction()">
+                        <select [(ngModel)]=fourni class="form-control" id="dept" (change)="onFilterAction()">
                             <option selected></option>
-                            <option *ngFor="" value="">
-
+                            <option *ngFor="let f of fournisseurs" value="{{f.nom}}">
+                                {{f.nom}}
                             </option>
                         </select>
                     </div>
@@ -47,12 +47,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngIf="achats.length==0">
+                <tr *ngIf="achatsFiltered.length==0">
                     <td class="alert alert-secondary" colspan="6" role="alert">
                         No data to display.
                     </td>
                 </tr>
-                <tr *ngFor="let achat of achats">
+                <tr *ngFor="let achat of achatsFiltered">
                     <td>{{achat.ref}}</td>
                     <td>{{achat.statut}}</td>
                     <td>{{achat.fournisseur.nom}}</td>
@@ -60,9 +60,18 @@
                     <td>{{achat.dateLivraison}}</td>
                     <td>
                         <button (click)="onAchatDelete(achat)" class="btn btn-danger fa fa-trash mr-2"></button>
-                        <button class="btn btn-primary fa fa-eye mr-2" (click)="onAchatShow(achat)"></button>
+                        <button class="btn btn-primary fa fa-eye mr-2" (click)="onAchatShow()"></button>
                     </td>
             </tbody>
+
         </table>
+        <ul class="pagination justify-content-center" style="margin:20px 0">
+            <li class="page-item"><a (click)="setPage(page-1,$event)" class="page-link"><i style="color: rgb(37, 37, 37);" class="fa fa-arrow-left " aria-hidden="true"></i></a></li>
+            <li class="page-item" *ngFor="let p of pages; let i=index" [ngClass]="{'active':i==page}">
+                <a (click)="setPage(i,$event)" class="page-link" href="">{{i}}</a>
+            </li>
+            <li class="page-item"><a (click)="setPage(page+1,$event)" class="page-link"><i style="color: rgb(37, 37, 37);" class="fa fa-arrow-right " aria-hidden="true"></i></a></li>
+
+        </ul>
     </div>
 </div>

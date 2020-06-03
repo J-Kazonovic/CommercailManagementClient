@@ -13,12 +13,12 @@ import { UniteService } from 'src/app/controller/service/unite.service';
 })
 export class ProductCreateComponent implements OnInit {
 
-  catLib:string;
-  uniteLib:string;
+  catLib: string;
+  uniteLib: string;
 
   constructor(private catService: CategoryService
-    ,private prService:ProductService
-    ,private uService:UniteService) { }
+    , private prService: ProductService
+    , private uService: UniteService) { }
 
 
   ngOnInit() {
@@ -27,43 +27,47 @@ export class ProductCreateComponent implements OnInit {
   }
 
   saveProduct() {
-    this.prService.saveProduct();
+    this.prService.save(this.product).subscribe(
+      data=>{
+
+      },error=>{
+
+      }
+    )
   }
 
-  getAllUnites(){
+  getAllUnites() {
     this.uService.findAll();
   }
-
-
-  getAllCats( ) {
-    this.catService.findAll();  
-  }
-
   
-  get cats(): Array<Category> {
-    return this.catService.cats;
-  }
-  get cat(): Category {
-    return this.catService.cat;
+  getAllCats() {
+    this.catService.findAll();
   }
 
-  get unite(): Unite {
-    return this.uService.unite;
- }
-
- get unites(): Array<Unite> {
-   return this.uService.unites;
- }
-
-  public get catProduitsList(): Array<Product> {
-    
-    return this.prService._catProduitsList;
-  }
-
-  public get product(): Product {
-		return this.prService.product;
-  }
   findCategoryByLibelle() {
     this.catService.findCategoryByLibelle(this.product.cat);
   }
+
+
+  public get product(): Product {
+    return this.prService.product;
+  }
+
+  get cat(): Category {
+    return this.catService.cat;
+  }
+  get cats(): Array<Category> {
+    return this.catService.cats;
+  }
+  get unite(): Unite {
+    return this.uService.unite;
+  }
+  get unites(): Array<Unite> {
+    return this.uService.unites;
+  }
+
+
+
+
+
 }

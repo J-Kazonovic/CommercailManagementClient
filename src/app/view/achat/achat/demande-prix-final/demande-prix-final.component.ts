@@ -6,7 +6,7 @@ import { AchatService } from 'src/app/controller/service/achat.service';
 import { FournisseurService } from 'src/app/controller/service/fournisseur.service';
 import { AchatItemService } from 'src/app/controller/service/achat-item.service';
 import { Achat } from 'src/app/controller/entity/achat.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DemmandePrixService } from 'src/app/controller/service/demmande-prix.service';
 
 @Component({
@@ -32,14 +32,15 @@ export class DemandePrixFinalComponent implements OnInit {
   nom: string;
 
 
-  items = new Array<AchatItem>();
 
 
   constructor(private achatService: AchatService
     , private dpService: DemmandePrixService
     , private route: ActivatedRoute
+    , private router: Router
     , private frService: FournisseurService
     , private achatItemService: AchatItemService) { }
+
 
   ngOnChanges(changes: SimpleChanges): void {
     this.getFournByNom();
@@ -49,7 +50,6 @@ export class DemandePrixFinalComponent implements OnInit {
 
   ngOnInit() {
     this.getAllFournisseurs();
-   
     this.sub = this.route.params.subscribe(params => {
       this.ref = params['ref'];
       this.getAchatByRef(this.ref);
@@ -62,8 +62,7 @@ export class DemandePrixFinalComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  //API Calls
-  
+  //API Calls 
   updateDemmande() {
     this.achat.achatItems = this.achatItemsDB;
     this.achatService.updateAchat(this.achat).subscribe(
@@ -77,10 +76,12 @@ export class DemandePrixFinalComponent implements OnInit {
 
   updateToDevis() {
     this.achat.achatItems = this.achatItemsDB;
-    this.achat.statut=this.statuts[3];
+    this.achat.statut=this.statuts[2];
     this.achatService.updateAchat(this.achat).subscribe(
       data => {
-        console.log(data);
+        if(data==1){
+          this.router.navigate(['comptable/bc/ref',this.achat.ref]);
+        }
       }, error => {
         console.log(error);
       }
@@ -107,7 +108,6 @@ export class DemandePrixFinalComponent implements OnInit {
     );
   }
 
-
   getAchatByRef(ref:string){
     this.achatService.getAchatByRef(ref).subscribe(
       data => {
@@ -117,6 +117,7 @@ export class DemandePrixFinalComponent implements OnInit {
       }
     )
   }
+
   getAllDBAchatItems(ref:string) {
     this.achatItemService.getAchatItemsByAchat(ref).subscribe(
       data => {

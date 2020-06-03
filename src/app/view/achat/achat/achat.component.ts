@@ -14,92 +14,13 @@ declare var $: any;
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })
-export class AchatComponent implements OnInit, OnChanges {
+export class AchatComponent implements OnInit{
 
-  a:boolean;
-  b:boolean;
-  c:boolean;
+  constructor(){
 
-  private sub: any;
-  ref:string;
-
-  edit: number;
-  statuts = [UtilStatuts.DEMMANDE_BROUILLON
-    , UtilStatuts.DEMMANDE
-    , UtilStatuts.DEVI_RECU
-    , UtilStatuts.COMMANDE];
-
-  dbItems = new Array<AchatItem>();
-
-  constructor(private achatService: AchatService
-    , private achatItemService: AchatItemService
-    ,private route: ActivatedRoute
-    ,private cdRef : ChangeDetectorRef) { }
-
-  ngOnInit(): void {
-    /*this.a=this.achat.statut===this.statuts[3]||this.achat.statut===this.statuts[2];
-    this.b=this.achat.statut!==this.statuts[2] || this.edit==0;
-    this.c=this.achat.statut!==this.statuts[3] || this.edit==1;*/
-    this.sub = this.route.params.subscribe(params => {
-      this.ref = params['ref']; // (+) converts string 'id' to a number
-
-      
-      this.achatService.getAchatByRef(this.ref).subscribe(
-        data=>{
-          this.achatService.achat=data;
-          console.log(this.achatService.achat);
-        },error=>{
-          console.log(error);
-        }
-      )
-      // In a real app: dispatch action to load the details here.
-   });
-
-   console.log(this.achat);
   }
 
-   
-   ngOnDestroy() {
-    this.sub.unsubscribe();
+  ngOnInit(){
+
   }
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log("Change");
-    this.edit = this.achatService.edit;
-    this.getAllDBAchatItems();
-  }
-
-  /*ngAfterViewChecked() {
-   
-      this.cdRef.detectChanges();
-    
-  }*/
-
-  onEditClick() {
-    this.achatService.edit = 1;
-    this.achat.statut = this.statuts[2];
-  }
-
-  getAllDBAchatItems() {
-    this.achatItemService.getAchatItemsByAchat(this.achat.ref).subscribe(
-      data => {
-        this.achatService.achatItems = data;
-      }, error => {
-        console.log(error);
-      }
-    );
-  }
-
-  get achat(): Achat {
-    return this.achatService.achat;
-  }
-
-  set achat(achat: Achat) {
-    this.achatService.achat = achat;
-  }
-
-  get achatItems(): Array<AchatItem> {
-    return this.achatService.achatItems;
-  }
-
 }
