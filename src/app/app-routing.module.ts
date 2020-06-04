@@ -24,6 +24,7 @@ import { StockItemComponent } from './view/stock/stock-item/stock-item.component
 import { StockListComponent } from './view/stock/stock-list/stock-list.component';
 import { BonCommandeService } from './controller/service/bon-commande.service';
 import { CommandeBonFinalComponent } from './view/achat/achat/commande-bon-final/commande-bon-final.component';
+import { PaiementComponent } from './view/paiement/paiement.component';
 
 
 const routes: Routes = [
@@ -48,6 +49,7 @@ const routes: Routes = [
   {
     path: "comptable", component: ComptableDashBoardComponent, children: [
       { path: "ebs", component: EbListComptableComponent},
+
       { path: "achat", component: AchatComponent},
       { path: "achats/:ref", component: AchatComponent},
 
@@ -56,8 +58,10 @@ const routes: Routes = [
 
       { path: "bc", component: CommandeBonComponent},
       { path: "bc/ref/:ref", component: CommandeBonFinalComponent},
-
       { path: "achats", component: AchatListComponent },
+
+      { path: "paiements", component: PaiementComponent },
+
       { path: "commande", component: CommandeBonComponent},
       { path: "fournisseur", component: FournisseurCreateComponent},
       { path: "fournisseurs", component: FournisseurListComponent},

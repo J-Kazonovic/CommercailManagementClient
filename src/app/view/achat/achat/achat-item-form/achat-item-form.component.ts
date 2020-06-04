@@ -28,7 +28,13 @@ export class AchatItemFormComponent implements OnInit {
   }
 
   getProductBycat(){
-    this.prService.getAllCatProduct(this.catLib);
+    this.prService.getAllCatProduct(this.catLib).subscribe(
+      data=>{
+        this.prService.catProduitsList=data;
+      },error=>{
+        console.log(error);
+      }
+    )
   }
 
   onAddItem(){
@@ -42,16 +48,16 @@ export class AchatItemFormComponent implements OnInit {
     this.catService.findAll();  
   }
 
-
+  public get catProduitsList(): Array<Product> {
+    return this.prService._catProduitsList;
+  }
   get cats(): Array<Category> {
     return this.catService.cats;
   }
   get cat(): Category {
     return this.catService.cat;
   }
-  public get catProduitsList(): Array<Product> {
-    return this.prService._catProduitsList;
-  }
+ 
 
 
 

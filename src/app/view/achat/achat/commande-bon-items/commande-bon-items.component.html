@@ -13,7 +13,7 @@
                     <th>Unité</th>
                     <th>Quantite</th>
                     <th>Prix Unit (DH)</th>
-                    <th>Sous-Total</th>
+                    <th>Sous-Total (DH)</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -29,11 +29,10 @@
                     <td>{{item.produit.unite.libelle}}</td>
                     <td><input (change)="item.totalPrice=item.qteCommander*item.unitPrice" (keyup)="item.totalPrice=item.qteCommander*item.unitPrice" [min]=1 type="number" [(ngModel)]=item.qteCommander class="form-control col-xs-2"></td>
                     <td><input (change)="item.totalPrice=item.qteCommander*item.unitPrice" (keyup)="item.totalPrice=item.qteCommander*item.unitPrice" [min]=1 type="number" [(ngModel)]=item.unitPrice class="form-control col-xs-2"></td>
-                    <td>{{item.totalPrice}} DH</td>
+                    <td>{{item.totalPrice}}</td>
 
                     <td>
                         <button (click)="removeDemmandeItem(item) " type="button " class="btn btn-danger fa fa-trash"></button>
-
                     </td>
                 </tr>
             </tbody>

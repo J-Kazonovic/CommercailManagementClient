@@ -80,6 +80,7 @@ export class ProductService {
 
 
 
+  //Util 
   searchByLibelle(products: Array<Product>, libelle: string) {
     if (libelle.length > 0) {
       return products.filter(p => p.libelle.trim().toLowerCase().indexOf(libelle) > -1);
@@ -103,4 +104,6 @@ export class ProductService {
       return products;
     }
   }
+
+
 }
