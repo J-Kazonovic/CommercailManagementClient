@@ -10,7 +10,7 @@ export class StockItemService {
   private url="http://localhost:8090/stockItems/";
 
   private _item: StockItem;
-
+  private _items: Array<StockItem>;
   constructor(private http: HttpClient) { }
   get item(): StockItem {
     if (this._item == null) {
@@ -21,17 +21,28 @@ export class StockItemService {
   set item(value: StockItem) {
     this._item = value;
   }
-
+  get items(): Array<StockItem> {
+    if (this._items == null) {
+      this._items = new Array<StockItem>();
+    }
+    return this._items;
+  }
+  set items(value: Array<StockItem>) {
+    this._items = value;
+  }
   getAllStockItems(){
     return this.http.get<Array<StockItem>>(this.url);
   }
+ 
 
-  getStockItemsByStock(stockRef:string){
-    return this.http.get<Array<StockItem>>(this.url+"stock/ref/"+ stockRef);
+  getStockItemByStock(stockId:number){
+    return this.http.get<Array<StockItem>>(this.url+stockId);
   }
-
-  deleteStockItem(stockItem:StockItem) {
-    return this.http.delete<number>(this.url + stockItem.id);
+  deleteStock(stockId: number) {
+    return this.http.delete<number>(this.url + "id/" + stockId)
+  }
+  deleteStockItem(stockItem:number) {
+    return this.http.delete<number>(this.url + stockItem);
   }
   
 }

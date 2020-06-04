@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { StockService } from 'src/app/controller/service/stock.service';
 import { Stock } from 'src/app/controller/entity/stock.model';
 import { Category } from 'src/app/controller/entity/category.model';
@@ -9,6 +9,7 @@ import { UniteService } from 'src/app/controller/service/unite.service';
 import { StockItem } from 'src/app/controller/entity/stock-item.model';
 import { StockItemService } from 'src/app/controller/service/stock-item.service';
 import { Product } from 'src/app/controller/entity/product.model';
+import { UtilList } from 'src/app/util/utillist.module';
 
 @Component({
   selector: 'app-stock-item',
@@ -16,9 +17,11 @@ import { Product } from 'src/app/controller/entity/product.model';
   styleUrls: ['./stock-item.component.css']
 })
 export class StockItemComponent implements OnInit {
+
+  @Input() items=new Array<StockItem>();
   catLib:string;
   uniteLib:string;
-  ref:string;
+  prLib:string;
   constructor(private stockService: StockService,private catService: CategoryService
     ,private prService:ProductService
     ,private uService:UniteService) { }
@@ -32,11 +35,13 @@ export class StockItemComponent implements OnInit {
       this.uService.findAll();
     }
   
-  
     getAllCats( ) {
       this.catService.findAll();  
     }
-  
+    getProductBycat(){
+      this.prService.getAllCatProduct(this.catLib);
+    }
+   
     
     get cats(): Array<Category> {
       return this.catService.cats;
@@ -64,17 +69,15 @@ export class StockItemComponent implements OnInit {
     findCategoryByLibelle() {
       this.catService.findCategoryByLibelle(this.product.cat);
     }
-  get item(): StockItem {
-    return this.stockService.item;
-  }
   get stock(): Stock {
     return this.stockService.stock;
   }
  
- onAddItem() {
-   this.item.produit.ref=this.ref;
-  this.item.produit.cat.libelle=this.catLib;
-  this.stockService.onAddItem(this.item);
-}
 
+  onRemoveItem(item:StockItem){
+    UtilList.deleteFromListByLibelle2(item.produit.libelle,this.stockItems);
+  }
+get stockItems(): Array<StockItem> {
+  return this.stockService.stockItems;
+}
 }

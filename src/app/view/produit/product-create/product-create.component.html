@@ -29,16 +29,6 @@
                 </option>
             </select>
         </div>
-
-        <div class="form-group">
-            <label>Quantite:</label>
-            <input type="number" placeholder="entrer la qte du produit" class="form-control"
-                [(ngModel)]=product.qteStock>
-        </div>
-        <div class="form-group">
-            <label>Prix:</label>
-            <input type="number" placeholder="entrer le prix du produit" class="form-control" [(ngModel)]=product.prix>
-        </div>
     </div>
     <div class="card-footer">
         <button (click)="saveProduct()" type="submit" class="btn btn-primary ">add Product</button>

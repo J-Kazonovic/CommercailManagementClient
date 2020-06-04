@@ -17,11 +17,7 @@ export class DemandePrixItemsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onAddItem(item: AchatItem) {
-    if (item != null) {
-      this.items.push(item);
-    }
-  }
+
 
   onRemoveItem(item:AchatItem){
     UtilList.deleteFromListByLibelle2(item.produit.libelle,this.items);

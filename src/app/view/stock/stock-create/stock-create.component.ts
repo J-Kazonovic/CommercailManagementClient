@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { StockService } from 'src/app/controller/service/stock.service';
 import { StockItem } from 'src/app/controller/entity/stock-item.model';
 import { Stock } from 'src/app/controller/entity/stock.model';
 import { ProductService } from 'src/app/controller/service/product.service';
 import { Product } from 'src/app/controller/entity/product.model';
+import { UtilList } from 'src/app/util/utillist.module';
+import { StockItemService } from 'src/app/controller/service/stock-item.service';
 
 @Component({
   selector: 'app-stock-create',
@@ -11,9 +13,14 @@ import { Product } from 'src/app/controller/entity/product.model';
   styleUrls: ['./stock-create.component.css']
 })
 export class StockCreateComponent implements OnInit {
-  constructor(private stockService: StockService,private prService: ProductService) { }
+  @Input() items=new Array<StockItem>();
+  constructor(private stockService: StockService,private prService: ProductService,
+    private siService: StockItemService) { }
 
   ngOnInit(): void {
+  }
+  deleteProduct(stockItem:StockItem) {
+    UtilList.deleteFromListById(stockItem.produit.id,this.stockItems);
   }
   get stockItems(): Array<StockItem> {
     return this.stockService.stockItems;
@@ -21,10 +28,9 @@ export class StockCreateComponent implements OnInit {
   get stock(): Stock {
     return this.stockService.stock;
   }
-  saveStock() {
-    this.stockService.saveStock();
+  onSaveStock() {
+    this.stockService.onSaveStock();
   }
-  findProductByRef(stock:StockItem) {
-    this.stockService.findProductByRef(stock);
-  }
+  
+  
 }

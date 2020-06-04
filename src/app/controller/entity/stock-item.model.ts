@@ -4,7 +4,8 @@ import { Stock } from './stock.model';
 
 export class StockItem {
     id:number;
-	ref:string;
+    ref:string;
+    qteStock:number;
     qtAlerte:number;
     qtFinal:number;
 	produit=new Product();

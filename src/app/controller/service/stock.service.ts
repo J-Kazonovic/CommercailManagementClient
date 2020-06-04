@@ -10,12 +10,12 @@ import { StockItemService } from './stock-item.service';
 export class StockService {
 
   private url = "http://localhost:8090/stocks/";
-
+  private _stockRef: Stock;
   private _stock: Stock;
   private _item: StockItem;
   private _stockItems: Array<StockItem>;
   private _stocks: Array<Stock>;
-
+  private _stockLs: Array<Stock>;
   constructor(private http: HttpClient,private stockItemService:StockItemService) { }
 
   get item(): StockItem {
@@ -27,10 +27,11 @@ export class StockService {
   set item(value: StockItem) {
     this._item = value;
   }
-  saveStock() {
-    this.http.post<number>(this.url, this.stock).subscribe(
+  saveStock(stock:Stock) {
+    this.http.post<number>(this.url, stock).subscribe(
       data => {
-        if (data > 0) {
+        if (data == 1) {
+          this.stockItems=null;
           this.stock = null;
           this.getAllStock();
         }
@@ -39,11 +40,46 @@ export class StockService {
       }
     );
   }
-
- 
-
+  updateStock(stock:Stock) {
+    this.http.put<number>(this.url, stock).subscribe(
+      data => {
+        if (data == 1) {
+          this.stockItems=null;
+          this.stock = null;
+          this.getAllStock();
+        }
+      }, error => {
+        console.log(error);
+      }
+    );
+  }
+  onSaveStock() {
+    this.stock.stockItems = this.stockItems;
+    this.saveStock(this.stock);
+  }
+  public addProduitOnUpdateStock(c: Stock) {
+      this.stockItems.push(this.cloneStock(this.item));
+      this.item= null;
+  }
+  updateAchat(stock:Stock) {
+    return this.http.put<number>(this.url, stock).subscribe(
+      data => {
+        console.log(data);
+        }, error => {
+        console.log('erreur');
+      }
+    );
+  }
   deleteStock(stockId: number) {
     return this.http.delete<number>(this.url + "id/" + stockId)
+  }
+  public findStockItemByStockRef(ref:string) {
+    this.http.get<Array<StockItem>>("http://localhost:8090/stockItems/"+ "stock/ref/" + ref).subscribe(
+      data => {
+        this.stockItems = data;
+        console.log(data);
+      }
+    );
   }
 
   getAllStock() {
@@ -55,12 +91,20 @@ export class StockService {
       }
     );
   }
+  searchByRef(sList: Array<Stock>, ref: string) {
+    if (ref.length > 0) {
+      return sList.filter(eb => eb.ref === ref);
+    } else {
+      return sList;
+    }
+  }
+
   //Events
-  onAddItem(item:StockItem) {
-    this.stock.qteInitiale+=this.item.produit.qte;
-    this.item.qtFinal =this.item.produit.qte;
-      this.stock.stockItems.push(this.cloneStock(this.item));
-      this.item=null;
+   onAddItem() {
+    this.stock.qteInitiale+=this.item.qteStock;
+    this.item.qtFinal =this.item.qteStock;
+      this.stockItems.push(this.cloneStock(this.item));
+      this.item= null;
   }
   private cloneStock(stockItem: StockItem) {
     const myClone = new StockItem();
@@ -103,22 +147,11 @@ export class StockService {
       }
     );
   }
-  findStockByRef(stock:Stock) {
-    this.http.get<Stock>(this.url +"ref/"+stock.ref).subscribe(
+  findStockByRef(ref:string) {
+    this.http.get<Array<Stock>>(this.url +"ref/"+ref).subscribe(
       data => {
         console.log(data);
-        this.stock = data;
-      }, error => {
-        console.log('erreur');
-      }
-    );
-  }
-  getStockByRef(ref: String) {
-    return this.http.get<Stock>(this.url + "ref/" + ref).subscribe(
-      data => {
-        console.log(data);
-        this.stock = data;
-        console.log(data);
+        this.stocks = data;
       }, error => {
         console.log('erreur');
       }
@@ -134,6 +167,15 @@ export class StockService {
   }
   set stock(value: Stock) {
     this._stock = value;
+  }
+  get stockRef(): Stock {
+    if (this._stockRef == null) {
+      this._stockRef = new Stock();
+    }
+    return this._stockRef;
+  }
+  set stockRef(value: Stock) {
+    this._stockRef = value;
   }
 
   get stockItems(): Array<StockItem> {
@@ -153,5 +195,14 @@ export class StockService {
   }
   set stocks(value: Array<Stock>) {
     this._stocks = value;
+  }
+  get stockLs(): Array<Stock> {
+    if (this._stockLs == null) {
+      this._stockLs = new Array<Stock>();
+    }
+    return this._stockLs;
+  }
+  set stockLs(value: Array<Stock>) {
+    this._stockLs = value;
   }
 }

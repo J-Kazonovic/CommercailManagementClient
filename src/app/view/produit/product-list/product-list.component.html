@@ -47,8 +47,6 @@
                     <th>Libelle</th>
                     <th>Category</th>
                     <th>Unite</th>
-                    <th>Q Stock</th>
-                    <th>Price</th>
                 </tr>
             </thead>
             <tbody *ngFor="let p of productsFiltered">
@@ -61,8 +59,6 @@
                 <td>{{p.libelle}}</td>
                 <td>{{p.cat.libelle}}</td>
                 <td>{{p.unite.libelle}}</td>
-                <td>{{p.qteStock}}</td>
-                <td>{{p.prix}}</td>
 
                 <td>
                     <button class="btn btn-danger fa fa-trash mr-2" (click)="onProductDelete(p)"></button>
