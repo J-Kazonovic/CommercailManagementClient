@@ -11,33 +11,56 @@ import { StockItemService } from 'src/app/controller/service/stock-item.service'
   styleUrls: ['./stock-list.component.css']
 })
 export class StockListComponent implements OnInit {
+  page = 0;
+  pages: Array<number>;
   date: string;
   ref: string;
+  searchKey = "";
   stockUpdate:Stock;
+  stocksFiltered= new Array<Stock>();
+  stocks= new Array<Stock>();
+ 
   constructor(private stockService: StockService,private stockItemServ: StockItemService) { }
 
   ngOnInit(): void {
-    this.stockService.getAllStock();
-  }
-  get stocks(): Array<Stock> {
-    return this.stockService.stocks;
+    this.getAllStock();
   }
 
-  get stock(): Stock {
-    return this.stockService.stock;
+  onFilterAction() {
+    this.stocksFiltered = this.stocks;
+    this.stocksFiltered= this.stockService.searchByRef(this.stocksFiltered, this.searchKey);
   }
-  get stockItems(): Array<StockItem> {
-    return this.stockService.stockItems;
+
+  setPage(i: number, event: any) {
+    event.preventDefault()
+    this.page = i;
+    this.getAllStock();
   }
-  get item(): StockItem {
-    return this.stockService.item;
-  }
+
   getAllStock() {
-    this.stockService.getAllStock();
+    this.stockService.getAllStock(this.page).subscribe(
+      data => {
+        this.stocks = data["content"];
+        this.stocksFiltered = data["content"];
+        this.pages = new Array(data["totalPages"]);
+      }, error => {
+        console.log('erreur');
+      }
+    )
   }
+  
   getStockByDate() {
-    this.stockService.getStockByDate(this.date);
+     this.stockService.getStockByDate(this.date).subscribe(
+      data => {
+        this.stocks = data;
+        this.stocksFiltered = data;
+        console.log(data);
+      }, error => {
+        console.log('erreur');
+      }
+    );
   }
+
   onStockDelete(stock:Stock){
     this.stockService.deleteStock(stock.id).subscribe(
       data=>{
@@ -69,18 +92,32 @@ export class StockListComponent implements OnInit {
     myClone.produit= stockItem.produit;
     return myClone;
   }
+
   updateStock() {
     this.stockUpdate.stockItems=this.stockItems;
     console.log(this.stockUpdate);
     this.stockService.updateStock(this.stockUpdate);
   }
 
-
   findStockByRef() {
     this.stockService.findStockByRef(this.ref);
   }
+
   public findStockItemByStockRef(stock:Stock) {
     this.stockUpdate=stock
     this.stockService.findStockItemByStockRef(stock.ref);
   }
+
+  get stock(): Stock {
+    return this.stockService.stock;
+  }
+
+  get stockItems(): Array<StockItem> {
+    return this.stockService.stockItems;
+  }
+
+  get item(): StockItem {
+    return this.stockService.item;
+  }
+
 }

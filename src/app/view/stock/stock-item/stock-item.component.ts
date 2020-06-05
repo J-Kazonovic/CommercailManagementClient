@@ -20,6 +20,7 @@ export class StockItemComponent implements OnInit {
   catLib:string;
   uniteLib:string;
   prLib:string;
+
   constructor(private stockService: StockService,private catService: CategoryService
     ,private prService:ProductService
     ,private uService:UniteService) { }
@@ -36,18 +37,23 @@ export class StockItemComponent implements OnInit {
     getAllCats( ) {
       this.catService.findAll();  
     }
+    
     getProductBycat(){
       this.prService.getAllCatProduct(this.catLib);
     }
+
     findCategoryByLibelle() {
       this.catService.findCategoryByLibelle(this.product.cat);
     }
+
     onRemoveItem(item:StockItem){
       UtilList.deleteFromListByLibelle2(item.produit.libelle,this.stockItems);
     }
+
     get cats(): Array<Category> {
       return this.catService.cats;
     }
+
     get cat(): Category {
       return this.catService.cat;
     }
@@ -59,18 +65,20 @@ export class StockItemComponent implements OnInit {
    get unites(): Array<Unite> {
      return this.uService.unites;
    }
-  public get catProduitsList(): Array<Product> { 
+
+   public get catProduitsList(): Array<Product> { 
       return this.prService._catProduitsList;
     }
+
     public get product(): Product {
       return this.prService.product;
     }
   
-  get stock(): Stock {
+   get stock(): Stock {
     return this.stockService.stock;
-  }
+   }
  
-get stockItems(): Array<StockItem> {
-  return this.stockService.stockItems;
-}
+   get stockItems(): Array<StockItem> {
+    return this.stockService.stockItems;
+   }
 }

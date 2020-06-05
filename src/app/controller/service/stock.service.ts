@@ -14,6 +14,7 @@ export class StockService {
   private _item: StockItem;
   private _stockItems: Array<StockItem>;
   private _stocks: Array<Stock>;
+  page:number;
   constructor(private http: HttpClient,private stockItemService:StockItemService) { }
 
   
@@ -23,7 +24,7 @@ export class StockService {
         if (data == 1) {
           this.stockItems=null;
           this.stock = null;
-          this.getAllStock();
+          this.getAllStock(this.page);
         }
       }, error => {
         console.log(error);
@@ -37,7 +38,7 @@ export class StockService {
         if (data == 1) {
           this.stockItems=null;
           this.stock = null;
-          this.getAllStock();
+          this.getAllStock(this.page);
         }
       }, error => {
         console.log(error);
@@ -63,25 +64,14 @@ export class StockService {
     );
   }
 
-  getAllStock() {
-    this.http.get<Array<Stock>>(this.url).subscribe(
-      data => {
-        this.stocks = data;
-      }, error => {
-        console.log('erreur');
-      }
-    );
+  getAllStock(page:number) {
+    return this.http.get<Array<Stock>>(this.url+"?page="+page);
   }
+
   getStockByDate(date: String) {
-    return this.http.get<Array<Stock>>(this.url + "date/" + date).subscribe(
-      data => {
-        this.stocks = data;
-        console.log(data);
-      }, error => {
-        console.log('erreur');
-      }
-    );
+    return this.http.get<Array<Stock>>(this.url + "date/" + date);
   }
+
   findStockByRef(ref:string) {
     this.http.get<Array<Stock>>(this.url +"ref/"+ref).subscribe(
       data => {
@@ -91,6 +81,14 @@ export class StockService {
         console.log('erreur');
       }
     );
+  }
+  
+  searchByRef(stocks: Array<Stock>, ref: string) {
+    if (ref.length > 0) {
+      return stocks.filter(stock => stock.ref.trim().toLowerCase().indexOf(ref) > -1);
+    } else {
+      return stocks;
+    }
   }
 
   get item(): StockItem {

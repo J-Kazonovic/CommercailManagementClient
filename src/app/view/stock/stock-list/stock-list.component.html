@@ -11,8 +11,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="dept">Filter By Ref</label>
-                            <input id="text" type="text" class="form-control" [(ngModel)]=ref (change)="findStockByRef()">
+                        <label for="dept">Search By Ref</label>
+                        <input [(ngModel)]=searchKey (keyup)="onFilterAction()" placeholder="stock ref..." id="key" type="text" class="form-control">
                     </div>
                 </div>
 
@@ -29,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let eb of stocks">
+                <tr *ngFor="let eb of stocksFiltered">
                     <td>{{eb.ref}}</td>
                     <td>{{eb.qteInitiale}}</td>
                     <td>{{eb.dateResu}}</td>
@@ -40,6 +40,14 @@
                 </tr>
             </tbody>
         </table>
+        <ul class="pagination justify-content-center" style="margin:20px 0">
+            <li class="page-item"><a (click)="setPage(page-1,$event)" class="page-link"><i style="color: rgb(37, 37, 37);" class="fa fa-arrow-left " aria-hidden="true"></i></a></li>
+            <li class="page-item" *ngFor="let p of pages; let i=index" [ngClass]="{'active':i==page}">
+                <a (click)="setPage(i,$event)" class="page-link" href="">{{i}}</a>
+            </li>
+            <li class="page-item"><a (click)="setPage(page+1,$event)" class="page-link"><i style="color: rgb(37, 37, 37);" class="fa fa-arrow-right " aria-hidden="true"></i></a></li>
+
+        </ul>
     </div>
     </div>
     <div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

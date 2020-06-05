@@ -21,9 +21,11 @@ export class StockComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
   findAllCats( ) {
     this.catService.findAll();  
   }
+
   getProductBycat(){
     this.prService.getAllCatProduct(this.catLib).subscribe(
       data=>{
@@ -33,6 +35,7 @@ export class StockComponent implements OnInit {
       }
     )
   }
+
   onAddItem(){
     this.item.produit.cat.libelle=this.catLib;
     this.stock.qteInitiale+=this.item.qteStock;
@@ -53,6 +56,11 @@ export class StockComponent implements OnInit {
     myClone.produit.libelle= stockItem.produit.libelle;
     return myClone;
   }
+
+  public get catProduitsList(): Array<Product> {
+    return this.prService._catProduitsList;
+  }
+
   get item(): StockItem {
     return this.stockService.item;
   }
@@ -60,15 +68,14 @@ export class StockComponent implements OnInit {
     return this.stockService.stockItems;
   }
  
-  public get catProduitsList(): Array<Product> {
-    return this.prService._catProduitsList;
-  }
   get cats(): Array<Category> {
     return this.catService.cats;
   }
+
   get cat(): Category {
     return this.catService.cat;
   }
+
   get stock(): Stock {
     return this.stockService.stock;
   }

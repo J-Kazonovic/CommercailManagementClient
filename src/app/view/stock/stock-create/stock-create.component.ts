@@ -18,15 +18,19 @@ export class StockCreateComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   onSaveStock() {
     this.stockService.onSaveStock();
   }
+
   deleteProduct(stockItem:StockItem) {
     UtilList.deleteFromListById(stockItem.produit.id,this.stockItems);
   }
+
   get stockItems(): Array<StockItem> {
     return this.stockService.stockItems;
   }
+
   get stock(): Stock {
     return this.stockService.stock;
   }
