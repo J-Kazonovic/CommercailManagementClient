@@ -13,17 +13,17 @@ import { Stock } from 'src/app/controller/entity/stock.model';
   styleUrls: ['./stock.component.css']
 })
 export class StockComponent implements OnInit {
-  @Input() items=new Array<StockItem>();
 
   catLib:string;
-
 
   constructor(private catService: CategoryService
     ,private prService:ProductService,private stockService: StockService) { }
 
   ngOnInit(): void {
   }
-
+  findAllCats( ) {
+    this.catService.findAll();  
+  }
   getProductBycat(){
     this.prService.getAllCatProduct(this.catLib).subscribe(
       data=>{
@@ -32,12 +32,6 @@ export class StockComponent implements OnInit {
         console.log(error);
       }
     )
-  }
-  get item(): StockItem {
-    return this.stockService.item;
-  }
-  get stockItems(): Array<StockItem> {
-    return this.stockService.stockItems;
   }
   onAddItem(){
     this.item.produit.cat.libelle=this.catLib;
@@ -56,13 +50,16 @@ export class StockComponent implements OnInit {
     myClone.qtAlerte= stockItem.qtAlerte;
     myClone.qtFinal= stockItem.qtFinal;
     myClone.stock= stockItem.stock;
-    myClone.produit= stockItem.produit;
+    myClone.produit.libelle= stockItem.produit.libelle;
     return myClone;
   }
-
-  findAllCats( ) {
-    this.catService.findAll();  
+  get item(): StockItem {
+    return this.stockService.item;
   }
+  get stockItems(): Array<StockItem> {
+    return this.stockService.stockItems;
+  }
+ 
   public get catProduitsList(): Array<Product> {
     return this.prService._catProduitsList;
   }

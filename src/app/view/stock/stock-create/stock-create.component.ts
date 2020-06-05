@@ -13,11 +13,13 @@ import { StockItemService } from 'src/app/controller/service/stock-item.service'
   styleUrls: ['./stock-create.component.css']
 })
 export class StockCreateComponent implements OnInit {
-  @Input() items=new Array<StockItem>();
-  constructor(private stockService: StockService,private prService: ProductService,
-    private siService: StockItemService) { }
+
+  constructor(private stockService: StockService) { }
 
   ngOnInit(): void {
+  }
+  onSaveStock() {
+    this.stockService.onSaveStock();
   }
   deleteProduct(stockItem:StockItem) {
     UtilList.deleteFromListById(stockItem.produit.id,this.stockItems);
@@ -28,9 +30,7 @@ export class StockCreateComponent implements OnInit {
   get stock(): Stock {
     return this.stockService.stock;
   }
-  onSaveStock() {
-    this.stockService.onSaveStock();
-  }
+  
   
   
 }

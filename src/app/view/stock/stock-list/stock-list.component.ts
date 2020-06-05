@@ -13,30 +13,24 @@ import { StockItemService } from 'src/app/controller/service/stock-item.service'
 export class StockListComponent implements OnInit {
   date: string;
   ref: string;
-  reference ="";
-  stockLists= new Array<Stock>();
-  stockList= new Array<Stock>();
-  sList=new Array<Stock>();
   stockUpdate:Stock;
-  stockListItems =new Array<StockItem>();
   constructor(private stockService: StockService,private stockItemServ: StockItemService) { }
 
   ngOnInit(): void {
     this.stockService.getAllStock();
   }
-  onFilterAction() {
-    this.stockList = this.sList;
-    this.stockList=this.stockService.searchByRef(this.stockList,this.reference);
-    console.log(this.stockList);
-  }
   get stocks(): Array<Stock> {
     return this.stockService.stocks;
   }
-  get stockLs(): Array<Stock> {
-    return this.stockService.stockLs;
-  }
+
   get stock(): Stock {
     return this.stockService.stock;
+  }
+  get stockItems(): Array<StockItem> {
+    return this.stockService.stockItems;
+  }
+  get item(): StockItem {
+    return this.stockService.item;
   }
   getAllStock() {
     this.stockService.getAllStock();
@@ -55,9 +49,7 @@ export class StockListComponent implements OnInit {
       }
     )
   }
-  get item(): StockItem {
-    return this.stockService.item;
-  }
+ 
   onAddItemUpdate(){
     this.stock.qteInitiale+=this.item.qteStock;
     this.item.qtFinal =this.item.qteStock;
@@ -81,25 +73,8 @@ export class StockListComponent implements OnInit {
     this.stock.stockItems=this.stockItems;
     this.stockService.updateStock(this.stock);
   }
-  public addProduitOnUpdateStock() {
-    this.stockListItems=this.stockUpdate.stockItems;
-    console.log(this.stockUpdate.stockItems);
-    this.stockService.addProduitOnUpdateStock(this.stockUpdate);
-  }
-  onStockItemShow(stock:Stock) {
-    this.stockItemServ.getStockItemByStock(stock.id).subscribe(
-      data => {
-        this.stockListItems = data;
-        console.log(data);
-      }
-    );
-  }
-  findStockItemByRef(ref: string) {
-    this.stockService.findStockItemByRef(ref);
-  }
-  get stockItems(): Array<StockItem> {
-    return this.stockService.stockItems;
-  }
+
+
   findStockByRef() {
     this.stockService.findStockByRef(this.ref);
   }

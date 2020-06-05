@@ -33,16 +33,5 @@ export class StockItemService {
   getAllStockItems(){
     return this.http.get<Array<StockItem>>(this.url);
   }
- 
-
-  getStockItemByStock(stockId:number){
-    return this.http.get<Array<StockItem>>(this.url+stockId);
-  }
-  deleteStock(stockId: number) {
-    return this.http.delete<number>(this.url + "id/" + stockId)
-  }
-  deleteStockItem(stockItem:number) {
-    return this.http.delete<number>(this.url + stockItem);
-  }
   
 }

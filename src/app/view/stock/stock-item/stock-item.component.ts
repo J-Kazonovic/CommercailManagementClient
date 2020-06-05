@@ -17,8 +17,6 @@ import { UtilList } from 'src/app/util/utillist.module';
   styleUrls: ['./stock-item.component.css']
 })
 export class StockItemComponent implements OnInit {
-
-  @Input() items=new Array<StockItem>();
   catLib:string;
   uniteLib:string;
   prLib:string;
@@ -41,8 +39,12 @@ export class StockItemComponent implements OnInit {
     getProductBycat(){
       this.prService.getAllCatProduct(this.catLib);
     }
-   
-    
+    findCategoryByLibelle() {
+      this.catService.findCategoryByLibelle(this.product.cat);
+    }
+    onRemoveItem(item:StockItem){
+      UtilList.deleteFromListByLibelle2(item.produit.libelle,this.stockItems);
+    }
     get cats(): Array<Category> {
       return this.catService.cats;
     }
@@ -57,26 +59,17 @@ export class StockItemComponent implements OnInit {
    get unites(): Array<Unite> {
      return this.uService.unites;
    }
-  
-    public get catProduitsList(): Array<Product> {
-      
+  public get catProduitsList(): Array<Product> { 
       return this.prService._catProduitsList;
     }
-  
     public get product(): Product {
       return this.prService.product;
     }
-    findCategoryByLibelle() {
-      this.catService.findCategoryByLibelle(this.product.cat);
-    }
+  
   get stock(): Stock {
     return this.stockService.stock;
   }
  
-
-  onRemoveItem(item:StockItem){
-    UtilList.deleteFromListByLibelle2(item.produit.libelle,this.stockItems);
-  }
 get stockItems(): Array<StockItem> {
   return this.stockService.stockItems;
 }
