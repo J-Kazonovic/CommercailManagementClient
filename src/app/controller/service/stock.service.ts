@@ -30,6 +30,7 @@ export class StockService {
       }
     );
   }
+
   updateStock(stock:Stock) {
     this.http.put<number>(this.url, stock).subscribe(
       data => {
@@ -43,15 +44,16 @@ export class StockService {
       }
     );
   }
+
   onSaveStock() {
     this.stock.stockItems = this.stockItems;
     this.saveStock(this.stock);
   }
 
-
   deleteStock(stockId: number) {
     return this.http.delete<number>(this.url + "id/" + stockId)
   }
+  
   public findStockItemByStockRef(ref:string) {
     this.http.get<Array<StockItem>>("http://localhost:8090/stockItems/"+ "stock/ref/" + ref).subscribe(
       data => {

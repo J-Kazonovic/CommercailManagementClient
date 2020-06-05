@@ -70,8 +70,9 @@ export class StockListComponent implements OnInit {
     return myClone;
   }
   updateStock() {
-    this.stock.stockItems=this.stockItems;
-    this.stockService.updateStock(this.stock);
+    this.stockUpdate.stockItems=this.stockItems;
+    console.log(this.stockUpdate);
+    this.stockService.updateStock(this.stockUpdate);
   }
 
 
@@ -79,6 +80,7 @@ export class StockListComponent implements OnInit {
     this.stockService.findStockByRef(this.ref);
   }
   public findStockItemByStockRef(stock:Stock) {
+    this.stockUpdate=stock
     this.stockService.findStockItemByStockRef(stock.ref);
   }
 }

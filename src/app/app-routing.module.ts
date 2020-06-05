@@ -22,7 +22,6 @@ import { DemandePrixFinalComponent } from './view/achat/achat/demande-prix-final
 import { StockCreateComponent } from './view/stock/stock-create/stock-create.component';
 import { StockItemComponent } from './view/stock/stock-item/stock-item.component';
 import { StockListComponent } from './view/stock/stock-list/stock-list.component';
-import { BonCommandeService } from './controller/service/bon-commande.service';
 import { CommandeBonFinalComponent } from './view/achat/achat/commande-bon-final/commande-bon-final.component';
 import { PaiementComponent } from './view/paiement/paiement.component';
 
