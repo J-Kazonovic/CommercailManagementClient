@@ -5,6 +5,7 @@ import {formatDate} from '@angular/common';
 import { UtilStatuts } from 'src/app/util/utilstatuts.module';
 import { UtilValidation } from 'src/app/util/utilvalidation.module';
 import { Ebp } from 'src/app/controller/entity/ebp.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-eb-create',
@@ -15,7 +16,8 @@ export class EbCreateComponent implements OnInit {
 
 
  
-  constructor(private ebService:EbService) { }
+  constructor(private ebService:EbService
+    , private router:Router) { }
 
   ngOnInit(): void {
 
@@ -25,6 +27,11 @@ export class EbCreateComponent implements OnInit {
   onSaveEb() {
     this.eb.statut=UtilStatuts.Decision;
     this.ebService.onSaveEb();
+  }
+
+  onShowEbsClick(){
+    this.router.navigate(['stuf/ebs']);
+
   }
   
   /**Events */

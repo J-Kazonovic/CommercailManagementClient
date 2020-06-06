@@ -16,7 +16,7 @@ export class ProductListComponent implements OnInit {
 
 
   page=0;
-  pages:Array<number>;
+  pages=new Array<number>();
 
   products=new Array<Product>();
   productsFiltered=new Array<Product>();
@@ -28,7 +28,7 @@ export class ProductListComponent implements OnInit {
 
 
   constructor(private catService: CategoryService
-    , private pService: ProductService
+    , private prService: ProductService
     , private uService: UniteService) { }
 
   ngOnInit(): void {
@@ -40,18 +40,18 @@ export class ProductListComponent implements OnInit {
 
   onFilterAction() {
     this.productsFiltered = this.products;
-    this.productsFiltered=this.pService.searchByLibelle(this.productsFiltered,this.searchKey);
-    this.productsFiltered = this.pService.filterByCat(this.productsFiltered, this.catLib);
-    this.productsFiltered = this.pService.filterByUnite(this.productsFiltered, this.uniteLib);
+    this.productsFiltered=this.prService.searchByLibelle(this.productsFiltered,this.searchKey);
+    this.productsFiltered = this.prService.filterByCat(this.productsFiltered, this.catLib);
+    this.productsFiltered = this.prService.filterByUnite(this.productsFiltered, this.uniteLib);
   }
 
 
   getClickedProduct(p: Product) {
-    this.pService.product = p;
+    this.prService.product = p;
   }
 
   onProductDelete(id: number) {
-    this.pService.delete(id).subscribe(
+    this.prService.delete(id).subscribe(
       data => {
         if (data == 1) {
           UtilList.deleteFromListById(id, this.products);
@@ -63,7 +63,7 @@ export class ProductListComponent implements OnInit {
   }
 
   onProductEdit() {
-    this.pService.update(this.pService.product).subscribe(
+    this.prService.update(this.product).subscribe(
       data => {
         console.log(data);
         if (data == 1) {
@@ -84,13 +84,12 @@ export class ProductListComponent implements OnInit {
 
 
   getAllProducts() {
-    this.pService.getAllProducts(this.page).subscribe(
+    this.prService.getAllProducts(this.page).subscribe(
       data => {
         console.log(data);
         this.products = data["content"];
         this.productsFiltered = data["content"];
         this.pages=new Array(data["totalPages"]);
-
       }, error => {
         console.log(error);
       }
@@ -101,6 +100,10 @@ export class ProductListComponent implements OnInit {
   }
   getAllCats() {
     this.catService.findAll();
+  }
+
+  public get product(): Product {
+    return this.prService.product;
   }
 
 
@@ -120,7 +123,7 @@ export class ProductListComponent implements OnInit {
   }
 
   public get catProduitsList(): Array<Product> {
-    return this.pService.catProduitsList;
+    return this.prService.catProduitsList;
   }
 
 

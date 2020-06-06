@@ -1,24 +1,38 @@
 <div class="container-fluid">
-    <div class="form-inline form-group input-group">
-        <div class="input-group-prepend">
-            <span class="input-group-text">Titre</span>
-         </div>
-        <input [(ngModel)]=eb.title name="" class="form-control mr-sm-2" placeholder="Titre Du Demande" type="text">
-        <div class="input-group-prepend">
-            <span class="input-group-text">Descreption</span>
-         </div>
-        <input [(ngModel)]=eb.eb_desc name="" class="form-control  mr-sm-2" placeholder="Ajouter Une Descreption" type="text">
-        <button (click)="onSaveEb()" [disabled]="!ebValidation(eb.title)" type="submit" class="btn btn-primary ">Submit</button>
-    </div> 
-    <div class="row">
-        <div class="col-md-4 mb-2">
-            <app-ebp-form></app-ebp-form>
-        </div>
-        <div class="col-md-8 mb-2">
-            <app-ebp-list-current></app-ebp-list-current>
-        </div>
-        <div class="col-md-12 mb-2">
-            <app-eb-list-current></app-eb-list-current>
+    <div class="card mb-3">
+        <div class="card-body">
+            <h4 style="display: inline;">Expression Du Besoin</h4>
+            <button (click)="onShowEbsClick()" style="float: right;" type="button" class="btn btn-success">Voir Votre
+                List Des Expression</button>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-5" style="height: 60rem">
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Titre</span>
+                </div>
+                <input [(ngModel)]=eb.title name="" class="form-control mr-sm-2" placeholder="Titre Du Demande" type="text">
+            </div>
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Descreption</span>
+                </div>
+                <input [(ngModel)]=eb.eb_desc name="" class="form-control  mr-sm-2" placeholder="Ajouter Une Descreption" type="text">
+            </div>
+
+            <app-ebp-form></app-ebp-form>
+
+
+
+
+
+        </div>
+        <div class="col-md-7 mt-2" style="height: 60rem">
+            <app-ebp-list-current></app-ebp-list-current>
+            <button style="float: right;" (click)="onSaveEb()" [disabled]="!ebValidation(eb.title)" type="submit" class="btn btn-primary mt-2">Submit</button>
+        </div>
+
+    </div>
+
 </div>

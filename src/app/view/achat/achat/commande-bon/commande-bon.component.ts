@@ -52,6 +52,7 @@ export class CommandeBonComponent implements OnInit, OnChanges {
   saveCommande() {
     this.achat.achatItems = this.achatItemsCurrent;
     this.achat.statut = UtilStatuts.COMMANDE;
+    this.achat.total=this.calculTotal();
     this.achatService.saveAchat(this.achat).subscribe(
       data => {
         if (data != null) {

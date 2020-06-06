@@ -62,24 +62,24 @@
 
                 <td>
                     <button class="btn btn-danger fa fa-trash mr-2" (click)="onProductDelete(p)"></button>
-                    <button (click)="onProductEdit()" class="btn btn-primary fa fa-edit" data-toggle="modal" data-target="#myModal"></button>
+                    <button data-toggle="modal" data-target="#p-edit" (click)="getClickedProduct(p)" class="btn btn-primary fa fa-edit"></button>
                 </td>
             </tbody>
         </table>
         <ul class="pagination justify-content-center" style="margin:20px 0">
-            <li class="page-item"><a (click)="setPage(page-1,$event)" class="page-link"><i
+            <li class="page-item"><a [hidden]="page<=0" (click)="setPage(page-1,$event)" class="page-link"><i
                         style="color: rgb(37, 37, 37);" class="fa fa-arrow-left " aria-hidden="true"></i></a></li>
             <li class="page-item" *ngFor="let p of pages; let i=index" [ngClass]="{'active':i==page}">
                 <a (click)="setPage(i,$event)" class="page-link" href="">{{i}}</a>
             </li>
-            <li class="page-item"><a (click)="setPage(page+1,$event)" class="page-link"><i
+            <li class="page-item"><a [hidden]="page<=pages.length" (click)="setPage(page+1,$event)" class="page-link"><i
                         style="color: rgb(37, 37, 37);" class="fa fa-arrow-right " aria-hidden="true"></i></a></li>
 
         </ul>
     </div>
 </div>
 
-<div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="p-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -89,7 +89,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <app-fournisseur-create [isForUpdate]="['true']"></app-fournisseur-create>
+                <app-product-create [isForUpdate]="['true']"></app-product-create>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

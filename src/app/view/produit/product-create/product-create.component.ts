@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CategoryService } from 'src/app/controller/service/category.service';
 import { ProductService } from 'src/app/controller/service/product.service';
 import { Category } from 'src/app/controller/entity/category.model';
@@ -12,6 +12,8 @@ import { UniteService } from 'src/app/controller/service/unite.service';
   styleUrls: ['./product-create.component.css']
 })
 export class ProductCreateComponent implements OnInit {
+
+  @Input() isForUpdate=false;
 
   catLib: string;
   uniteLib: string;
@@ -49,7 +51,7 @@ export class ProductCreateComponent implements OnInit {
   }
 
 
-  public get product(): Product {
+  get product(): Product {
     return this.prService.product;
   }
 

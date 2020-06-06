@@ -2,15 +2,16 @@
 <div class="container-fluid">
 
     <div class="row mb-2">
-        <div class="col-md-12">
-            <h3 style="display: inline;">Bon De Commande <i><u>{{achat.ref}}</u></i></h3>
-            <button style="float: right;" (click)="updateAchat()" type="button" class="btn btn-success ml-1">Modifier</button>
+        <div class="col-md-12 text-center">
+            <button style="float: left;" (click)="backToDemande()" type="button" class="btn btn-danger mr-3"> Back To Demande</button>
+            <h3 style="display: inline-block; ">Bon De Commande <i><u>{{achat.ref}}</u></i></h3>
+            <button style="float: right;" (click)="updateAchat()" type="button" class="btn btn-success ">Save Changes</button>
         </div>
     </div>
 
     <div class="shadow card text-white bg-dark mb-3">
         <div class="card-body">
-            <button style="float: right;" (click)="updateToCommande()" type="button" class="btn btn-info ml-1">Commande Confirmer</button>
+            <h3 style="float: right;">Total: {{achat.total}} DH</h3>
             <button type="button" class="btn btn-primary fa fa-file-pdf-o ml-1"></button>
             <button type="button" class="btn btn-primary fa fa-download ml-1"></button>
             <button type="button" class="btn btn-primary fa fa-envelope ml-1"></button>

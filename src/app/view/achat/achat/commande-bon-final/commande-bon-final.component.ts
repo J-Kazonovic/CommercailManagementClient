@@ -74,17 +74,27 @@ export class CommandeBonFinalComponent implements OnInit,OnChanges {
     this.achat.total=this.calculTotal();
     this.achatService.updateAchat(this.achat).subscribe(
       data => {
+        console.log(data);
       }, error => {
         console.log(error);
       }
     );
   }
-  updateToCommande() {
-    this.achat.achatItems = this.achatItemsDB;
-    this.achat.statut = UtilStatuts.COMMANDE;
-    this.achat.total=this.calculTotal();
+  backToDemande(){
+    this.achat.statut=this.statuts[1];
     this.achatService.updateAchat(this.achat).subscribe(
       data => {
+        this.router.navigate(['comptable/dp/ref',this.achat.ref]);
+      }, error => {
+        console.log(error);
+      }
+    );
+  }
+
+  update(achat:Achat){
+    this.achatService.updateAchat(achat).subscribe(
+      data => {
+        this.router.navigate(['comptable/bc/ref',this.achat.ref]);
       }, error => {
         console.log(error);
       }

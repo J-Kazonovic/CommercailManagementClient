@@ -22,6 +22,7 @@ export class AchatListComponent implements OnInit {
 
   achats = new Array<Achat>();
   achatsFiltered = new Array<Achat>();
+  achatItems=new Array<AchatItem>();
 
   statut = "";
   fourni = "";
@@ -60,13 +61,22 @@ export class AchatListComponent implements OnInit {
     this.achatsFiltered = this.achatService.filterByFourni(this.achatsFiltered, this.fourni);
   }
 
-  onAchatShow(achat: Achat) {
+  onAchatEdit(achat: Achat) {
     if (achat.statut === this.statuts[1]) {
       this.router.navigate(['comptable/dp/ref', achat.ref]);
     } else if (achat.statut === this.statuts[2] || achat.statut === this.statuts[3]) {
       this.router.navigate(['comptable/bc/ref', achat.ref]);
     }
+  }
 
+  onAchatShow(achat: Achat) {
+    this.achatItemService.getAchatItemsByAchat(achat.ref).subscribe(
+      data=>{
+        this.achatItems=data;
+      },error=>{
+        console.log(error);
+      }
+    )
   }
 
   onAchatDelete(achat: Achat) {
