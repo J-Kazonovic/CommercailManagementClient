@@ -17,7 +17,6 @@ import { Category } from 'src/app/controller/entity/category.model';
 import { Product } from 'src/app/controller/entity/product.model';
 import { DemmandePrixService } from 'src/app/controller/service/demmande-prix.service';
 import { Router } from '@angular/router';
-
 declare var $: any;
 
 @Component({
@@ -39,8 +38,6 @@ export class DemandePrixComponent implements OnInit, OnChanges{
 
 
   items = new Array<AchatItem>();
-
-
   constructor(private achatService: AchatService
     , private dpService: DemmandePrixService
     , private frService: FournisseurService
@@ -54,6 +51,7 @@ export class DemandePrixComponent implements OnInit, OnChanges{
   ngOnInit() {
     this.getAllFournisseurs();
   }
+
 
   //API Calls
   saveDemmande() {

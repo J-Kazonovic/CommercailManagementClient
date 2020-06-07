@@ -6,7 +6,9 @@ import { CategoryService } from 'src/app/controller/service/category.service';
 import { UniteService } from 'src/app/controller/service/unite.service';
 import { Category } from 'src/app/controller/entity/category.model';
 import { Unite } from 'src/app/controller/entity/unite.model';
-
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -49,12 +51,38 @@ export class ProductListComponent implements OnInit {
   getClickedProduct(p: Product) {
     this.prService.product = p;
   }
+  generatePdf(){
+    const documentDefinition = { content: [
+     {
+       text: 'Demmande Des prix ',
+       bold: true,
+       fontSize: 20,
+       alignment: 'center',
+       margin: [0, 0, 0, 20]
+     },
+{
+      table: {
+        // headers are automatically repeated if the table spans over multiple pages
+        // you can declare how many rows should be treated as headers
+        headerRows: 1,
+        widths: [ 100, 100],
 
-  onProductDelete(id: number) {
-    this.prService.delete(id).subscribe(
+        body: [
+          [ 'First', 'Second' ],
+          [ this.product.ref, this.product.libelle]
+        ]
+      }
+    }
+     ]
+    };
+    pdfMake.createPdf(documentDefinition).open();
+    pdfMake.createPdf(documentDefinition).download();
+   }
+  onProductDelete(product: Product) {
+    this.prService.delete(product.id).subscribe(
       data => {
         if (data == 1) {
-          UtilList.deleteFromListById(id, this.products);
+          UtilList.deleteFromListById(product.id, this.products);
         }
       }, error => {
         console.log(error);
