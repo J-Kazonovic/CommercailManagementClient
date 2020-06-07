@@ -1,0 +1,62 @@
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-md-12">
+            <h3 style="display: inline;">Facture Fournisseur <b>{{facture.ref}}</b></h3>
+            <button (click)="onFactureSave()" style="float: right;" type="button" class="btn btn-success">Save Changes</button>
+        </div>
+    </div>
+    <div class="shadow card text-white bg-dark mb-3">
+        <div class="card-body">
+            <button style="float: left;" type="button" class="btn btn-primary fa fa-file-pdf-o mr-2"></button>
+            <button style="float: left;" type="button" class="btn btn-primary fa fa-download mr-2"></button>
+            <button style="float: left;" type="button" class="btn btn-primary fa fa-envelope"></button>
+
+            <span style="float: right;">
+                <span [class]="facture.etat==etats[0]?'active':''">{{etats[0]}} | </span>
+            <span [class]="facture.etat==etats[1]?'active':''">{{etats[1]}}</span>
+            </span>
+        </div>
+    </div>
+    <!--Info-->
+    <div class="row mt-3 mb-2">
+        <div class="col-md-6">
+            <div class="shadow card text-white bg-dark" style="height: 18rem">
+                <div class="card-body">
+                    <h2>Fournisseur:</h2>
+                    <h3>{{achat.fournisseur.nom}}</h3>
+                    <h4><b>Email: </b>{{achat.fournisseur.email}}</h4>
+                    <h4><b>Tel: </b>{{achat.fournisseur.tel}}</h4>
+                    <h4><b>Address: </b>{{achat.fournisseur.adress}}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="shadow card text-white bg-dark" style="height: 18rem">
+                <div class="card-body">
+                    <h2>Achat:</h2>
+                    <h4><b>N°: </b>{{achat.ref}}</h4>
+                    <h4><b>Date Du Commande: </b>{{achat.dateCommande}}</h4>
+                    <h4><b>Date Du Livraison: </b>{{achat.dateLivraison}}</h4>
+                    <h4><b>By: </b>{{achat.comptable.name}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Info-->
+
+    <!--List-->
+    <div class="row mb-2">
+        <div class="col-md-12">
+            <app-facture-items [items]="items"></app-facture-items>
+        </div>
+    </div>
+
+    <div class="card bg-dark text-white" style="float: right;">
+        <div class="card-body">
+            <h4 class="card-title">Total: {{achat.total}} DH</h4>
+        </div>
+    </div>
+    <!--List-->
+
+
+</div>
