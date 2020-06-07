@@ -29,13 +29,7 @@ export class ProductCreateComponent implements OnInit {
   }
 
   saveProduct() {
-    this.prService.save(this.product).subscribe(
-      data=>{
-
-      },error=>{
-
-      }
-    )
+    this.prService.save(this.product);
   }
 
   getAllUnites() {

@@ -4,7 +4,6 @@ import { StockService } from 'src/app/controller/service/stock.service';
 import { UtilList } from 'src/app/util/utillist.module';
 import { StockItem } from 'src/app/controller/entity/stock-item.model';
 import { StockItemService } from 'src/app/controller/service/stock-item.service';
-
 @Component({
   selector: 'app-stock-list',
   templateUrl: './stock-list.component.html',
@@ -48,7 +47,7 @@ export class StockListComponent implements OnInit {
       }
     )
   }
-  
+
   getStockByDate() {
      this.stockService.getStockByDate(this.date).subscribe(
       data => {
@@ -72,7 +71,6 @@ export class StockListComponent implements OnInit {
       }
     )
   }
- 
   onAddItemUpdate(){
     this.stock.qteInitiale+=this.item.qteStock;
     this.item.qtFinal =this.item.qteStock;

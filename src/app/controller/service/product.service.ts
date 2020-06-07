@@ -11,18 +11,27 @@ export class ProductService {
   public _products:Array<Product>;
   public _categoryList:Array<Category>;
   public _catProduitsList=new Array<Product>();
-
+  page:number;
   private url="http://localhost:8090/produit/";
 
   constructor(private http:HttpClient) { }
-
   save(p:Product) {
-    return this.http.post<number>(this.url, p);
+    this.http.post<number>(this.url, p).subscribe(
+      data => {
+        if (data == 1) {
+          this.product= null;
+          this.products=null;
+          this.getAllProducts(this.page);
+        }
+      }, error => {
+        console.log(error);
+      }
+    );
   }
   update(p:Product){
     return this.http.put<number>(this.url, p);
   }
-
+ 
   delete(id:number){
     return this.http.delete<number>(this.url + id);
   }
