@@ -1,1 +1,48 @@
-<p>facture-list works!</p>
+<h2>List Des Factures</h2>
+<div class="card text-white bg-dark shadow mt-3 mb-3">
+    <div class="card-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="date">Filter By Date</label>
+                        <input id="date" type="date" class="form-control"  [(ngModel)]=facture.dateDeFac>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="dept">Search By Ref</label>
+                        <input [(ngModel)]=facture.ref placeholder="stock ref..." id="key" type="text" class="form-control">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="card-body table-responsive">
+        <table class="table table-light table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Ref</th>
+                    <th>DateDeFac</th>
+                    <th>Etat</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let fr of factures">
+                    <td>{{fr.ref}}</td>
+                    <td>{{fr.dateDeFac}}</td>
+                    <td>{{fr.etat}}</td>
+                    <td>
+                        <button  class="btn btn-danger fa fa-trash mr-2"></button>
+                        <button  data-toggle="modal" data-target="#myModal" class="btn btn-primary fa fa-eye mr-2"></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul class="pagination justify-content-center" style="margin:20px 0">
+
+
+        </ul>
+    </div>
+    </div>
