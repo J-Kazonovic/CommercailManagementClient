@@ -41,12 +41,6 @@ export class StockCreateComponent implements OnInit {
       
     });
 for (var i = 0; i < this.stockItems.length; i++) {
-    var itemq  = this.stockItems[i];
-    console.log(itemq);
-    Items.push({
-      'qteStock': itemq.qteStock
-  });
-
   const documentDefinition = { content: [
     {
       text: 'Stock',
