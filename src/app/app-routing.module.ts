@@ -23,9 +23,9 @@ import { StockCreateComponent } from './view/stock/stock-create/stock-create.com
 import { StockItemComponent } from './view/stock/stock-item/stock-item.component';
 import { StockListComponent } from './view/stock/stock-list/stock-list.component';
 import { CommandeBonFinalComponent } from './view/achat/achat/commande-bon-final/commande-bon-final.component';
-import { PaiementComponent } from './view/paiement/paiement.component';
 import { FactureFinalComponent } from './view/facture/facture-final/facture-final.component';
 import { FactureFormComponent } from './view/facture/facture-form/facture-form.component';
+import { FactureListComponent } from './view/facture/facture-list/facture-list.component';
 
 
 const routes: Routes = [
@@ -63,7 +63,7 @@ const routes: Routes = [
 
       { path: "facture/achat/:ref", component: FactureFinalComponent },
       { path: "facturation", component: FactureFormComponent },
-      { path: "paiements", component: PaiementComponent },
+      { path: "factures", component: FactureListComponent},
 
       { path: "commande", component: CommandeBonComponent},
       { path: "fournisseur", component: FournisseurCreateComponent},

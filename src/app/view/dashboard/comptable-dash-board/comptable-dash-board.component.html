@@ -7,10 +7,10 @@
 
             <!--Expression-->
             <a style="color: rgb(14, 13, 13);" [routerLink]="['/login']" class="list-group-item list-group-item-action bg-info collapsed" data-toggle="collapse" href="#collapseeb">
-               Login<i style="float: right; bottom: 0;" class="fa fa-user" aria-hidden="true"></i>
+                Login<i style="float: right; bottom: 0;" class="fa fa-user" aria-hidden="true"></i>
             </a>
             <a style="color: rgb(14, 13, 13);" class="list-group-item list-group-item-action bg-info collapsed" data-toggle="collapse" href="#collapseeb">
-                Expression <i style="float: right; bottom: 0;" class="fa fa-angle-down" aria-hidden="true"></i>
+                Besoins <i style="float: right; bottom: 0;" class="fa fa-angle-down" aria-hidden="true"></i>
             </a>
 
             <div id="collapseeb" class="collapse bg-dark" data-parent="#accordion">
@@ -28,12 +28,12 @@
 
             <div id="collapseachat" class="collapse bg-dark" data-parent="#accordion">
 
-                <a style="color: white;" href="comptable/achats" class="bg-dark list-group-item list-group-item-action">
+                <a style="color: white;" [routerLink]="['achats']" class="bg-dark list-group-item list-group-item-action">
                     <i class="fa fa-list" aria-hidden="true"></i> List Des Achats</a>
                 <a style="color: white;" href="comptable/dp" class="bg-dark list-group-item list-group-item-action">
-                    <i class="fa fa-plus" aria-hidden="true"></i> Crée Une Demmande de Prix</a>
+                    <i class="fa fa-plus-square" aria-hidden="true"></i> Crée Une Demande de Prix</a>
                 <a style="color: white;" href="comptable/bc" class="bg-dark list-group-item list-group-item-action">
-                    <i class="fa fa-plus" aria-hidden="true"></i> Crée Bon De Commande</a>
+                    <i class="fa fa-plus-square" aria-hidden="true"></i> Crée Bon De Commande</a>
             </div>
 
             <!--Facturation-->
@@ -45,7 +45,9 @@
 
             <div id="collapsepai" class="collapse bg-dark" data-parent="#accordion">
                 <a style="color: white;" [routerLink]="['facturation']" class="bg-dark list-group-item list-group-item-action">
-                    <i class="fa fa-money" aria-hidden="true"></i> Facturation</a>
+                    <i class="fa fa-handshake-o mr-1"></i>Facturation</a>
+                <a style="color: white;" [routerLink]="['factures']" class="bg-dark list-group-item list-group-item-action">
+                    <i class="fa fa-money mr-1" aria-hidden="true"></i>Paiements</a>
             </div>
 
 
@@ -59,7 +61,7 @@
             <div id="collapsefourni" class="collapse bg-dark" data-parent="#accordion">
 
                 <a style="color: white;" [routerLink]="['fournisseur']" class="bg-dark list-group-item list-group-item-action">
-                    <i class="fa fa-handshake-o" aria-hidden="true"></i> Ajouter un Fournisseur</a>
+                    <i class="fa fa-plus-square" aria-hidden="true"></i> Ajouter un Fournisseur</a>
 
                 <a style="color: white;" [routerLink]="['fournisseurs']" class="bg-dark list-group-item list-group-item-action">
                     <i class="fa fa-list" aria-hidden="true"></i> List Des Fournisseur</a>
@@ -88,7 +90,7 @@
                 <a style="color: white;" class="bg-dark list-group-item list-group-item-action" [routerLink]="['stock']">
                     <i class="fa fa-plus-square" aria-hidden="true"></i> Ajouter un Stock</a>
                 <a style="color: white;" class="bg-dark list-group-item list-group-item-action" [routerLink]="['stocks']">
-                    <i class="fa fa-list" aria-hidden="true"></i>List des Stocks</a>
+                    <i class="fa fa-list" aria-hidden="true"></i> List des Stocks</a>
             </div>
 
         </div>

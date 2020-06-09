@@ -37,6 +37,7 @@ export class FactureFinalComponent implements OnInit {
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
       this.ref = params['ref'];
+      this.getFactureByAchatRef(this.ref);
       this.getAchatByRef(this.ref);
       this.getAllDBAchatItems(this.ref);
     });
@@ -44,14 +45,26 @@ export class FactureFinalComponent implements OnInit {
 
 
   onFactureSave(){
-    this.facture.etat=this.etats[0];
-    this.facService.save(this.facture).subscribe(
+    console.log(this.facture.etat);
+    if(this.facture.etat===this.etats[0]){
+      this.facService.update(this.facture).subscribe(
+        data => {
+          console.log(data);
+        }, error => {
+          console.log(error);
+        }
+      );
+    }else{
+      this.facture.etat=this.etats[0];
+      this.facService.save(this.facture).subscribe(
       data => {
         console.log(data);
       }, error => {
         console.log(error);
       }
     );
+    }
+    
   }
 
   getAchatByRef(ref:string){
@@ -64,6 +77,22 @@ export class FactureFinalComponent implements OnInit {
       }
     )
   }
+
+  getFactureByAchatRef(ref:string){
+    this.facService.getFactureByAchatRef(ref).subscribe(
+      data => {
+        console.log(data);
+         if(data!=null){
+           this.facture=data;
+
+         }
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
+
+  
 
   getAllDBAchatItems(ref:string) {
     this.achatItemService.getAchatItemsByAchat(ref).subscribe(
@@ -78,6 +107,6 @@ export class FactureFinalComponent implements OnInit {
 
   genererLaFacture(achat:Achat){
     this.facture.achat=achat;
-    this.facture.ref="F/"+achat.ref;
+    this.facture.ref="Fac"+achat.ref;
   }
 }

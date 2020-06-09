@@ -29,8 +29,8 @@ export class PaiementService {
     return this.http.get<Array<Paiement>>(this.url);
   }
 
-  getPaiementByAchatRef(ref:string) {
-    return this.http.get<Array<Paiement>>(this.url+ "achat/ref/" + ref);
+  getPaiementByFactureRef(ref:string) {
+    return this.http.get<Array<Paiement>>(this.url+ "facture/ref/" + ref);
   }
 
 

@@ -24,11 +24,15 @@ export class FactureService {
     return this.http.delete<number>(this.url + id);
   }
 
-  getAllFactures(page:number){
+  getAllFactures(){
     return this.http.get<Array<Facture>>(this.url);
   }
 
   getFactureByRef(ref:string) {
-    return this.http.get<Array<Facture>>(this.url+ "ref/" + ref);
+    return this.http.get<Facture>(this.url+ "ref/" + ref);
+  }
+
+  getFactureByAchatRef(ref:string) {
+    return this.http.get<Facture>(this.url+ "achat/ref/" + ref);
   }
 }

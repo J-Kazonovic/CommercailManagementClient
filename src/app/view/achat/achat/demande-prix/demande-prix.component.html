@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="shadow card text-white bg-dark mb-3">
         <div class="card-body">
-            <h4 style="display: inline;">Crée Une Demmande De Prix</h4>
+            <h4 style="display: inline;">Demande De Prix</h4>
             <button style="float: right;" (click)="saveDemmande()" type="button" class="btn btn-success">Save</button>
         </div>
     </div>
@@ -12,7 +12,7 @@
                 <div class="card-body">
 
                     <div class="form-group">
-                        <label for="date-input">Réfernece</label>
+                        <label for="date-input">Réference</label>
                         <input class="form-control" type="text" id="date-input" [(ngModel)]=achat.ref>
                     </div>
                     <div class="form-group">
@@ -36,16 +36,18 @@
             <div class="shadow card text-white bg-dark" style="height: 22rem">
                 <div class="card-body">
                     <label for="fournisseur">Fournisseur</label>
-                    <button style="float: right;" class="btn btn-primary fa fa-plus mb-2" data-toggle="modal" data-target="#modal-fourni"></button>
-                    <select (change)="getFournByNom()" class="form-control" id="fournisseur" [(ngModel)]=achat.fournisseur.nom>
+                    <button style="float: right;" class="btn btn-primary fa fa-plus mb-2" data-toggle="modal"
+                        data-target="#modal-fourni"></button>
+                    <select (change)="getFournByNom()" class="form-control" id="fournisseur"
+                        [(ngModel)]=achat.fournisseur.nom>
                         <option *ngFor="let fr of fournisseurs" value="{{fr.nom}}">
                             {{fr.nom}}
                         </option>
                     </select><br>
                     <h3>{{fourn.nom}}</h3>
-                    <p>{{fourn.email}}</p>
-                    <p>{{fourn.tel}}</p>
-                    <p>{{fourn.adress}}</p>
+                    <p><b>Email: </b>{{fourn.email}}</p>
+                    <p><b>Tel: </b>{{fourn.tel}}</p>
+                    <p><b>Address: </b>{{fourn.adress}}</p>
                 </div>
             </div>
 
@@ -65,7 +67,8 @@
 </div>
 
 <!--Ajouter Un Nouvelle Fournisseur-->
-<div class="modal fade bd-example-modal-lg" id="modal-fourni" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="modal-fourni" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">

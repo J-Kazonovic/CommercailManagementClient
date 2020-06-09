@@ -1,48 +1,108 @@
-<h2>List Des Factures</h2>
-<div class="card text-white bg-dark shadow mt-3 mb-3">
-    <div class="card-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="date">Filter By Date</label>
-                        <input id="date" type="date" class="form-control"  [(ngModel)]=facture.dateDeFac>
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <h2>List Des Factures</h2>
+            <div class="card text-white bg-dark shadow mt-3 mb-3">
+                <div class="card-header">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="date">Filter By Achat</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="dept">Search By Ref</label>
-                        <input [(ngModel)]=facture.ref placeholder="stock ref..." id="key" type="text" class="form-control">
-                    </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-light table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Ref</th>
+                                <th>DateDeFac</th>
+                                <th>Origine</th>
+                                <th>Etat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let fr of factures">
+                                <td>{{fr.ref}}</td>
+                                <td>{{fr.dateDeFac}}</td>
+                                <td>{{fr.achat.ref}}</td>
+                                <td>{{fr.etat}}</td>
+                                <td>
+                                    <button class="btn btn-danger fa fa-trash mr-2"></button>
+                                    <button (click)="onFacturePayer(fr)" class="btn btn-primary fa fa-eye mr-2"></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
             </div>
         </div>
+        <div class="col-md-5">
+            <div class="card text-white bg-dark shadow mt-3 mb-3">
+                <div class="card-header">
+                    List Du Paiement of {{facture.ref}}
+                    <button data-toggle="modal" data-target="#myModal" type="button" style="float: right;" class="btn btn-primary fa fa-plus"></button>
+                </div>
+
+                <div class="card-body table-responsive">
+                    <table class="table table-light table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Montent (DH)</th>
+                                <th>Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="paiements.length==0">
+                                <td class="alert alert-secondary" colspan="6" role="alert">
+                                    No data to display.
+                                </td>
+                            </tr>
+                            <tr *ngFor="let p of paiements">
+                                <td>
+                                    <input [(ngModel)]=p.montent (change)="onPaiementEdit(p)" type="text" class="form-control" value="{{p.montent}}">
+
+                                </td>
+                                <td>{{p.paiementDate}}</td>
+
+                                <td>
+                                    <button class="btn btn-danger fa fa-trash mr-2" (click)="onPaiementDelete(p)"></button>
+                                </td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="card-body table-responsive">
-        <table class="table table-light table-hover table-bordered">
-            <thead>
-                <tr>
-                    <th>Ref</th>
-                    <th>DateDeFac</th>
-                    <th>Etat</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let fr of factures">
-                    <td>{{fr.ref}}</td>
-                    <td>{{fr.dateDeFac}}</td>
-                    <td>{{fr.etat}}</td>
-                    <td>
-                        <button  class="btn btn-danger fa fa-trash mr-2"></button>
-                        <button  data-toggle="modal" data-target="#myModal" class="btn btn-primary fa fa-eye mr-2"></button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <ul class="pagination justify-content-center" style="margin:20px 0">
 
 
-        </ul>
-    </div>
+    <div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Produits</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="p">Montent Payer</label>
+                        <input [(ngModel)]=paiement.montent type="number" class="form-control" id="p" aria-describedby="helpId" placeholder="">
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onPaiementSave()">Save
+                        changes</button>
+                </div>
+            </div>
+        </div>
     </div>

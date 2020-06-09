@@ -71,6 +71,7 @@ export class CommandeBonFinalComponent implements OnInit,OnChanges {
   //API Calls
   updateAchat() {
     this.achat.achatItems = this.achatItemsDB;
+    this.achat.statut=this.statuts[3];
     this.achat.total=this.calculTotal();
     this.achatService.updateAchat(this.achat).subscribe(
       data => {

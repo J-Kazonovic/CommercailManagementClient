@@ -6,8 +6,8 @@ import { CategoryService } from 'src/app/controller/service/category.service';
 import { UniteService } from 'src/app/controller/service/unite.service';
 import { Category } from 'src/app/controller/entity/category.model';
 import { Unite } from 'src/app/controller/entity/unite.model';
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
+import * as pdfMake from 'pdfmake/build/pdfMake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-product-list',

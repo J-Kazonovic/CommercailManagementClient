@@ -16,6 +16,7 @@ import { UtilValidation } from 'src/app/util/utilvalidation.module';
 export class EbpFormComponent implements OnInit {
 
   catLib:string;
+  products=new Array<Product>();
 
 
 
@@ -29,7 +30,13 @@ export class EbpFormComponent implements OnInit {
   }
 
   getProductBycat(){
-    this.prService.getAllCatProduct(this.catLib);
+    this.prService.getAllCatProduct(this.catLib).subscribe(
+      data => {
+        this.products= data;
+      }, error => {
+        console.log(error);
+      }
+    );
   }
 
   onProductAdd(){
@@ -54,7 +61,6 @@ export class EbpFormComponent implements OnInit {
   }
 
   public get catProduitsList(): Array<Product> {
-    
     return this.prService._catProduitsList;
   }
 

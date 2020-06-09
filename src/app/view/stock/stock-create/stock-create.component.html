@@ -1,23 +1,20 @@
-
 <div class="container-fluid">
-    <div class="shadow card text-white bg-dark mb-3">
+
+    <!--Info-->
+    <div class="shadow card text-white bg-dark mb-2">
+
+        <div class="card-header">
+            Crée Un Stock
+            <button style="float: right;" (click)="generatePdf()" class="btn btn-primary mt-2">Open PDF</button>
+        </div>
+
         <div class="card-body">
-            <h4 style="display: inline;">Crée Un Stock</h4>
-            <button style="float: right;" (click)=" onSaveStock()" type="button" class="btn btn-success">Save</button>
+            <div class="form-group">
+                <label for="date-input">Réfernece</label>
+                <input type="text" placeholder="entrer la ref du stock" class="form-control" [(ngModel)]=stock.ref>
+            </div>
         </div>
     </div>
-    <!--Info-->
-            <div class="shadow card text-white bg-dark" style="height: 22rem">
-                <div class="card-body">
-
-                    <div class="form-group">
-                        <label for="date-input">Réfernece</label>
-                        <input type="text" placeholder="entrer la ref du stock" class="form-control" [(ngModel)]=stock.ref>
-                    </div>
-                    <button (click)="generatePdf()" class="btn btn-primary mt-2">Open PDF</button>
-                </div>
-                
-            </div>
     <!--Info-->
 
     <!--List-->
@@ -26,10 +23,9 @@
             <app-stock-item></app-stock-item>
         </div>
     </div>
+    <button style="float: right;" (click)=" onSaveStock()" type="button" class="btn btn-success">Save</button>
+
     <!--List-->
 
 
 </div>
-
-
- 

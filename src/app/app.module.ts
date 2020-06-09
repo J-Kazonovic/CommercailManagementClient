@@ -62,7 +62,6 @@ import { StockComponent } from './view/stock/stock/stock.component';
 import { StockCreateComponent } from './view/stock/stock-create/stock-create.component';
 import { StockItemComponent } from './view/stock/stock-item/stock-item.component';
 import { StockListComponent } from './view/stock/stock-list/stock-list.component';
-import { PaiementComponent } from './view/paiement/paiement.component';
 import { FactureFormComponent } from './view/facture/facture-form/facture-form.component';
 import { FactureListComponent } from './view/facture/facture-list/facture-list.component';
 import { FactureFinalComponent } from './view/facture/facture-final/facture-final.component';
@@ -107,7 +106,6 @@ import { FactureItemsComponent } from './view/facture/facture-items/facture-item
     StockCreateComponent,
     StockItemComponent,
     StockListComponent,
-    PaiementComponent,
     FactureFormComponent,
     FactureListComponent,
     FactureFinalComponent,
