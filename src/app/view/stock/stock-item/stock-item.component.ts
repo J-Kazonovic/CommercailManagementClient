@@ -23,7 +23,7 @@ export class StockItemComponent implements OnInit {
 
   constructor(private stockService: StockService,private catService: CategoryService
     ,private prService:ProductService
-    ,private uService:UniteService) { }
+    ,private uService:UniteService,private stockItemService: StockItemService) { }
 
     ngOnInit() {
       this.getAllCats();
@@ -37,7 +37,7 @@ export class StockItemComponent implements OnInit {
     getAllCats( ) {
       this.catService.findAll();  
     }
-    
+
     getProductBycat(){
       this.prService.getAllCatProduct(this.catLib);
     }
@@ -46,8 +46,8 @@ export class StockItemComponent implements OnInit {
       this.catService.findCategoryByLibelle(this.product.cat);
     }
 
-    onRemoveItem(item:StockItem){
-      UtilList.deleteFromListByLibelle2(item.produit.libelle,this.stockItems);
+    deleteProduct(sI:StockItem) {
+    this.stockService.deleteProduct(sI);
     }
 
     get cats(): Array<Category> {

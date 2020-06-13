@@ -24,8 +24,14 @@ export class CommandeBonItemsComponent implements OnInit {
     }
   }
 
-  removeDemmandeItem(item:AchatItem){
-    UtilList.deleteFromListByLibelle2(item.produit.libelle,this.items);
+  deleteProduct(aI:AchatItem) {
+    this.achatService.deleteProduct(aI).subscribe(
+      data => {
+        this.achatService.onStockItemDelete(aI,this.items);
+      }, error => {
+        console.log(error);
+      }
+    );
   }
 
   

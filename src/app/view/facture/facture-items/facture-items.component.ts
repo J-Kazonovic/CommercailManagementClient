@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AchatItem } from 'src/app/controller/entity/achat-item.model';
+import { BonCommandeService } from 'src/app/controller/service/bon-commande.service';
 
 @Component({
   selector: 'app-facture-items',
@@ -10,9 +11,9 @@ export class FactureItemsComponent implements OnInit {
   
   @Input() items=new Array<AchatItem>();
 
-  constructor() { }
+  constructor(private bcService:BonCommandeService) { }
 
   ngOnInit(): void {
   }
-
+  
 }

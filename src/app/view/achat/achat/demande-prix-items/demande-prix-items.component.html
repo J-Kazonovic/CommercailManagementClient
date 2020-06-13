@@ -25,7 +25,7 @@
                     <td>{{item.produit.cat.libelle}}</td>
                     <td><input [min]=1 type="number" [(ngModel)]=item.qteCommander class="form-control col-xs-2"></td>
                     <td>
-                        <button (click)="onRemoveItem(item) " type="button " class="btn btn-danger ">-</button>
+                        <button (click)="deleteProduct(item) " type="button " class="btn btn-danger ">-</button>
                     </td>
                 </tr>
             </tbody>

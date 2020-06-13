@@ -50,7 +50,21 @@ export class StockService {
     this.stock.stockItems = this.stockItems;
     this.saveStock(this.stock);
   }
-
+  deleteProduct(sI:StockItem) {
+    this.http.delete<number>("http://localhost:8090/stockItems/"+ sI.produit.libelle).subscribe(
+      data => {
+        this.onStockItemDelete(sI,this.stockItems);
+      }, error => {
+        console.log(error);
+      }
+    );
+  }
+  onStockItemDelete(sI:StockItem,stockItems:Array<StockItem>){
+    const i=stockItems.findIndex(e=>e.produit.libelle===sI.produit.libelle);
+    if(i!==-1){
+      stockItems.splice(i,1);
+    } 
+}
   deleteStock(stockId: number) {
     return this.http.delete<number>(this.url + "id/" + stockId)
   }
@@ -82,7 +96,7 @@ export class StockService {
       }
     );
   }
-  
+
   searchByRef(stocks: Array<Stock>, ref: string) {
     if (ref.length > 0) {
       return stocks.filter(stock => stock.ref.trim().toLowerCase().indexOf(ref) > -1);

@@ -8,7 +8,9 @@ import { AchatItemService } from 'src/app/controller/service/achat-item.service'
 import { Achat } from 'src/app/controller/entity/achat.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DemmandePrixService } from 'src/app/controller/service/demmande-prix.service';
-
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-demande-prix-final',
   templateUrl: './demande-prix-final.component.html',
@@ -42,6 +44,65 @@ export class DemandePrixFinalComponent implements OnInit {
     , private achatItemService: AchatItemService) { }
 
 
+    generatePdf(){
+      console.log(this.achatItemsDB);
+      for (var i = 0;i < this.achatItemsDB.length; i++) {
+        const documentDefinition = { content: [
+          {
+            text: 'Demmande De Prix Reference  '+this.achat.ref,
+            bold: true,
+            fontSize: 20,
+            alignment: 'left',
+            margin: [0, 0, 0, 20],
+          },
+          
+          {
+           columns: [
+             [{
+              text: 'Date : ' +this.achat.dateLivraison,style: 'header'
+            },{
+              text: 'Nom: ' +this.achat.fournisseur.nom,style: 'anotherStyle'
+            },{
+              text: 'Email : ' +this.achat.fournisseur.email,style: 'anotherStyle'
+            },{
+              text: 'Adresse : ' +this.achat.fournisseur.adress,style: 'anotherStyle'
+            },{
+              text: 'Tel : ' +this.achat.fournisseur.tel,style: 'anotherStyle'
+            }
+             ],
+           ],lineHeight: 3,
+         },
+         {
+           table: {
+             // headers are automatically repeated if the table spans over multiple pages
+             // you can declare how many rows should be treated as headers
+             headerRows: 1,
+             widths: [100,100,100, 100,100],
+  
+             body: [
+               ["Ref","Categorie","Designation","Uniter","Quantiter"],
+               [this.achatItemsDB[i].produit.ref,this.achatItemsDB[i].produit.cat.libelle,this.achatItemsDB[i].produit.libelle,this.achatItemsDB[i].produit.unite.libelle,this.achatItemsDB[i].qteCommander],
+               [this.achatItemsDB[i+1].produit.ref,this.achatItemsDB[i+1].produit.cat.libelle,this.achatItemsDB[i+1].produit.libelle,this.achatItemsDB[i+1].produit.unite.libelle,this.achatItemsDB[i+1].qteCommander],
+             ],
+             color:'#191970'
+           }
+         }
+          ],styles: {
+            header: {
+              bold: true,
+              alignment: 'left'
+            },
+            anotherStyle: {
+              italics: true,
+              alignment: 'right'
+            }
+          },
+         }; 
+         
+         pdfMake.createPdf(documentDefinition).open();
+      }
+          
+        }
   ngOnChanges(changes: SimpleChanges): void {
     this.getFournByNom();
 

@@ -40,10 +40,19 @@ export class AchatItemFormComponent implements OnInit {
   onAddItem(){
     this.item.produit.cat.libelle=this.catLib;
       if (this.item != null) {
-        this.items.push(this.item);
+        this.items.push(this.cloneItem(this.item));
       }
   }
-
+  private cloneItem(achatItem: AchatItem) {
+    const myClone = new AchatItem();
+    myClone.id= achatItem.id;
+    myClone.achat= achatItem.achat;
+    myClone.qteCommander= achatItem.qteCommander;
+    myClone.qteRecu= achatItem.qteRecu;
+    myClone.produit.libelle= achatItem.produit.libelle;
+    myClone.produit.cat.libelle= achatItem.produit.cat.libelle;
+    return myClone;
+  }
   findAllCats( ) {
     this.catService.findAll();  
   }
