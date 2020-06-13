@@ -23,8 +23,5 @@ export class StufDashBoardComponent implements OnInit {
   }
 
 
- public get username(): string {
-   return this.loginService.username;
- }
 
 }

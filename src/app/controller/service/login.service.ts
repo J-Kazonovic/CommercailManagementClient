@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthRequest } from '../entity/auth-request.model';
+import { AuthResponse } from '../entity/auth-response.model';
 
 
 @Injectable({
@@ -7,49 +9,64 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class LoginService {
 
-  private _username: string;
-  private _password: string;
-  constructor(private http:HttpClient) { }
+  private  _userToken:string;
 
-  login(username:string,password:string){
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get("http://localhost:8090/",{headers,responseType: 'json'})
-  }
+  private _request:AuthRequest;
+
+   constructor(private http:HttpClient) { }
+
+   login(request:AuthRequest){
+     return this.http.post<AuthResponse>("http://localhost:8090/authenticate"
+     , request, {  responseType: 'json' ,headers:{skip:"true"}});
+
+   }
+
+
+   
+   /*getUsers() {
+       let username='javatechie'
+       let password='jt143'
+       const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+      return  this.http.get("http://localhost:8090/getUsers",{headers});
+   }*/
 
 
 
+   /**
+    * Getter request
+    * @return {AuthRequest}
+    */
+ public get request(): AuthRequest {
+   if(this._request==null){
+     this._request=new AuthRequest();
+   }
+   return this._request;
+ }
 
-    /**
-     * Getter username
-     * @return {string}
-     */
-	public get username(): string {
-		return this._username;
-	}
+   /**
+    * Setter request
+    * @param {AuthRequest} value
+    */
+ public set request(value: AuthRequest) {
+   this._request = value;
+ }
+   
 
-    /**
-     * Getter password
-     * @return {string}
-     */
-	public get password(): string {
-		return this._password;
-	}
+   /**
+    * Getter userToken
+    * @return {string}
+    */
+ public get userToken(): string {
+   return this._userToken;
+ }
 
-    /**
-     * Setter username
-     * @param {string} value
-     */
-	public set username(value: string) {
-		this._username = value;
-	}
-
-    /**
-     * Setter password
-     * @param {string} value
-     */
-	public set password(value: string) {
-		this._password = value;
-	}
+   /**
+    * Setter userToken
+    * @param {string} value
+    */
+ public set userToken(value: string) {
+   this._userToken = value;
+ }
    
 
 }

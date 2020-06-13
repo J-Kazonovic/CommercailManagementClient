@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Eb } from '../entity/eb.model';
 import { Ebp } from '../entity/ebp.model';
 import { UtilStatuts } from 'src/app/util/utilstatuts.module';

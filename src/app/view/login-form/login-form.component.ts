@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/controller/service/login.service';
 import { Router } from '@angular/router';
+import { AuthRequest } from 'src/app/controller/entity/auth-request.model';
+import { AuthResponse } from 'src/app/controller/entity/auth-response.model';
+import { UtilAuthority } from 'src/app/util/utilauthority.module';
 
 
 @Component({
@@ -10,58 +13,69 @@ import { Router } from '@angular/router';
 })
 export class LoginFormComponent implements OnInit {
 
- 
+  username: string;
+  password: string;
   message: any
-  constructor(private loginService:LoginService
-    ,private router:Router) { }
+  bad_credentials=false;
 
-  ngOnInit(): void {
+  response=new AuthResponse();
+  constructor(private service: LoginService, private router: Router) { }
+
+  ngOnInit() {
+    this.service.userToken = sessionStorage.getItem("jwt");
+    
   }
 
   doLogin() {
-    let resp = this.loginService.login(this.username, this.password);
-    resp.subscribe(data => {
-      console.log(data[0]["authority"]);
-      if(data[0]["authority"]==="ROLE_CHEF"){
-        this.router.navigate(["/chef"]);
-      }else if(data[0]["authority"]==="ROLE_STUF"){
-        this.router.navigate(["/stuf"]);
-      }else if(data[0]["authority"]==="ROLE_COMPTABLE"){
-        this.router.navigate(["/comptable"]);
-      }
-    
-    });
+    this.getAccessToken();
   }
 
-    /**
-     * Getter username
-     * @return {string}
-     */
-    public get username(): string {
-      return this.loginService.username;
-    }
-  
-      /**
-       * Getter password
-       * @return {string}
-       */
-    public get password(): string {
-      return this.loginService.password;
-    }
-  
-      /**
-       * Setter username
-       * @param {string} value
-       */
-    public set username(value: string) {
-      this.loginService.username = value;
-    }
-  
-      /**
-       * Setter password
-       * @param {string} value
-       */
-    public set password(value: string) {
-      this.loginService.password = value;
-    }
+  public getAccessToken() {
+    this.service.login(this.request).subscribe(
+      data => {
+        if(data!=null){
+          this.response=data;
+          var userRoles=[];
+          sessionStorage.setItem("jwt", this.response.jwtKey);
+          sessionStorage.setItem("user_name", this.response.user_name);
+          userRoles= this.getUserRoles(this.response.user_roles);
+          if(userRoles.includes(UtilAuthority.ROLE_STUF)){
+            this.router.navigate(["/stuf"]);
+          }else if(userRoles.includes(UtilAuthority.ROLE_CHEF)){
+            this.router.navigate(["/chef"]);
+          }else if(userRoles.includes(UtilAuthority.ROLE_COMPTABLE)){
+            this.router.navigate(["/comptable"]);
+          }
+          
+        }else{
+          this.bad_credentials=true;
+        }
+      }
+    );
+
+
+  }
+
+
+  getUserRoles(user_roles:any[]){
+    var myUserRoles=[];
+    user_roles.forEach(item=>{
+      myUserRoles.push(item["authority"]); 
+    })
+
+    return myUserRoles;
+  }
+
+  public get request(): AuthRequest {
+    return this.service.request;
+  }
+
+  public get userToken(): string {
+    return this.service.userToken;
+  }
+
+  public set userToken(value: string) {
+    this.service.userToken = value;
+  }
+
 }

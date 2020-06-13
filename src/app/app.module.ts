@@ -12,7 +12,7 @@ import { CommonModule } from "@angular/common";
 
 
 /*HTTP*/
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 /*Component*/
 import { AppComponent } from './app.component';
@@ -66,6 +66,8 @@ import { FactureFormComponent } from './view/facture/facture-form/facture-form.c
 import { FactureListComponent } from './view/facture/facture-list/facture-list.component';
 import { FactureFinalComponent } from './view/facture/facture-final/facture-final.component';
 import { FactureItemsComponent } from './view/facture/facture-items/facture-items.component';
+import { TokeninterceptorService } from './controller/service/tokeninterceptor.service';
+import { UserComponent } from './view/user/user.component';
 
 
 
@@ -110,6 +112,7 @@ import { FactureItemsComponent } from './view/facture/facture-items/facture-item
     FactureListComponent,
     FactureFinalComponent,
     FactureItemsComponent,
+    UserComponent,
     
     
   ],
@@ -120,7 +123,7 @@ import { FactureItemsComponent } from './view/facture/facture-items/facture-item
     FormsModule,
     CommonModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokeninterceptorService, multi: true},],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

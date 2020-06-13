@@ -26,6 +26,7 @@ import { CommandeBonFinalComponent } from './view/achat/achat/commande-bon-final
 import { FactureFinalComponent } from './view/facture/facture-final/facture-final.component';
 import { FactureFormComponent } from './view/facture/facture-form/facture-form.component';
 import { FactureListComponent } from './view/facture/facture-list/facture-list.component';
+import { UserComponent } from './view/user/user.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
 
   {
     path: "chef", component: ChefDashBoardComponent, children: [
+      { path: "user", component: UserComponent },
       { path: "ebs", component: EbListChefComponent },
       { path: "achats", component: AchatListComponent },
       { path: "fournisseurs", component: FournisseurListComponent},

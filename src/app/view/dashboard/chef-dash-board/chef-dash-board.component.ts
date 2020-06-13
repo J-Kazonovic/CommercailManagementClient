@@ -9,9 +9,11 @@ declare var $: any;
 })
 export class ChefDashBoardComponent implements OnInit {
 
+  user_name:string;
   constructor(private loginService:LoginService) { }
 
   ngOnInit(): void {
+    this.user_name=sessionStorage.getItem("user_name");
     $("#menu-toggle").click(function(e) {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
@@ -19,8 +21,6 @@ export class ChefDashBoardComponent implements OnInit {
   }
 
 
- public get username(): string {
-   return this.loginService.username;
- }
+
 
 }

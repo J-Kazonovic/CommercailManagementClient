@@ -1,0 +1,36 @@
+<div class="card text-white bg-dark m-3">
+    <div class="card-header">
+        Ajouter Un Utilisateur
+    </div>
+    <div class="card-body">
+        <div class="form-group">
+            <label for="f-name">Name</label>
+            <input [(ngModel)]=user.name type="text" class="form-control" name="" id="f-name" aria-describedby="helpId" placeholder="example fournisseur ...">
+        </div>
+        <div class="form-group">
+            <label for="f-pass">Password</label>
+            <input [(ngModel)]=user.password type="password" class="form-control" name="" id="f-pass" aria-describedby="helpId">
+        </div>
+        <div class="form-group">
+            <table class="table text-white">
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let role of roles">
+
+                    <tr>
+                        <td>{{role.libelle}}</td>
+                        <td><button (click)="addUserRole(role)" type="button" class="btn btn-success fa fa-plus-square"></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="card-footer text-muted">
+        <button (click)="onUserCreated()" type="button" class="btn btn-outline-light">Submit</button>
+    </div>
+</div>
