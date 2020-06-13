@@ -19,5 +19,5 @@ export class Achat {
     total:number;// Total Si l'achat devient une Bon de Commande
 	totalPaier:number;// totalPaier=totalPaier + montentPaiment
     totalRester:number;// totalRester=total-totalPaier
-    
+
 }

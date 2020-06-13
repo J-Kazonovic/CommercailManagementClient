@@ -42,7 +42,15 @@ export class AchatService {
   getAllAchat(page:number) {
     return this.http.get<Array<Achat>>(this.url+"?page="+page);
   }
-
+  deleteProduct(aI:AchatItem) {
+    return this.http.delete<number>("http://localhost:8090/achatItems/"+ aI.produit.libelle);
+  }
+  onStockItemDelete(aI:AchatItem,achatItems:Array<AchatItem>){
+    const i=achatItems.findIndex(e=>e.produit.libelle===aI.produit.libelle);
+    if(i!==-1){
+      achatItems.splice(i,1);
+    } 
+}
   
 
 

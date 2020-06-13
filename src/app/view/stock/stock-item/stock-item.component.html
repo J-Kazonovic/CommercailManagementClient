@@ -25,13 +25,13 @@
                     <td>{{item.qteStock}}</td>
                     <td>{{item.qtAlerte}}</td>
                     <td>{{item.qtFinal}}</td>
-                    <td><button class="btn btn-danger fa fa-trash" (click)="onRemoveItem(item)" type="button"></button></td>
+                    <td><button class="btn btn-danger fa fa-trash" (click)="deleteProduct(item)" type="button"></button></td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-
+</div>
     <div class="modal fade bd-example-modal-lg" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">

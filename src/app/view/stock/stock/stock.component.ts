@@ -21,7 +21,7 @@ export class StockComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
+
   findAllCats( ) {
     this.catService.findAll();  
   }
@@ -38,7 +38,6 @@ export class StockComponent implements OnInit {
 
   onAddItem(){
     this.item.produit.cat.libelle=this.catLib;
-    this.stock.qteInitiale+=this.item.qteStock;
     this.item.qtFinal =this.item.qteStock;
       if (this.item != null) {
         this.stockItems.push(this.cloneStock(this.item));
