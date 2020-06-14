@@ -67,7 +67,8 @@ import { FactureListComponent } from './view/facture/facture-list/facture-list.c
 import { FactureFinalComponent } from './view/facture/facture-final/facture-final.component';
 import { FactureItemsComponent } from './view/facture/facture-items/facture-items.component';
 import { TokeninterceptorService } from './controller/service/tokeninterceptor.service';
-import { UserComponent } from './view/user/user.component';
+import { UserFormComponent } from './view/users/user-form/user-form.component';
+import { UserListComponent } from './view/users/user-list/user-list.component';
 
 
 
@@ -112,7 +113,8 @@ import { UserComponent } from './view/user/user.component';
     FactureListComponent,
     FactureFinalComponent,
     FactureItemsComponent,
-    UserComponent,
+    UserFormComponent,
+    UserListComponent,
     
     
   ],

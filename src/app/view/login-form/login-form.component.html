@@ -1,32 +1,31 @@
 <div class="container">
-    <div class="alert alert-danger" [hidden]=!bad_credentials>
+    <div class="alert alert-danger mb-2 mt-2" [hidden]=!bad_credentials>
         Bad credentials, Please Try Again
     </div>
-    <div id="login-row" class="row justify-content-center align-items-center">
-        <div id="login-column" class="col-md-6">
-            <div class="box">
-                <div class="shape1"></div>
-                <div class="shape2"></div>
-                <div class="shape3"></div>
-                <div class="shape4"></div>
-                <div class="shape5"></div>
-                <div class="shape6"></div>
-                <div class="shape7"></div>
-                <div class="float">
-                    <form class="form" action="">
-                        <div class="form-group">
-                            <label for="username" class="text-white">Username:</label><br>
-                            <input [(ngModel)]=request.userName type="text" name="username" id="username" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="password" class="text-white">Password:</label><br>
-                            <input [(ngModel)]=request.password type="password" name="password" id="password" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <button (click)="doLogin()" type="button" class="btn btn-outline-light">Log In</button>
-                        </div>
-                    </form>
+    <div class="d-flex justify-content-center h-100">
+        <div class="card bg-dark text-white shadow mt-3">
+            <div class="card-header">
+                <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS5e8yCJ7ff3qCqIP8qtG7wnOHNdsydSsg2RmCf1P3JzDL_B7s5&usqp=CAU" alt="Card image" style="width:100%">
+            </div>
+
+            <div class="card-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="fa fa-user"></i></span>
+                    </div>
+                    <input [(ngModel)]=request.userName type="text" name="" class="form-control input_user" value="" placeholder="username">
                 </div>
+                <div class="input-group mb-2">
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="fa fa-key"></i></span>
+                    </div>
+                    <input [(ngModel)]=request.password type="password" name="" class="form-control input_pass" value="" placeholder="password">
+                </div>
+
+            </div>
+            <div class="card-footer text-muted">
+                <div [hidden]="hide_spinner" class="spinner-border text-success float-left"></div>
+                <button (click)="doLogin()" type="button" class="btn btn-success float-right">Log In</button>
             </div>
         </div>
     </div>

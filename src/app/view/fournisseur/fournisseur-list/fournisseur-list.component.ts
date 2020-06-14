@@ -29,7 +29,7 @@ export class FournisseurListComponent implements OnInit {
     this.fService.delete(f).subscribe(
       data=>{
         if(data==1){
-           UtilList.deleteFromListById(f.id,this.fournisseurList);
+          UtilList.deleteFromListById(f.id,this.fournisseurList);
         }
       },error=>{
         console.log(error);
@@ -56,7 +56,7 @@ export class FournisseurListComponent implements OnInit {
       data => {
         this.fournisseurList = data;
       }, error => {
-        console.log("error" + error);
+        console.log(error);
       }
     );
     }else{
@@ -69,7 +69,7 @@ export class FournisseurListComponent implements OnInit {
       data => {
         this.fournisseurList = data;
       }, error => {
-        console.log("error" + error);
+        console.log(error);
       }
     );
   }

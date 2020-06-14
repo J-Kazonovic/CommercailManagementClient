@@ -32,24 +32,19 @@ export class UserService {
     )
   }
 
-  update(f:User){
-    return this.http.put<number>(this._userURL,f);
+  update(u:User){
+    return this.http.put<number>(this._userURL,u);
   }
 
-  delete(f:User){
-    return this.http.delete<number>(this._userURL + f.id);
+  delete(u:User){
+    return this.http.delete<number>(this._userURL + u.id);
   }
 
-
-  findAllRoles(){
-    this.http.get<Array<Role>>(this._roleURL).subscribe(
-      data=>{
-        this._roles=data;
-      },error=>{
-        
-      }
-    )
+  getAllUsers(){
+     return  this.http.get<Array<User>>(this._userURL);
   }
+
+  
 
   
 	public get user(): User {

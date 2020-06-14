@@ -1,0 +1,41 @@
+<div class="card text-white bg-dark m-3">
+    <div class="card-header">
+        Ajouter Un Utilisateur
+    </div>
+    <div class="card-body">
+        <div class="form-group">
+            <label for="f-name">Name</label>
+            <input [(ngModel)]=user.name type="text" class="form-control" name="" id="f-name" aria-describedby="helpId" placeholder="Nom et Prénom ...">
+        </div>
+        <div class="form-group">
+            <label for="f-pass">Password</label>
+            <input [(ngModel)]=user.password type="password" placeholder="my password ..." class="form-control" name="" id="f-pass" aria-describedby="helpId">
+        </div>
+
+        <div class="form-group">
+            <label for="auth">Authorisation:</label>
+            <select id="auth" class="form-control" id="auth" (change)="addUserRole()" [(ngModel)]=role>
+                <option [value]="roles[0]">Comptable</option>
+                <option [value]="roles[1]">Responsable</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="st">Statut:</label>
+            <div id="st" class="form-group">
+                <div class="form-check">
+                    <label class="form-check-label">
+                    <input [(ngModel)]=active [value]="true" type="radio" class="form-check-input" name="optradio">Active
+                </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                    <input checked [(ngModel)]=active [value]="false" type="radio" class="form-check-input" name="optradio">Blocke
+                </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted">
+        <button (click)="onUserCreated()" type="button" class="btn btn-outline-light">Submit</button>
+    </div>
+</div>
