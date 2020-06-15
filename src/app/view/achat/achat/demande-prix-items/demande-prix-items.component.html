@@ -9,6 +9,7 @@
             <thead class=" thead-inverse ">
                 <tr>
                     <th>Produit</th>
+                    <th>Unité</th>
                     <th>Catégorie</th>
                     <th>Quantite</th>
                     <th>Action</th>
@@ -22,6 +23,7 @@
                 </tr>
                 <tr *ngFor="let item of items">
                     <td>{{item.produit.libelle}}</td>
+                    <td>{{item.produit.unite.libelle}}</td>
                     <td>{{item.produit.cat.libelle}}</td>
                     <td><input [min]=1 type="number" [(ngModel)]=item.qteCommander class="form-control col-xs-2"></td>
                     <td>

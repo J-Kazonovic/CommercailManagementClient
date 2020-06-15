@@ -19,8 +19,26 @@
     <div class="row mb-2">
         <div class="col-md-6">
             <div class="row">
+
                 <div class="col-md-12 mb-2">
-                    <div class="card bg-dark text-white" style="height: 8rem ">
+                    <div>
+                        <h2>Fournisseur:</h2>
+                    </div>
+                    <div class="shadow card text-white bg-dark ">
+
+                        <div class="card-body ">
+                            <h3>{{achat.fournisseur.nom}}</h3>
+                            <h5><i class="fa fa-telegram mr-2" aria-hidden="true"></i><b>Email:
+                                </b>{{achat.fournisseur.email}}</h5>
+                            <h5><i class="fa fa-phone-square mr-2" aria-hidden="true"></i><b>Tel:
+                                </b>{{achat.fournisseur.tel}}</h5>
+                            <h5><i class="fa fa-address-card mr-2" aria-hidden="true"></i><b>Address:
+                                </b>{{achat.fournisseur.adress}}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-2">
+                    <div class="card bg-dark text-white">
                         <div class="card-body ">
                             <div class="form-group">
                                 <label for="d">Date De Facturartion</label>
@@ -29,25 +47,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 mb-2">
-                    <div class="shadow card text-white bg-dark " style="height: 16rem ">
-                        <div class="card-body ">
-                            <h2 style="color: rgb(207, 155, 255);">Fournisseur:</h2>
-                            <h3>{{achat.fournisseur.nom}}</h3>
-                            <h5><i class="fa fa-telegram mr-2" aria-hidden="true"></i><b>Email: </b>{{achat.fournisseur.email}}</h5>
-                            <h5><i class="fa fa-phone-square mr-2" aria-hidden="true"></i><b>Tel: </b>{{achat.fournisseur.tel}}</h5>
-                            <h5><i class="fa fa-address-card mr-2" aria-hidden="true"></i><b>Address: </b>{{achat.fournisseur.adress}}</h5>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="row">
                 <div class="col-md-12 mb-2">
-                    <div class="shadow card text-white bg-dark " style="height: 18rem ">
+                    <div>
+                        <h2>Achat:</h2>
+                    </div>
+                    <div class="shadow card text-white bg-dark ">
                         <div class="card-body ">
-                            <h2>Achat:</h2>
                             <h5><b>N°: </b>{{achat.ref}}</h5>
                             <h5><b>Date Du Commande: </b>{{achat.dateCommande}}</h5>
                             <h5><b>Date Du Livraison: </b>{{achat.dateLivraison}}</h5>
@@ -59,14 +68,14 @@
                 <div class="col-md-12 mb-2">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="card bg-success text-white" style="height: 6rem ">
+                            <div class="card bg-success text-white">
                                 <div class="card-body ">
                                     <h3>Total Paier {{achat.totalPaier}} DH</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="card bg-danger text-white" style="height: 6rem ">
+                            <div class="card bg-danger text-white">
                                 <div class="card-body ">
                                     <h3>Total Rester {{achat.totalRester}} DH</h3>
                                 </div>

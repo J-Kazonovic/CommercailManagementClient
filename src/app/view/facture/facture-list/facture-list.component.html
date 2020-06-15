@@ -21,6 +21,7 @@
                                 <th>Ref</th>
                                 <th>DateDeFac</th>
                                 <th>Origine</th>
+                                <th>Total Paier</th>
                                 <th>Etat</th>
                             </tr>
                         </thead>
@@ -29,10 +30,10 @@
                                 <td>{{fr.ref}}</td>
                                 <td>{{fr.dateDeFac}}</td>
                                 <td>{{fr.achat.ref}}</td>
+                                <td>{{fr.achat.totalPaier}} dh</td>
                                 <td>{{fr.etat}}</td>
                                 <td>
-                                    <button class="btn btn-danger fa fa-trash mr-2"></button>
-                                    <button (click)="onFacturePayer(fr)" class="btn btn-primary fa fa-eye mr-2"></button>
+                                    <button (click)="onFacturePayer(fr)" class="btn btn-primary">Payer</button>
                                 </td>
                             </tr>
                         </tbody>
