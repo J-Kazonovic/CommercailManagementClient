@@ -9,15 +9,16 @@
         </div>
 
     </div>
-    <div class="card-body">
-        <table class="table bg-light table table-striped table-inverse">
+    <div class="card-body table-responsive">
+        <table class="table bg-light table table-striped table-inverse mr-1">
             <thead class="thead-inverse">
                 <tr>
                     <th>Nom</th>
                     <th>Email</th>
                     <th>Tel</th>
-                    <th>Statu</th>
-                    <th>Action</th>
+                    <th>Post</th>
+                    <th>Département</th>
+                    <th>Statut</th>
                 </tr>
             </thead>
             <tbody *ngFor="let u of userListFiltered" [hidden]="u.roles[0].role.libelle=='ROLE_CHEF'">
@@ -27,11 +28,14 @@
                     </td>
                 </tr>
                 <td>{{u.name}}</td>
+
                 <td>{{u.email}}</td>
                 <td>{{u.tel}}</td>
-                <td *ngFor="let auth of u.roles">
-                    {{auth.role.libelle}}
-                </td>
+                <td *ngIf="u.roles[0].role.libelle==roles[0].libelle">Comptable</td>
+
+                <td *ngIf="u.roles[0].role.libelle==roles[1].libelle">Responable</td>
+                <td *ngIf="u.dept==null">N/A</td>
+                <td *ngIf="!(u.dept==null)">{{u.dept.libelle}}</td>
                 <td>
                     <span [hidden]="u.active==false">Active</span>
                     <span [hidden]="u.active==true">Désactive</span>

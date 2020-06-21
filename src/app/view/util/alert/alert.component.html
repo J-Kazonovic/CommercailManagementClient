@@ -1,0 +1,10 @@
+<div *ngIf="visibility" class="sticky-top m-2">
+    <span *ngIf="type=='success'" class="alert alert-success float-right m-2">
+        <button (click)="onCloseClick()" type="button" class="close" data-dismiss="alert">&times;</button>
+        Success: {{message}}
+    </span>
+    <span *ngIf="type=='danger'" class="alert alert-danger float-right m-2">
+        <button (click)="onCloseClick()" type="button" class="close" data-dismiss="alert">&times;</button>
+        Error: {{message}}
+    </span>
+</div>

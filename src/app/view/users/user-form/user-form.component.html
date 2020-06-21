@@ -1,34 +1,112 @@
-<div class="card text-white bg-dark m-3">
-    <div class="card-header"> Ajouter Un Utilisateur </div>
-    <div class="card-body">
-        <div class="form-group">
-            <label for="f-name">Name:</label>
-            <input [(ngModel)]=user.name type="text" class="form-control" name="" id="f-name" aria-describedby="helpId" placeholder="Nom et Prénom ...">
-        </div>
-        <div class="form-group">
-            <label for="f-name">Email:</label>
-            <input [(ngModel)]=user.email type="email" class="form-control" name="" id="f-name" aria-describedby="helpId" placeholder="exampl@email.co ...">
-        </div>
-        <div class="form-group">
-            <label for="f-name">Tel:</label>
-            <input [(ngModel)]=user.tel type="tel" class="form-control" name="" id="f-name" aria-describedby="helpId" placeholder="065480000...">
-        </div>
-        <div [hidden]="isForUpdate" class="form-group">
-            <label for="f-pass">Password</label>
-            <input [(ngModel)]=user.password type="password" placeholder="my password ..." class="form-control" name="" id="f-pass" aria-describedby="helpId">
-        </div>
-        <div class="form-group"> <label for="auth">Authorisation:</label> <select id="auth" class="form-control" id="auth" (change)="addUserRole()" [(ngModel)]=role>
-                <option [value]="roles[0]">Comptable</option>
-                <option [value]="roles[1]">Responsable</option>
-            </select> </div>
-        <div class="form-group"> <label for="st">Statut:</label>
-            <div id="st" class="form-group">
-                <div class="form-check"> <label class="form-check-label"> <input [(ngModel)]=user.active [value]="true"
-                            type="radio" class="form-check-input" name="optradio">Active </label> </div>
-                <div class="form-check"> <label class="form-check-label"> <input checked [(ngModel)]=user.active
-                            [value]="false" type="radio" class="form-check-input" name="optradio">Blocke </label> </div>
+<div class="justify-content-center">
+    <div class="card text-white bg-dark m-3">
+        <div class="card-header"> Ajouter Un Utilisateur </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="f-name">Name:</label>
+                <input [(ngModel)]=user.name #name="ngModel" pattern="^[a-zA-Z\d ]*$" minlength="4" required type="text" class="form-control" id="f-name" aria-describedby="helpId" placeholder="Nom et Prénom ...">
+                <div *ngIf="name.invalid &&  name.touched" class="alert alert-danger mb-3 mt-1">
+                    <span *ngIf="name.errors.pattern">
+                        Invalid User Name
+                    </span>
+                    <span *ngIf="name.errors.required">
+                        Name is required.
+                    </span>
+                    <span *ngIf="name.errors.minlength">
+                        Name must be at least 4 characters long.
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="f-email">Email:</label>
+                <input [(ngModel)]=user.email #email="ngModel" pattern="^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$" required type="email" class="form-control" id="f-email" aria-describedby="helpId" placeholder="exampl@email.com ...">
+
+                <div *ngIf="email.invalid && email.touched" class="alert alert-danger mb-3 mt-1">
+                    <span *ngIf="email.errors.required">
+                        Email is required.
+                    </span>
+                    <span *ngIf="email.errors.pattern">
+                        Invalid Email Address.
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="f-name">Tel:</label>
+                <input [(ngModel)]=user.tel #tel="ngModel" pattern="^\d{10}$" type="tel" class="form-control" aria-describedby="helpId" placeholder="065480000...">
+                <div *ngIf="tel.invalid && tel.touched" class="alert alert-danger mb-3 mt-1">
+                    <span *ngIf="tel.errors.pattern">
+                        Invalid Phone Number.
+                    </span>
+                </div>
+            </div>
+
+            <div [hidden]="isForUpdate" class="form-group">
+                <label for="f-pass">Password</label>
+                <input [(ngModel)]=user.password #password="ngModel" pattern="^[#\w@_-]{8,12}$" required type="password" minlength="8" type="password" placeholder="my password ..." class="form-control" id="f-pass" aria-describedby="helpId">
+                <div *ngIf="password.invalid && password.touched" class="alert alert-danger mb-3 mt-1">
+                    <div *ngIf="password.errors.pattern">
+                        Invalid User Password
+                    </div>
+
+                    <span *ngIf="password.errors.required">
+                        Password is required.
+                    </span>
+
+                    <span *ngIf="password.errors.minlength">
+                        Password must be at least 8 characters long.
+                    </span>
+
+                </div>
+            </div>
+
+            <div [hidden]="isForUpdate" class="form-group">
+                <label for="auth">Post:</label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" [(ngModel)]=index [value]="0" class="form-check-input" name="post">
+                      Comptable
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" [(ngModel)]=index [value]="1" class="form-check-input" name="post">
+                      Responsable  
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="auth">Département:</label>
+                <select #dept="ngModel" class="form-control" id="dept" [(ngModel)]=user.dept.libelle>
+                    <option></option>
+                    <option *ngFor="let dept of deptList" value="{{dept.libelle}}">
+                        {{dept.libelle}}
+                    </option>
+                </select>
+            </div>
+            <div *ngIf="dept.invalid && dept.touched" class="alert alert-danger mb-3 mt-1">
+                <span *ngIf="dept.errors.required">
+                    Departement is required.
+                </span>
+            </div>
+            <div class="form-group"> <label for="st">Statut:</label>
+                <div id="st" class="form-group">
+                    <div class="form-check"> <label class="form-check-label"> <input [(ngModel)]=user.active
+                                [value]="true" type="radio" class="form-check-input" name="optradio">Active</label>
+                    </div>
+                    <div class="form-check"> <label class="form-check-label"> <input checked [(ngModel)]=user.active
+                                [value]="false" type="radio" class="form-check-input" name="optradio">Block</label>
+                    </div>
+                </div>
             </div>
         </div>
+        <div [hidden]="isForUpdate" class="card-footer text-muted">
+            <button [disabled]="name.invalid && (name.dirty||name.touched) 
+            || password.invalid && (password.dirty||password.touched)
+            || email.invalid && (email.dirty||email.touched)
+            || tel.invalid && (tel.dirty||tel.touched) 
+            || dept.invalid && (dept.dirty||dept.touched)" (click)="onUserCreated()" type="button" class="btn btn-outline-light float-right">Submit</button>
+        </div>
     </div>
-    <div [hidden]="isForUpdate" class="card-footer text-muted"> <button (click)="onUserCreated()" type="button" class="btn btn-outline-light">Submit</button> </div>
 </div>

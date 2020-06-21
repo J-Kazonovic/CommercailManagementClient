@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/controller/service/login.service';
+import { Router } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -9,12 +10,17 @@ declare var $: any;
 })
 export class ComptableDashBoardComponent implements OnInit {
 
+  loading:boolean;
   user_name:string;
-  constructor(private loginService:LoginService) { }
+  constructor(private loginService:LoginService,private router:Router) { }
 
   ngOnInit(): void {
-    this.user_name=sessionStorage.getItem("user_name");
-
+    if(this.loginService.isAuthenticated()){
+      this.user_name=localStorage.getItem("user_name");
+    }else{
+      this.router.navigate(['login']);
+    }
+    
     $("#menu-toggle").click(function(e) {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");

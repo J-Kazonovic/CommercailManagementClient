@@ -11,6 +11,8 @@ export class EbService {
 
   private url = "http://localhost:8090/ebs/";
 
+  private _ebUpdate: Eb;
+
   private _eb: Eb;
   private _ebp: Ebp;
   private _ebpListCurrent: Array<Ebp>;
@@ -19,22 +21,13 @@ export class EbService {
 
   /**Http Requests-Response*/
   saveEb(eb: Eb) {
-    this.http.post<number>(this.url, eb).subscribe(
-      data => {
-        if (data == 1) {
-          this.ebpListCurrent = null;
-          this.eb = null;
-        }
-      }, error => {
-        console.log(error);
-      }
-    );
+    return this.http.post<number>(this.url, eb);
   }
   updateEb(eb: Eb) {
     return this.http.put<number>(this.url, eb);
   }
   deleteEb(id: number) {
-    return this.http.delete<number>(this.url + "/eb/" + id);
+    return this.http.delete<number>(this.url + "eb/" + id);
   }
 
   getAllE() {
@@ -48,8 +41,8 @@ export class EbService {
   getEbByEntite(libelle: string) {
     return this.http.get<Array<Eb>>(this.url + "entite/" + libelle);
   }
-  getEbByPersonnel(cin: string) {
-    return this.http.get<Array<Eb>>(this.url + "personnel/" + cin);
+  getEbByPersonnel(name: string) {
+    return this.http.get<Array<Eb>>(this.url + "personnel/" + name);
   }
   getEbBySaveDate(date: String) {
     return this.http.get<Array<Eb>>(this.url + "date/" + date);
@@ -83,6 +76,17 @@ export class EbService {
     this._eb = value;
   }
 
+  get ebUpdate(): Eb {
+    if (this._ebUpdate == null) {
+      this._ebUpdate = new Eb();
+    }
+    return this._ebUpdate;
+  }
+
+  set ebUpdate(value: Eb) {
+    this._ebUpdate = value;
+  }
+
   get ebp(): Ebp {
     if (this._ebp == null) {
       this._ebp = new Ebp();
@@ -93,6 +97,7 @@ export class EbService {
   set ebp(value: Ebp) {
     this._ebp = value;
   }
+
 
   get ebpListCurrent(): Array<Ebp> {
     if (this._ebpListCurrent == null) {

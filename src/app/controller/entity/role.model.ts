@@ -1,4 +1,10 @@
 export class Role {
-    id:number;
-    libelle:string;
+    id: number;
+    libelle: string;
+
+    constructor(lib: string) {
+        this.libelle = lib
+    }
+
+ 
 }

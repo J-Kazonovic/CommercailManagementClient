@@ -28,6 +28,7 @@ import { FactureFormComponent } from './view/facture/facture-form/facture-form.c
 import { FactureListComponent } from './view/facture/facture-list/facture-list.component';
 import { UserFormComponent } from './view/users/user-form/user-form.component';
 import { UserListComponent } from './view/users/user-list/user-list.component';
+import { AuthGuardService } from './controller/service/auth-guard.service';
 
 
 const routes: Routes = [
@@ -42,14 +43,14 @@ const routes: Routes = [
       { path: "achats", component: AchatListComponent },
       { path: "fournisseurs", component: FournisseurListComponent},
       { path: "produits", component: ProductListComponent},
-    ]
+    ],
   },
   {
     path: "stuf", component: StufDashBoardComponent, children: [
       { path: "eb", component: EbCreateComponent},
       { path: "ebs", component: EbListStufComponent},
       { path: "produits", component: ProductListComponent},
-    ]
+    ],
   },
   {
     path: "comptable", component: ComptableDashBoardComponent, children: [
@@ -77,7 +78,7 @@ const routes: Routes = [
       { path: "stock", component: StockCreateComponent},
       { path: "stockItem", component: StockItemComponent},
       { path: "stocks", component: StockListComponent},
-    ]
+    ],
   }
 ];
 

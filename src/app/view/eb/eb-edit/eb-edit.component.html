@@ -1,0 +1,44 @@
+<div class="card bg-dark text-white shadow">
+
+    <div class="card-body">
+        <div class="form-group">
+            <label>Titre</label>
+            <input [(ngModel)]=ebUpdate.title class="form-control" placeholder="TitreExample..." type="text">
+        </div>
+
+        <div class="form-group">
+            <label>Descreption</label>
+            <textarea [(ngModel)]=ebUpdate.eb_desc class="form-control" placeholder="MyDescreption..." type="text"></textarea>
+        </div>
+        <label>Besoin</label>
+        <table class="table table-light table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Statut</th>
+                    <th>Q-Demander</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="ebUpdate.ebp.length==0">
+                    <td colspan="4" role="alert">
+                        Table Is Empty !
+                    </td>
+                </tr>
+                <tr *ngFor="let ebp of ebUpdate.ebp">
+                    <td>{{ebp.produit.libelle}}</td>
+                    <td><span class="badge badge-warning">{{ebp.besoin_statut}}</span></td>
+                    <td *ngIf="ebp.besoin_statut!=statuts[0]">{{ebp.qteDemande}}</td>
+                    <td *ngIf="ebp.besoin_statut==statuts[0]"><input [min]=1 type="number" [(ngModel)]=ebp.qteDemande class="form-control"></td>
+
+                    <td>{{ebp.product_desc}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer text-muted">
+
+        <button (click)="onEbUpdate()" type="button" class="btn btn-success float-right">Save</button>
+    </div>
+</div>

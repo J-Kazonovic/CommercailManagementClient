@@ -11,6 +11,8 @@ import { Dept } from 'src/app/controller/entity/dept.model';
 import { Personnel } from 'src/app/controller/entity/personnel.model';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/controller/service/user.service';
+import { User } from 'src/app/controller/entity/user.model';
 
 @Component({
   selector: 'app-eb-list-stuf',
@@ -36,7 +38,7 @@ export class EbListStufComponent implements OnInit {
   statuts = [UtilStatuts.Accorder, UtilStatuts.Refuser];
 
   /**Updated Eb*/
-  public ebUpdate: Eb;
+  //public ebUpdate: Eb;
   public ebDate: Date;
 
   /*Eb List*/
@@ -44,27 +46,33 @@ export class EbListStufComponent implements OnInit {
   ebListFiltered = new Array<Eb>();
   ebpList = new Array<Ebp>();
 
+  /**List De Personnel & Dept*/
+  personnels=new Array<User>();
+
   constructor(private ebService: EbService
     , private ebpService: EbpService
     , private deptService: DeptService
-    , private personnelService: PersonnelService
+    , private uService: UserService
     , private router:Router) { }
 
   ngOnInit() {
-    this.onShowAll();
+    this.getEbByPersonnelName(localStorage.getItem("user_name"));
     this.deptService.getAllDept();
-    this.personnelService.getAllPersonnel();
   }
 
 
+ 
+
+  onNewEbClick(){
+    this.router.navigate(['stuf/eb']);
+  }
+
   onFilterAction() {
-    
     this.ebListFiltered = this.ebList;
     this.ebListFiltered=this.ebService.searchByTitle(this.ebListFiltered,this.title);
     this.ebListFiltered = this.ebService.filterByDept(this.ebListFiltered, this.dept);
     this.ebListFiltered = this.ebService.filterByPersonnel(this.ebListFiltered, this.personnel);
     this.ebListFiltered = this.ebService.filterByDate(this.ebListFiltered, this.date);
-
   }
 
   onSortAction(){
@@ -97,35 +105,31 @@ export class EbListStufComponent implements OnInit {
 
 
   /**Events */
+  setEbPdate(eb:Eb){
+    this.ebService.ebUpdate=eb;
+ }
 
-  onShowAll() {
-    this.ebService.getEbByPersonnel("C2").subscribe(
-      data => {
-        this.ebList = data;
-        this.ebListFiltered = data;
-
-      }, error => {
-        console.log("Error:" + error);
-      }
-    );
-  }
   onEbShow(eb: Eb) {
-    this.ebUpdate = eb;
+    //this.ebUpdate = eb;
     this.ebpService.getEbpByEb(eb.id).subscribe(
       data => {
         this.ebpList = data;
+      },error=>{
+        console.log(error);
       }
     );
   }
+
   onEbpUpdate() {
     this.ebUpdate.ebp = this.ebpList;
     this.ebService.updateEb(this.ebUpdate).subscribe(
       data => {
       }, error => {
-        console.log("Error:" + error);
+        console.log(error);
       }
     );
   }
+
   onEbDelete(eb: Eb) {
     this.ebService.deleteEb(eb.id).subscribe(
       data => {
@@ -133,10 +137,11 @@ export class EbListStufComponent implements OnInit {
           UtilList.deleteFromListById(eb.id, this.ebList);
         }
       }, error => {
-        console.log("Error:" + error);
+        console.log(error);
       }
     )
   }
+
   onEbpDelete(ebp: Ebp) {
     this.ebpService.deleteEbp(ebp).subscribe(
       data => {
@@ -144,30 +149,36 @@ export class EbListStufComponent implements OnInit {
           UtilList.deleteFromListById(ebp.id, this.ebpList);
         }
       }, error => {
-        console.log("Error:" + error);
+        console.log(error);
       }
     )
   }
 
 
 
-  onNewEbClick(){
-    this.router.navigate(['stuf/eb']);
+  getEbByPersonnelName(name:string){
+    this.ebService.getEbByPersonnel(name).subscribe(
+      data=>{
+        this.ebList = data;
+        this.ebListFiltered = data;
 
+      },error=>{
+        console.log(error);
+      }
+    )
   }
 
+
   /** Getter */
+  public get ebUpdate(): Eb {
+    return this.ebService.ebUpdate;
+  }
   public get eb(): Eb {
     return this.ebService.eb;
   }
 
   public get deptList(): Array<Dept> {
     return this.deptService.deptList;
-  }
-
-  public get personnelList(): Array<Personnel> {
-
-    return this.personnelService.personnelList;
   }
   /** Getter */
 

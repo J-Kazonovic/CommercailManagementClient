@@ -1,9 +1,7 @@
-<div class="card mb-3">
-    <div class="card-body">
-        <h4 style="display: inline;">List De Tout Les Expression Des Besoin</h4>
-        <button (click)="onNewEbClick()" style="float: right;" type="button" class="btn btn-success">Crée Une Nouvelle Expression</button>
-    </div>
-</div>
+<h4 style="display: inline;">List De Tout Les Expression Des Besoin</h4>
+<button (click)="onNewEbClick()" style="float: right;" type="button" class="btn btn-success">Crée Une Nouvelle
+    Expression</button>
+
 
 
 <div class="card text-white bg-dark shadow mt-3 mb-3">
@@ -32,7 +30,8 @@
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="sort">Sort By <i class="fa fa-sort mr-1" (click)="onSortAction()" aria-hidden="true"></i></label>
+                        <label for="sort">Sort By <i class="fa fa-sort mr-1" (click)="onSortAction()"
+                                aria-hidden="true"></i></label>
 
                         <select class="form-control" id="sort" [(ngModel)]=sortBy (change)="onSortAction()">
                             <option selected></option>
@@ -41,19 +40,29 @@
                         </select>
                     </div>
                 </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Search</label>
+                        <div class="input-group mb-3">
+                            <input placeholder="search by eb title..." id="key" type="text" class="form-control" [(ngModel)]=title (keyup)="onFilterAction()">
+                            <div class="input-group-append">
+                                <span class="input-group-text fa fa-search"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="card-body table-responsive">
-        <div class="form-group">
-            <input placeholder="search by eb title..." id="key" type="text" class="form-control" [(ngModel)]=title (keyup)="onFilterAction()">
-        </div>
-        <table class="table table-light table-hover table-bordered">
+
+        <table class="table bg-light table-bordered">
             <thead>
                 <tr>
                     <th>Titre</th>
                     <th>Created At</th>
                     <th>Departement</th>
+                    <th class="w-25">Déscreption</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -67,9 +76,11 @@
                     <td>{{eb.title}}</td>
                     <td>{{eb.saveDate}}</td>
                     <td>{{eb.dept.libelle}}</td>
+                    <td>{{eb.eb_desc}}</td>
                     <td>
                         <button class="btn btn-danger fa fa-trash mr-2" (click)="onEbDelete(eb)"></button>
-                        <button data-toggle="modal" data-target="#myModal" class="btn btn-primary fa fa-eye mr-2" (click)="onEbShow(eb)"></button>
+                        <button data-toggle="modal" data-target="#ebps" class="btn btn-primary fa fa-eye mr-2" (click)="onEbShow(eb)"></button>
+                        <button (click)="setEbPdate(eb)" data-toggle="modal" data-target="#eb" class="btn btn-success fa fa-pencil"></button>
                     </td>
                 </tr>
             </tbody>
@@ -78,7 +89,10 @@
 
 
 </div>
-<div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+<!--Ebp List-->
+<div class="modal fade bd-example-modal-lg" id="ebps" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -87,7 +101,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body table-responsive">
                 <table class="table text-white table-bordered bg-dark">
                     <thead>
                         <tr>
@@ -96,6 +110,7 @@
                             <th>Statut</th>
                             <th>Q-Demander</th>
                             <th>Q-Accorder</th>
+                            <th>Q-Commander</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -108,19 +123,37 @@
                             <td>{{ebp.produit.libelle}}</td>
                             <td>{{ebp.product_desc}}</td>
                             <td>{{ebp.besoin_statut}}</td>
-                            <td><input [min]=1 type="number" [(ngModel)]=ebp.qteDemande class="form-control col-xs-2">
-                            </td>
-                            <td>{{ebp.qteAccorde}}</td>
+                            <td>{{ebp.qteDemande}}</td>
 
+                            <td>{{ebp.qteAccorde}}</td>
+                            <td>{{ebp.qteAchete}}</td>
                         </tr>
                     </tbody>
                 </table>
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onEbpUpdate()">Save
                     changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="eb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ebUpdate.title}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-eb-edit></app-eb-edit>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>

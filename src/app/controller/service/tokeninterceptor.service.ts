@@ -12,10 +12,9 @@ export class TokeninterceptorService implements HttpInterceptor {
 
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log("Intercepter");
     if (req.headers.get("skip")) return next.handle(req);
     else {
-      const userToken = sessionStorage.getItem("jwt");
+      const userToken = localStorage.getItem("jwt");
       if (userToken == null) {
          this.router.navigate(['/login']);
          return EMPTY; 

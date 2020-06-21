@@ -50,6 +50,7 @@ export class CommandeBonComponent implements OnInit, OnChanges {
   }
 
   saveCommande() {
+    this.achat.comptable.name=localStorage.getItem("user_name");
     this.achat.achatItems = this.achatItemsCurrent;
     this.achat.statut = UtilStatuts.COMMANDE;
     this.achat.total=this.calculTotal();

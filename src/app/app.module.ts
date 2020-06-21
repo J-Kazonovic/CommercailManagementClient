@@ -69,6 +69,11 @@ import { FactureItemsComponent } from './view/facture/facture-items/facture-item
 import { TokeninterceptorService } from './controller/service/tokeninterceptor.service';
 import { UserFormComponent } from './view/users/user-form/user-form.component';
 import { UserListComponent } from './view/users/user-list/user-list.component';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { ForbiddenValidatorDirective } from './directives/forbidden-validator.directive';
+import { AlertComponent } from './view/util/alert/alert.component';
+import { UserProfileComponent } from './view/users/user-profile/user-profile.component';
+import { EbEditComponent } from './view/eb/eb-edit/eb-edit.component';
 
 
 
@@ -115,6 +120,10 @@ import { UserListComponent } from './view/users/user-list/user-list.component';
     FactureItemsComponent,
     UserFormComponent,
     UserListComponent,
+    ForbiddenValidatorDirective,
+    AlertComponent,
+    UserProfileComponent,
+    EbEditComponent,
     
     
   ],

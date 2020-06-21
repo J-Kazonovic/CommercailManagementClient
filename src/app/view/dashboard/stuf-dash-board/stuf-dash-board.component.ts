@@ -10,12 +10,20 @@ declare var $: any;
 })
 export class StufDashBoardComponent implements OnInit {
 
+  loading:boolean;
+  user_name:string;
+
+
   constructor(private loginService:LoginService
     , private router:Router) { }
 
   ngOnInit(): void {
-    this.router.navigate(['stuf/ebs']);
-
+    if (this.loginService.isAuthenticated()) {
+      this.user_name = localStorage.getItem("user_name");
+      this.router.navigate(['stuf/eb']);
+    } else {
+      this.router.navigate(['login']);
+    }    
     $("#menu-toggle").click(function(e) {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");

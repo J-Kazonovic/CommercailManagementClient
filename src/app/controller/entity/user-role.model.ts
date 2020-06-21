@@ -3,6 +3,6 @@ import { Role } from './role.model';
 
 export class UserRole {
     id:number;
-    role=new Role();
+    role=new Role(null);
     user=new User();
 }

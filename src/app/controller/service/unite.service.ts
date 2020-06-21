@@ -39,7 +39,7 @@ export class UniteService {
       data => {
         this.unites = data;
       }, error => {
-        console.log("error:"+error);
+        console.log(error);
       }
     );
   }

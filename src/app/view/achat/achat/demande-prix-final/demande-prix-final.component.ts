@@ -44,65 +44,7 @@ export class DemandePrixFinalComponent implements OnInit {
     , private achatItemService: AchatItemService) { }
 
 
-    generatePdf(){
-      console.log(this.achatItemsDB);
-      for (var i = 0;i < this.achatItemsDB.length; i++) {
-        const documentDefinition = { content: [
-          {
-            text: 'Demmande De Prix Reference  '+this.achat.ref,
-            bold: true,
-            fontSize: 20,
-            alignment: 'left',
-            margin: [0, 0, 0, 20],
-          },
-          
-          {
-           columns: [
-             [{
-              text: 'Date : ' +this.achat.dateLivraison,style: 'header'
-            },{
-              text: 'Nom: ' +this.achat.fournisseur.nom,style: 'anotherStyle'
-            },{
-              text: 'Email : ' +this.achat.fournisseur.email,style: 'anotherStyle'
-            },{
-              text: 'Adresse : ' +this.achat.fournisseur.adress,style: 'anotherStyle'
-            },{
-              text: 'Tel : ' +this.achat.fournisseur.tel,style: 'anotherStyle'
-            }
-             ],
-           ],lineHeight: 3,
-         },
-         {
-           table: {
-             // headers are automatically repeated if the table spans over multiple pages
-             // you can declare how many rows should be treated as headers
-             headerRows: 1,
-             widths: [100,100,100, 100,100],
-  
-             body: [
-               ["Ref","Categorie","Designation","Uniter","Quantiter"],
-               [this.achatItemsDB[i].produit.ref,this.achatItemsDB[i].produit.cat.libelle,this.achatItemsDB[i].produit.libelle,this.achatItemsDB[i].produit.unite.libelle,this.achatItemsDB[i].qteCommander],
-               [this.achatItemsDB[i+1].produit.ref,this.achatItemsDB[i+1].produit.cat.libelle,this.achatItemsDB[i+1].produit.libelle,this.achatItemsDB[i+1].produit.unite.libelle,this.achatItemsDB[i+1].qteCommander],
-             ],
-             color:'#191970'
-           }
-         }
-          ],styles: {
-            header: {
-              bold: true,
-              alignment: 'left'
-            },
-            anotherStyle: {
-              italics: true,
-              alignment: 'right'
-            }
-          },
-         }; 
-         
-         pdfMake.createPdf(documentDefinition).open();
-      }
-          
-        }
+
   ngOnChanges(changes: SimpleChanges): void {
     this.getFournByNom();
 
@@ -114,7 +56,7 @@ export class DemandePrixFinalComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.ref = params['ref'];
       this.getAchatByRef(this.ref);
-      this.getAllDBAchatItems(this.ref); 
+      this.getAllDBAchatItems(this.ref);
       this.getFournByNom();
     });
   }
@@ -137,11 +79,11 @@ export class DemandePrixFinalComponent implements OnInit {
 
   updateToDevis() {
     this.achat.achatItems = this.achatItemsDB;
-    this.achat.statut=this.statuts[2];
+    this.achat.statut = this.statuts[2];
     this.achatService.updateAchat(this.achat).subscribe(
       data => {
-        if(data==1){
-          this.router.navigate(['comptable/bc/ref',this.achat.ref]);
+        if (data == 1) {
+          this.router.navigate(['comptable/bc/ref', this.achat.ref]);
         }
       }, error => {
         console.log(error);
@@ -164,12 +106,12 @@ export class DemandePrixFinalComponent implements OnInit {
       data => {
         this.fournisseurs = data;
       }, error => {
-        console.log("error" + error);
+        console.log(error);
       }
     );
   }
 
-  getAchatByRef(ref:string){
+  getAchatByRef(ref: string) {
     this.achatService.getAchatByRef(ref).subscribe(
       data => {
         this.dpService.achat = data;
@@ -179,10 +121,10 @@ export class DemandePrixFinalComponent implements OnInit {
     )
   }
 
-  getAllDBAchatItems(ref:string) {
+  getAllDBAchatItems(ref: string) {
     this.achatItemService.getAchatItemsByAchat(ref).subscribe(
       data => {
-        this.dpService.achatItemsDB= data;
+        this.dpService.achatItemsDB = data;
       }, error => {
         console.log(error);
       }
@@ -191,14 +133,119 @@ export class DemandePrixFinalComponent implements OnInit {
   //API Calls
 
 
+
+  buildTableBody(data, columns) {
+    var body = [];
+
+    body.push(columns);
+
+    data.forEach((row: AchatItem) => {
+      var dataRow = [];
+
+      columns.forEach(function (column) {
+        if (column == "proLib") {
+          dataRow.push(row["produit"]["libelle"]);
+        }
+        else if (column == "catLib") {
+          dataRow.push(row["produit"]["cat"]["libelle"]);
+        }
+        else if (column == "uniteLib") {
+          dataRow.push(row["produit"]["unite"]["libelle"]);
+        } else {
+          dataRow.push(row[column]);
+        }
+
+      })
+
+      body.push(dataRow);
+    });
+
+    return body;
+  }
+
+  table(data, columns) {
+    return {
+      table: {
+        headerRows: 1,
+        body: this.buildTableBody(data, columns)
+      }
+    };
+  }
+
+
+
+  generatePdf() {
+    console.log(this.achatItemsDB);
+    for (var i = 0; i < this.achatItemsDB.length; i++) {
+      const dd = {
+        content: [
+          {
+            text: 'Demmande De Prix Reference  ' + this.achat.ref,
+            bold: true,
+            fontSize: 20,
+            alignment: 'left',
+            margin: [0, 0, 0, 20],
+          },
+
+          {
+            columns: [
+              [{
+                text: 'Date : ' + this.achat.dateLivraison, style: 'header'
+              }, {
+                text: 'Nom: ' + this.achat.fournisseur.nom, style: 'anotherStyle'
+              }, {
+                text: 'Email : ' + this.achat.fournisseur.email, style: 'anotherStyle'
+              }, {
+                text: 'Adresse : ' + this.achat.fournisseur.adress, style: 'anotherStyle'
+              }, {
+                text: 'Tel : ' + this.achat.fournisseur.tel, style: 'anotherStyle'
+              }
+              ],
+            ], lineHeight: 3,
+          },
+          {
+            /*table: {
+              // headers are automatically repeated if the table spans over multiple pages
+              // you can declare how many rows should be treated as headers
+              headerRows: 1,
+              widths: [100, 100, 100, 100, 100],
+              body: [
+                this.table(this.achatItemsDB, ["proLib","catLib", "uniteLib","qteCommander"])
+              
+                //["Ref", "Categorie", "Designation", "Uniter", "Quantiter"],
+                //[this.achatItemsDB[i].produit.ref, this.achatItemsDB[i].produit.cat.libelle, this.achatItemsDB[i].produit.libelle, this.achatItemsDB[i].produit.unite.libelle, this.achatItemsDB[i].qteCommander],
+                //[this.achatItemsDB[i + 1].produit.ref, this.achatItemsDB[i + 1].produit.cat.libelle, this.achatItemsDB[i + 1].produit.libelle, this.achatItemsDB[i + 1].produit.unite.libelle, this.achatItemsDB[i + 1].qteCommander],
+              ],
+              color: '#191970'
+            }*/
+          },
+          this.table(this.achatItemsDB, ["proLib", "catLib", "uniteLib", "qteCommander"])
+        ], styles: {
+          header: {
+            bold: true,
+            alignment: 'left'
+          },
+          anotherStyle: {
+            italics: true,
+            alignment: 'right'
+          }
+        },
+      };
+
+      pdfMake.createPdf(dd).open();
+    }
+
+  }
+
+
   /**Getters & Setters */
   get achat(): Achat {
     return this.dpService.achat;
   }
 
   public get achatItemsDB(): Array<AchatItem> {
-		return this.dpService.achatItemsDB;
-	}
+    return this.dpService.achatItemsDB;
+  }
 
   /**Getters & Setters */
 

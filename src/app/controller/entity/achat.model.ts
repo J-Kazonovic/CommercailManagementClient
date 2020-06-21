@@ -20,4 +20,6 @@ export class Achat {
 	totalPaier:number;// totalPaier=totalPaier + montentPaiment
     totalRester:number;// totalRester=total-totalPaier
 
+    
+
 }

@@ -48,17 +48,21 @@
         </div>
     </div>
     <div class="card-body table-responsive">
-        <div class="form-group">
+        <div class="input-group mb-3 mt-2">
+            <div class="input-group-prepend">
+                <span class="input-group-text rounded bg-secondary text-white fa fa-search"></span>
+            </div>
             <input placeholder="search by eb title..." id="key" type="text" class="form-control" [(ngModel)]=title (keyup)="onFilterAction()">
         </div>
-        <table class="table table-light table-hover table-bordered">
+
+        <table class="table bg-light table-bordered table-hover">
             <thead>
                 <tr>
                     <th>Titre</th>
                     <th>Created At</th>
                     <th>Personnel</th>
                     <th>Departement</th>
-                    <th>Action</th>
+                    <th class="w-25">Description</th>
                 </tr>
             </thead>
             <tbody>
@@ -67,15 +71,12 @@
                         No data to display.
                     </td>
                 </tr>
-                <tr *ngFor="let eb of ebListFiltered">
+                <tr data-toggle="modal" data-target="#myModal" *ngFor="let eb of ebListFiltered" (click)="onEbShow(eb)">
                     <td>{{eb.title}}</td>
                     <td>{{eb.saveDate}}</td>
                     <td>{{eb.personnel.name}}</td>
                     <td>{{eb.dept.libelle}}</td>
-                    <td>
-                        <button class="btn btn-danger fa fa-trash mr-2" (click)="onEbDelete(eb)"></button>
-                        <button data-toggle="modal" data-target="#myModal" class="btn btn-primary fa fa-eye mr-2" (click)="onEbShow(eb)"></button>
-                    </td>
+                    <td>{{eb.eb_desc}}</td>
                 </tr>
             </tbody>
         </table>
@@ -101,7 +102,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table table-light table-bordered table-hover">
+                <table class="table bg-dark text-white table-bordered">
                     <thead>
                         <tr>
                             <th>Produit</th>
@@ -109,7 +110,7 @@
                             <th>Statut</th>
                             <th>Q-Demander</th>
                             <th>Q-Accorder</th>
-                            <th>Décision</th>
+                            <th>Q-Commander</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -122,19 +123,9 @@
                             <td>{{ebp.produit.libelle}}</td>
                             <td>{{ebp.product_desc}}</td>
                             <td>{{ebp.besoin_statut}}</td>
-                            <td><input [min]=1 type="number" [(ngModel)]=ebp.qteDemande class="form-control col-xs-2">
-                            </td>
-                            <td><input min="1" [max]="ebp.qteDemande" [disabled]="ebp.besoin_statut!=statuts[0]" type="number" [(ngModel)]=ebp.qteAccorde class="form-control"></td>
-                            <td>
-                                <div>
-                                    <input #a type="radio" [name]="ebp.id" [value]="statuts[0]" id="accorder" [(ngModel)]=ebp.besoin_statut>
-                                    <label for="accorder">{{statuts[0]}}</label>
-                                </div>
-                                <div>
-                                    <input #r type="radio" [name]="ebp.id" [value]="statuts[1]" id="refuser" [(ngModel)]=ebp.besoin_statut>
-                                    <label for="refuser">{{statuts[1]}}</label>
-                                </div>
-                            </td>
+                            <td>{{ebp.qteDemande}}</td>
+                            <td>{{ebp.qteAccorde}}</td>
+                            <td>{{ebp.qteAchete}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -142,8 +133,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onEbpUpdate()">Save
-                    changes</button>
+
             </div>
         </div>
     </div>

@@ -7,6 +7,7 @@ import { AchatService } from 'src/app/controller/service/achat.service';
 import { AchatItem } from 'src/app/controller/entity/achat-item.model';
 import { CategoryService } from 'src/app/controller/service/category.service';
 import { Category } from 'src/app/controller/entity/category.model';
+import { AchatitemEbpLink } from 'src/app/controller/entity/achatitem-ebp-link.model';
 
 @Component({
   selector: 'app-achat-item-search',
@@ -16,13 +17,13 @@ import { Category } from 'src/app/controller/entity/category.model';
 export class AchatItemSearchComponent implements OnInit {
 
   ebpList = new Array<Ebp>();
-  ebpListFinal = new Array<AchatItem>();
-  ebpListFilter = new Array<AchatItem>();
+  achatItemListFinal = new Array<AchatItem>();
+  achatItemListFilter = new Array<AchatItem>();
 
   catLib = "All";
-  key="";
+  key = "";
 
-  @Input() items=new Array<AchatItem>();
+  @Input() items = new Array<AchatItem>();
 
   constructor(private ebpService: EbpService
     , private dService: AchatService
@@ -31,13 +32,14 @@ export class AchatItemSearchComponent implements OnInit {
   ngOnInit(): void {
     this.getAllEbp();
     this.findAllCats();
-    this.ebpListFilter = this.ebpListFinal;
+    this.achatItemListFilter = this.achatItemListFinal;
   }
 
   addEbpToDemmande(item: AchatItem) {
-      if (item != null) {
-        this.items.push(item);
-      }
+    if (item != null) {
+      console.log(item);
+      this.items.push(item);
+    }
   }
 
   getAllEbp() {
@@ -61,16 +63,16 @@ export class AchatItemSearchComponent implements OnInit {
     this.key = this.key.trim().toLowerCase();
     if (this.catLib !== "All") {
       if (this.key.length > 0) {
-        this.ebpListFilter = this.ebpListFinal.filter(ebp => ebp.produit.libelle.trim().toLowerCase().indexOf(this.key) > -1);
-        this.ebpListFilter = this.ebpListFilter.filter(ebp => ebp.produit.cat.libelle === this.catLib);
+        this.achatItemListFilter = this.achatItemListFinal.filter(ebp => ebp.produit.libelle.trim().toLowerCase().indexOf(this.key) > -1);
+        this.achatItemListFilter = this.achatItemListFilter.filter(ebp => ebp.produit.cat.libelle === this.catLib);
 
-      }else{
-        this.ebpListFilter = this.ebpListFinal.filter(ebp => ebp.produit.cat.libelle === this.catLib);
+      } else {
+        this.achatItemListFilter = this.achatItemListFinal.filter(ebp => ebp.produit.cat.libelle === this.catLib);
       }
     } else {
-      this.ebpListFilter = this.ebpListFinal;
+      this.achatItemListFilter = this.achatItemListFinal;
       if (this.key.length > 0) {
-        this.ebpListFilter = this.ebpListFinal.filter(ebp => ebp.produit.libelle.trim().toLowerCase().indexOf(this.key) > -1);
+        this.achatItemListFilter = this.achatItemListFinal.filter(ebp => ebp.produit.libelle.trim().toLowerCase().indexOf(this.key) > -1);
       }
     }
   }
@@ -78,29 +80,27 @@ export class AchatItemSearchComponent implements OnInit {
   searchProduitByKey() {
     this.key = this.key.trim().toLowerCase();
     if (this.catLib !== "All") {
-      if (this.key!=null && this.key.length > 0) {
-        this.ebpListFilter = this.ebpListFinal.filter(ebp => ebp.produit.libelle.trim().toLowerCase().indexOf(this.key) > -1);
+      if (this.key != null && this.key.length > 0) {
+        this.achatItemListFilter = this.achatItemListFinal.filter(ebp => ebp.produit.libelle.trim().toLowerCase().indexOf(this.key) > -1);
       }
-      this.ebpListFilter = this.ebpListFilter.filter(ebp => ebp.produit.cat.libelle === this.catLib);
-
-
+      this.achatItemListFilter = this.achatItemListFilter.filter(ebp => ebp.produit.cat.libelle === this.catLib);
     } else {
-      this.ebpListFilter = this.ebpListFinal;
+      this.achatItemListFilter = this.achatItemListFinal;
       if (this.key.length > 0) {
-        this.ebpListFilter = this.ebpListFinal.filter(ebp => ebp.produit.libelle.trim().toLowerCase().indexOf(this.key) > -1);
+        this.achatItemListFilter = this.achatItemListFinal.filter(ebp => ebp.produit.libelle.trim().toLowerCase().indexOf(this.key) > -1);
       }
     }
-    
+
   }
   //Search Methods
 
 
+  /** */
   addSameProductQuantite() {
     var ebpListTemp = this.ebpList;
-
     while (ebpListTemp.length > 0) {
-      var ebpTemp = new Ebp();
       var ebpI = ebpListTemp[0];
+
       var qteTotal = ebpI.qteAccorde;
       for (var _i = 1; _i < ebpListTemp.length; _i++) {
         var ebpNext = ebpListTemp[_i];
@@ -108,14 +108,17 @@ export class AchatItemSearchComponent implements OnInit {
           qteTotal = qteTotal + ebpNext.qteAccorde;
         }
       }
+      var links = new Array<AchatitemEbpLink>();
       var demI = new AchatItem();
+      var link = new AchatitemEbpLink();
+      link.ebp = ebpI;
+      links.push(link);
       this.cloneObj(demI, ebpI);
+      demI.ebLinks = links;
       demI.qteCommander = qteTotal;
-      this.ebpListFinal.push(demI);
+      this.achatItemListFinal.push(demI);
       this.removeItemsWithLibelle(ebpListTemp, ebpI.produit.libelle);
     }
-
-
   }
 
   removeItemsWithLibelle(items: any, libelle: string): void {
@@ -129,8 +132,9 @@ export class AchatItemSearchComponent implements OnInit {
   cloneObj(ebp: AchatItem, ebpI: Ebp) {
     ebp.produit.libelle = ebpI.produit.libelle;
     ebp.produit.cat.libelle = ebpI.produit.cat.libelle;
+    ebp.produit.unite.libelle = ebpI.produit.unite.libelle;
     ebp.produit.id = ebpI.produit.id;
-    ebp.produit.prix = ebpI.produit.prix; 
+    ebp.produit.prix = ebpI.produit.prix;
   }
 
 

@@ -21,15 +21,7 @@ export class UserService {
 
 
   save(){
-    this.http.post<number>(this._userURL,this.user).subscribe(
-      data=>{
-        if(data==1){
-           this.user = null;
-        }
-      },error=>{
-        console.log(error);
-      }
-    )
+    return this.http.post<number>(this._userURL,this.user);
   }
 
   update(u:User){
@@ -38,6 +30,10 @@ export class UserService {
 
   delete(u:User){
     return this.http.delete<number>(this._userURL + u.id);
+  }
+
+  getUserByName(name:string){
+    return  this.http.get<User>(this._userURL + "name/" + name );
   }
 
   getAllUsers(){

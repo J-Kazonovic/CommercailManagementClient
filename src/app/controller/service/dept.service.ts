@@ -19,7 +19,7 @@ export class DeptService {
         this.deptList = data;
 
       }, error => {
-        console.log("error" + error);
+        console.log(error);
       }
     );
   }

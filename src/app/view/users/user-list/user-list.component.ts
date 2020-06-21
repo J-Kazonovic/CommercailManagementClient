@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/controller/entity/user.model';
 import { UserService } from 'src/app/controller/service/user.service';
 import { UtilList } from 'src/app/util/utillist.module';
+import { Role } from 'src/app/controller/entity/role.model';
+import { UtilAuthority } from 'src/app/util/utilauthority.module';
+import { AlertService } from 'src/app/controller/service/alert.service';
 
 @Component({
   selector: 'app-user-list',
@@ -15,8 +18,12 @@ export class UserListComponent implements OnInit {
   userListFiltered = new Array<User>();
   searchKey: string;
 
+  public roles = [new Role(UtilAuthority.ROLE_COMPTABLE)
+    ,new Role(UtilAuthority.ROLE_STUF)]
 
-  constructor(private uService: UserService) { }
+
+  constructor(private uService: UserService
+    ,private alertService:AlertService) { }
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -32,8 +39,12 @@ export class UserListComponent implements OnInit {
       data => {
         if (data == 1) {
           UtilList.deleteFromListById(u.id, this.userList);
+          this.alertService.setSuccessAlert("User Deleted Successfuly.");
+        }else{
+          this.alertService.setDangerAlert("Please Try Again!");
         }
       }, error => {
+        this.alertService.setDangerAlert("Please Try Again!");
         console.log(error);
       }
     );
@@ -44,9 +55,12 @@ export class UserListComponent implements OnInit {
       data => {
         console.log(data);
         if (data == 1) {
-
+          this.alertService.setSuccessAlert("User Update Successfuly.");
+        }else{
+          this.alertService.setDangerAlert("Please Try Again!");
         }
       }, error => {
+        this.alertService.setDangerAlert("Please Try Again!");
         console.log(error);
       }
     )

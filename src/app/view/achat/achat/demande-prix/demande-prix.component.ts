@@ -55,6 +55,7 @@ export class DemandePrixComponent implements OnInit, OnChanges{
 
   //API Calls
   saveDemmande() {
+    this.achat.comptable.name=localStorage.getItem("user_name");
     this.achat.achatItems = this.achatItemsCurrent;
     this.achat.statut = UtilStatuts.DEMMANDE;
     this.achatService.saveAchat(this.achat).subscribe(

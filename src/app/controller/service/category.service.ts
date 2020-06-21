@@ -32,7 +32,7 @@ export class CategoryService {
       data => {
         this.cats = data;
       }, error => {
-        console.log("error:"+error);
+        console.log(error);
       }
     );
   }
