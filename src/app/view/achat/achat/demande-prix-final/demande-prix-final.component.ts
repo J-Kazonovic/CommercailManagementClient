@@ -10,54 +10,57 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DemmandePrixService } from 'src/app/controller/service/demmande-prix.service';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { AlertService } from 'src/app/controller/service/alert.service';
+import { EmailService } from 'src/app/controller/service/email.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 @Component({
   selector: 'app-demande-prix-final',
   templateUrl: './demande-prix-final.component.html',
   styleUrls: ['./demande-prix-final.component.css']
 })
+
 export class DemandePrixFinalComponent implements OnInit {
 
+  //Const
+
+
+  //Routing
   private sub: any;
   ref: string;
 
+  //Achat Statuts
+  statuts = [UtilStatuts.DEMMANDE,UtilStatuts.COMMANDE];
 
 
-  statuts = [UtilStatuts.DEMMANDE_BROUILLON
-    , UtilStatuts.DEMMANDE
-    , UtilStatuts.DEVI_RECU
-    , UtilStatuts.COMMANDE];
-
-
+  //Fournisseur
   fournisseurs = Array<Fournisseur>();
   fourn = new Fournisseur();
-  nom: string;
 
 
+  //PDF
+  pdfName="fstg-demande-prix-";
 
 
   constructor(private achatService: AchatService
     , private dpService: DemmandePrixService
+    , private frService: FournisseurService
+    , private achatItemService: AchatItemService
     , private route: ActivatedRoute
     , private router: Router
-    , private frService: FournisseurService
-    , private achatItemService: AchatItemService) { }
+    , private alertService:AlertService) { }
 
 
 
   ngOnChanges(changes: SimpleChanges): void {
     this.getFournByNom();
-
   }
-
 
   ngOnInit() {
     this.getAllFournisseurs();
     this.sub = this.route.params.subscribe(params => {
       this.ref = params['ref'];
       this.getAchatByRef(this.ref);
-      this.getAllDBAchatItems(this.ref);
-      this.getFournByNom();
     });
   }
 
@@ -65,47 +68,43 @@ export class DemandePrixFinalComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
+
+  //Events
+  onDemandeUpdate(){
+    this.updateDemande();
+  }
+
+  onDemandeToCommande(){
+    this.updateToCommande();
+  }
+  //Events
+
+
+
   //API Calls 
-  updateDemmande() {
+  updateDemande() {
     this.achat.achatItems = this.achatItemsDB;
     this.achatService.updateAchat(this.achat).subscribe(
       data => {
-        console.log(data);
+        this.alertService.setSuccessAlert("Demande Updated Successfuly.");
       }, error => {
+        this.alertService.setSuccessAlert("Please Try Again!")
         console.log(error);
       }
     );
   }
 
-  updateToDevis() {
+  updateToCommande() {
     this.achat.achatItems = this.achatItemsDB;
     this.achat.statut = this.statuts[2];
     this.achatService.updateAchat(this.achat).subscribe(
       data => {
         if (data == 1) {
+          this.alertService.setSuccessAlert("Commande Created Successfuly.");
           this.router.navigate(['comptable/bc/ref', this.achat.ref]);
         }
       }, error => {
-        console.log(error);
-      }
-    );
-  }
-
-  getFournByNom() {
-    this.frService.getfournByNom(this.achat.fournisseur.nom).subscribe(
-      data => {
-        this.fourn = data;
-      }, error => {
-        console.log(error);
-      }
-    );
-  }
-
-  getAllFournisseurs() {
-    this.frService.getAllFournisseur().subscribe(
-      data => {
-        this.fournisseurs = data;
-      }, error => {
+        this.alertService.setSuccessAlert("Please Try Again!");
         console.log(error);
       }
     );
@@ -115,6 +114,9 @@ export class DemandePrixFinalComponent implements OnInit {
     this.achatService.getAchatByRef(ref).subscribe(
       data => {
         this.dpService.achat = data;
+        this.fourn=this.achat.fournisseur;
+        this.getAllDBAchatItems(this.ref);
+        this.getFournByNom();
       }, error => {
         console.log(error);
       }
@@ -130,29 +132,50 @@ export class DemandePrixFinalComponent implements OnInit {
       }
     );
   }
+
+  getFournByNom() {
+    this.frService.getfournByNom(this.fourn.nom).subscribe(
+      data => {
+        this.dpService.achat.fournisseur = data;
+      }, error => {
+        console.log(error);
+      }
+    );
+  }
+
+  getAllFournisseurs() {
+    this.frService.getAllFournisseur().subscribe(
+      data => {
+        this.fournisseurs = data;
+      }, error => {
+        console.log(error);
+      }
+    );
+  }
   //API Calls
 
 
 
+  //PDF
+  col1="Produit";
+  col2="Category";
+  col3="Unite";
+  col4="Quantité Demander";
   buildTableBody(data, columns) {
     var body = [];
-
     body.push(columns);
-
     data.forEach((row: AchatItem) => {
       var dataRow = [];
-
       columns.forEach(function (column) {
-        if (column == "proLib") {
+
+        if (column=="Produit") {
           dataRow.push(row["produit"]["libelle"]);
-        }
-        else if (column == "catLib") {
+        }else if (column=="Category") {
           dataRow.push(row["produit"]["cat"]["libelle"]);
-        }
-        else if (column == "uniteLib") {
+        }else if (column =="Unite") {
           dataRow.push(row["produit"]["unite"]["libelle"]);
-        } else {
-          dataRow.push(row[column]);
+        }else if(column== "Quantité Demander"){
+          dataRow.push(row["qteCommander"]);
         }
 
       })
@@ -162,7 +185,6 @@ export class DemandePrixFinalComponent implements OnInit {
 
     return body;
   }
-
   table(data, columns) {
     return {
       table: {
@@ -171,16 +193,13 @@ export class DemandePrixFinalComponent implements OnInit {
       }
     };
   }
-
-
-
   generatePdf() {
+    var dd=null;
     console.log(this.achatItemsDB);
-    for (var i = 0; i < this.achatItemsDB.length; i++) {
-      const dd = {
+      dd = {
         content: [
           {
-            text: 'Demmande De Prix Reference  ' + this.achat.ref,
+            text: 'Demmande De Prix ' + this.achat.ref,
             bold: true,
             fontSize: 20,
             alignment: 'left',
@@ -202,24 +221,7 @@ export class DemandePrixFinalComponent implements OnInit {
               }
               ],
             ], lineHeight: 3,
-          },
-          {
-            /*table: {
-              // headers are automatically repeated if the table spans over multiple pages
-              // you can declare how many rows should be treated as headers
-              headerRows: 1,
-              widths: [100, 100, 100, 100, 100],
-              body: [
-                this.table(this.achatItemsDB, ["proLib","catLib", "uniteLib","qteCommander"])
-              
-                //["Ref", "Categorie", "Designation", "Uniter", "Quantiter"],
-                //[this.achatItemsDB[i].produit.ref, this.achatItemsDB[i].produit.cat.libelle, this.achatItemsDB[i].produit.libelle, this.achatItemsDB[i].produit.unite.libelle, this.achatItemsDB[i].qteCommander],
-                //[this.achatItemsDB[i + 1].produit.ref, this.achatItemsDB[i + 1].produit.cat.libelle, this.achatItemsDB[i + 1].produit.libelle, this.achatItemsDB[i + 1].produit.unite.libelle, this.achatItemsDB[i + 1].qteCommander],
-              ],
-              color: '#191970'
-            }*/
-          },
-          this.table(this.achatItemsDB, ["proLib", "catLib", "uniteLib", "qteCommander"])
+          },this.table(this.achatItemsDB, [this.col1, this.col2, this.col3, this.col4])
         ], styles: {
           header: {
             bold: true,
@@ -231,14 +233,24 @@ export class DemandePrixFinalComponent implements OnInit {
           }
         },
       };
-
-      pdfMake.createPdf(dd).open();
-    }
-
+    
+    return dd;
   }
 
 
-  /**Getters & Setters */
+  openPDF(){
+    const b =this.generatePdf();
+    pdfMake.createPdf(b).open();
+  }
+  downloadPDF(){
+    const b =this.generatePdf();
+    pdfMake.createPdf(b).download(this.pdfName+this.achat.ref+".pdf");
+  }
+
+
+  //PDF
+
+  //Getters & Setters
   get achat(): Achat {
     return this.dpService.achat;
   }
@@ -246,7 +258,6 @@ export class DemandePrixFinalComponent implements OnInit {
   public get achatItemsDB(): Array<AchatItem> {
     return this.dpService.achatItemsDB;
   }
-
-  /**Getters & Setters */
+  //Getters & Setters
 
 }

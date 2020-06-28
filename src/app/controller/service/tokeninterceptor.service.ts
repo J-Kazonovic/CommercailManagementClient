@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class TokeninterceptorService implements HttpInterceptor {
 
+  loading:boolean;
   constructor(private router:Router) { }
 
 
@@ -27,4 +28,7 @@ export class TokeninterceptorService implements HttpInterceptor {
 
     }
   }
+
+
+
 }

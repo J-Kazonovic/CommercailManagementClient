@@ -12,6 +12,7 @@ import { AchatItem } from 'src/app/controller/entity/achat-item.model';
 import { Achat } from 'src/app/controller/entity/achat.model';
 import { BonCommandeService } from 'src/app/controller/service/bon-commande.service';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/controller/service/alert.service';
 
 @Component({
   selector: 'app-commande-bon',
@@ -37,7 +38,7 @@ export class CommandeBonComponent implements OnInit, OnChanges {
   constructor(private achatService: AchatService
     , private bcService:BonCommandeService 
     , private frService: FournisseurService
-    , private achatItemService: AchatItemService
+    , private alertService: AlertService
     , private router: Router) { }
 
 
@@ -57,9 +58,11 @@ export class CommandeBonComponent implements OnInit, OnChanges {
     this.achatService.saveAchat(this.achat).subscribe(
       data => {
         if (data != null) {
+          this.alertService.setSuccessAlert("Commande Created Successfuly.");
           this.router.navigate(['comptable/bc/ref',data.ref]);
         }
       }, error => {
+        this.alertService.setDangerAlert("Try Again!");
         console.log(error);
       }
     );

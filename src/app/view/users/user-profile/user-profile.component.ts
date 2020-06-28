@@ -14,7 +14,7 @@ export class UserProfileComponent implements OnInit {
 
   @Input() userName:string;
 
-  user :User;
+   user = new User();
    public roles = [new Role(UtilAuthority.ROLE_CHEF)
     ,new Role(UtilAuthority.ROLE_COMPTABLE)
     ,new Role(UtilAuthority.ROLE_STUF)];
@@ -23,7 +23,6 @@ export class UserProfileComponent implements OnInit {
     ,private router:Router) { }
 
   ngOnInit(): void {
-    this.user = new User();
     this.getUser();
   }
 

@@ -2,7 +2,7 @@
     <div class="shadow card text-white bg-dark mb-3">
         <div class="card-body">
             <h4 style="display: inline;">Demande De Prix</h4>
-            <button style="float: right;" (click)="saveDemmande()" type="button" class="btn btn-success">Save</button>
+            <button style="float: right;" (click)="onDemandeSave()" type="button" class="btn btn-success">Save</button>
         </div>
     </div>
     <!--Info-->
@@ -36,10 +36,8 @@
             <div class="shadow card text-white bg-dark" style="height: 22rem">
                 <div class="card-body">
                     <label for="fournisseur">Fournisseur</label>
-                    <button style="float: right;" class="btn btn-primary fa fa-plus mb-2" data-toggle="modal"
-                        data-target="#modal-fourni"></button>
-                    <select (change)="getFournByNom()" class="form-control" id="fournisseur"
-                        [(ngModel)]=achat.fournisseur.nom>
+                    <button style="float: right;" class="btn btn-primary fa fa-plus mb-2" data-toggle="modal" data-target="#modal-fourni"></button>
+                    <select (change)="getFournByNom()" class="form-control" id="fournisseur" [(ngModel)]=achat.fournisseur.nom>
                         <option *ngFor="let fr of fournisseurs" value="{{fr.nom}}">
                             {{fr.nom}}
                         </option>
@@ -62,13 +60,10 @@
         </div>
     </div>
     <!--List-->
-
-
 </div>
 
 <!--Ajouter Un Nouvelle Fournisseur-->
-<div class="modal fade bd-example-modal-lg" id="modal-fourni" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="modal-fourni" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">

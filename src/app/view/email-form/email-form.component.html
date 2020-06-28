@@ -1,0 +1,21 @@
+<div class="card bg-dark">
+    <div class="card-body">
+        <div class="row m-0">
+            <div class="col-md-12 p-0 message-box-input">
+                <div class="form-group">
+                    <input type="email" [(ngModel)]=fournis_email class="form-control mb-1" aria-describedby="emailHelp" placeholder="To">
+                    <input type="text" [(ngModel)]=mail.subject class="form-control" aria-describedby="subject" placeholder="Subject">
+
+                    <div class="custom-file">
+                        <input (change)="setFiles($event.target.files)" type="file" class="custom-file-input mb-1" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                    <textarea [(ngModel)]=mail.message class="form-control mb-1" id="exampleFormControlTextarea1" rows="6"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted">
+        <button (click)="sendMail()" class="btn btn-primary btn-sm pl-3 pr-3 float-right">SEND</button>
+    </div>
+</div>

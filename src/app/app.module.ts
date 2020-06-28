@@ -74,6 +74,8 @@ import { ForbiddenValidatorDirective } from './directives/forbidden-validator.di
 import { AlertComponent } from './view/util/alert/alert.component';
 import { UserProfileComponent } from './view/users/user-profile/user-profile.component';
 import { EbEditComponent } from './view/eb/eb-edit/eb-edit.component';
+import { EmailFormComponent } from './view/email-form/email-form.component';
+import { ProfileComponent } from './view/profile/profile.component';
 
 
 
@@ -124,6 +126,8 @@ import { EbEditComponent } from './view/eb/eb-edit/eb-edit.component';
     AlertComponent,
     UserProfileComponent,
     EbEditComponent,
+    EmailFormComponent,
+    ProfileComponent,
     
     
   ],

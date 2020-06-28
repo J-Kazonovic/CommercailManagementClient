@@ -8,13 +8,14 @@ import { BonCommandeService } from 'src/app/controller/service/bon-commande.serv
 import { Router, ActivatedRoute } from '@angular/router';
 import { FournisseurService } from 'src/app/controller/service/fournisseur.service';
 import { Fournisseur } from 'src/app/controller/entity/fournisseur.model';
+import { AlertService } from 'src/app/controller/service/alert.service';
 
 @Component({
   selector: 'app-commande-bon-final',
   templateUrl: './commande-bon-final.component.html',
   styleUrls: ['./commande-bon-final.component.css']
 })
-export class CommandeBonFinalComponent implements OnInit,OnChanges {
+export class CommandeBonFinalComponent implements OnInit{
 
   
   private sub: any;
@@ -39,6 +40,7 @@ export class CommandeBonFinalComponent implements OnInit,OnChanges {
     , private router: Router
     , private route: ActivatedRoute
     , private frService: FournisseurService
+    , private alertService: AlertService
     , private achatItemService: AchatItemService) { }
 
   ngOnInit(): void {
@@ -50,10 +52,6 @@ export class CommandeBonFinalComponent implements OnInit,OnChanges {
       this.getAllDBAchatItems(this.ref); 
       this.getFournByNom();
     });
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    
   }
 
   
@@ -75,6 +73,7 @@ export class CommandeBonFinalComponent implements OnInit,OnChanges {
     this.achat.total=this.calculTotal();
     this.achatService.updateAchat(this.achat).subscribe(
       data => {
+        this.alertService.setSuccessAlert("Commande Created Successfuly.");
         console.log(data);
       }, error => {
         console.log(error);

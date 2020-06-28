@@ -17,6 +17,8 @@ import { Category } from 'src/app/controller/entity/category.model';
 import { Product } from 'src/app/controller/entity/product.model';
 import { DemmandePrixService } from 'src/app/controller/service/demmande-prix.service';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/controller/service/alert.service';
+
 
 declare var $: any;
 
@@ -25,45 +27,46 @@ declare var $: any;
   templateUrl: './demande-prix.component.html',
   styleUrls: ['./demande-prix.component.css']
 })
-export class DemandePrixComponent implements OnInit, OnChanges{
+export class DemandePrixComponent implements OnInit{
 
-  statuts = [UtilStatuts.DEMMANDE_BROUILLON
-    , UtilStatuts.DEMMANDE
-    , UtilStatuts.DEVI_RECU
-    , UtilStatuts.COMMANDE];
-
+  statuts = [UtilStatuts.DEMMANDE,UtilStatuts.COMMANDE];
 
   fournisseurs = Array<Fournisseur>();
   fourn = new Fournisseur();
   nom: string;
-
-
   items = new Array<AchatItem>();
+
   constructor(private achatService: AchatService
     , private dpService: DemmandePrixService
     , private frService: FournisseurService
-    , private achatItemService: AchatItemService
-    , private router: Router) { }
+    , private router: Router
+    , private alertService:AlertService) { }
 
-  ngOnChanges(changes:SimpleChanges): void {
-  }
 
   ngOnInit() {
     this.getAllFournisseurs();
   }
 
 
+  //Events
+  onDemandeSave(){
+    this.saveDemande();
+  }
+  //Events
+
   //API Calls
-  saveDemmande() {
+  saveDemande() {
     this.achat.comptable.name=localStorage.getItem("user_name");
     this.achat.achatItems = this.achatItemsCurrent;
     this.achat.statut = UtilStatuts.DEMMANDE;
     this.achatService.saveAchat(this.achat).subscribe(
       data => {
         if (data != null) {
+          this.alertService.setSuccessAlert("Demande Saved Successfuly.");
           this.router.navigate(['comptable/dp/ref',data.ref]);
         }
       }, error => {
+        this.alertService.setSuccessAlert("Please Try Again!")
         console.log(error);
       }
     );
@@ -85,11 +88,10 @@ export class DemandePrixComponent implements OnInit, OnChanges{
       data => {
         this.fournisseurs = data;
       }, error => {
-        console.log("error" + error);
+        console.log(error);
       }
     );
   }
-
   //API Calls
 
 
@@ -101,8 +103,6 @@ export class DemandePrixComponent implements OnInit, OnChanges{
 	public get achatItemsCurrent(): Array<AchatItem> {
 		return this.dpService.achatItemsDB;
 	}
-
-
   /**Getters & Setters */
 
 

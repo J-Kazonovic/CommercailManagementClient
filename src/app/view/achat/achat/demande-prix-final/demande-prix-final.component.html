@@ -2,16 +2,16 @@
     <div class="row mb-2">
         <div class="col-md-12">
             <h3 style="display: inline;">Demmande De Prix <b>{{achat.ref}}</b></h3>
-            <button (click)="updateDemmande()" style="float: right;" type="button" class="btn btn-success">Save Changes</button>
+            <button (click)="onDemandeUpdate()" style="float: right;" type="button" class="btn btn-success">Save Changes</button>
         </div>
     </div>
     <div class="shadow card text-white bg-dark mb-3">
         <div class="card-body">
-            <button (click)="updateToDevis()" style="float: right;" type="button" class="btn btn-info">Crée Bon De Commande</button>
+            <button (click)="onDemandeToCommande()" style="float: right;" type="button" class="btn btn-info">Crée Bon De Commande</button>
 
-            <button style="float: left;" type="button" class="btn btn-primary fa fa-file-pdf-o mr-2" (click)="generatePdf()"></button>
-            <button style="float: left;" type="button" class="btn btn-primary fa fa-download mr-2"></button>
-            <button style="float: left;" type="button" class="btn btn-primary fa fa-envelope"></button>
+            <button style="float: left;" type="button" class="btn btn-primary fa fa-file-pdf-o mr-2" (click)="openPDF()"></button>
+            <button style="float: left;" type="button" class="btn btn-primary fa fa-download mr-2" (click)="downloadPDF()"></button>
+            <button data-toggle="modal" data-target="#modal-mail" style="float: left;" type="button" class="btn btn-primary fa fa-envelope"></button>
 
         </div>
     </div>
@@ -49,15 +49,18 @@
                 <div class="card-body">
                     <label for="fournisseur">Fournisseur</label>
                     <button style="float: right;" class="btn btn-primary fa fa-plus mb-2" data-toggle="modal" data-target="#modal-fourni"></button>
-                    <select (change)="getFournByNom()" class="form-control" id="fournisseur" [(ngModel)]=achat.fournisseur.nom>
+                    <select (change)="getFournByNom()" class="form-control" id="fournisseur" [(ngModel)]=fourn.nom>
                         <option *ngFor="let fr of fournisseurs" value="{{fr.nom}}">
                             {{fr.nom}}
                         </option>
                     </select><br>
                     <h3>{{achat.fournisseur.nom}}</h3>
-                    <p>{{achat.fournisseur.email}}</p>
-                    <p>{{achat.fournisseur.tel}}</p>
-                    <p>{{achat.fournisseur.adress}}</p>
+                    <h5><i class="fa fa-telegram mr-2" aria-hidden="true"></i><b>Email:
+                        </b>{{achat.fournisseur.email}}</h5>
+                    <h5><i class="fa fa-phone-square mr-2" aria-hidden="true"></i><b>Tel:
+                        </b>{{achat.fournisseur.tel}}</h5>
+                    <h5><i class="fa fa-address-card mr-2" aria-hidden="true"></i><b>Address:
+                        </b>{{achat.fournisseur.adress}}</h5>
                 </div>
             </div>
 
@@ -88,6 +91,24 @@
             </div>
             <div class="modal-body">
                 <app-fournisseur-create></app-fournisseur-create>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bd-example-modal-lg" id="modal-mail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Mail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-email-form [fournis_email]="achat.fournisseur.email"></app-email-form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

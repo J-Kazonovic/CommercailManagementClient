@@ -1,0 +1,79 @@
+<div class="card shadow bg-dark text-white m-3">
+    <div class="card-body">
+        <h3 class="mt-2 mb-3">{{user.name}}</h3>
+
+        <div *ngIf="user.dept!=null" class="row mt-3">
+            <div class="col-md-3">
+                <label>Département:</label>
+            </div>
+            <div class="col-md-8">
+                <p>Département: {{user.dept.libelle}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label>Email:</label>
+            </div>
+            <div class="col-md-8">
+                <p>{{user.email}}</p>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-3">
+                <label>Email Password (or Mot de pass d'application)*:</label>
+            </div>
+            <div class="col-md-8">
+                <input [(ngModel)]=user.email_password #password="ngModel" required type="password" minlength="8" type="password" placeholder="my password ..." class="form-control" id="f-pass" aria-describedby="helpId">
+                <div *ngIf="password.invalid && password.touched" class="alert alert-danger mb-3 mt-1">
+                    <span *ngIf="password.errors.required">
+                        Password is required.
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label>Tel:</label>
+            </div>
+            <div class="col-md-8">
+                <p>{{user.tel}}</p>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-3">
+                <label>Post:</label>
+            </div>
+            <div class="col-md-8">
+                <h5><span class="badge badge-pill badge-info" *ngIf="user.roles[0].role.libelle==roles[0].libelle">Doyen</span></h5>
+                <h5><span class="badge badge-pill badge-info" *ngIf="user.roles[0].role.libelle==roles[1].libelle">Comptable</span></h5>
+                <h5><span class="badge badge-pill badge-info" *ngIf="user.roles[0].role.libelle==roles[2].libelle">Responable</span></h5>
+            </div>
+        </div>
+    </div>
+    <button (click)="onUserUpdate()" type="button" class="btn btn-success">Save</button>
+</div>
+<a class="list-group-item list-group-item-action bg-danger collapsed bg-info text-white">
+    Si vous activez la validation en deux étapes dans votre google compte, you need to use mot de pass d'application
+</a>
+
+<a class="list-group-item list-group-item-action bg-info collapsed bg-info text-white" data-toggle="collapse" href="#info">
+    <p>Pour créer un <strong>mot de passe d’application</strong> pour votre <strong>compte Google</strong>, procédez comme suit&nbsp;:</p> <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+</a>
+
+<div id="info" class="collapse bg-dark" data-parent="#accordion">
+    <div class="card bg-warning">
+        <div class="card-body">
+            <ol>
+                <li>Consultez la page «&nbsp;Mots de passe d’application&nbsp;». Vous pourrez être amené à vous connecter à votre <strong>compte Google&nbsp;</strong>;</li>
+                <li>Au bas de la page, cliquez sur «&nbsp;Sélectionner une application&nbsp;»&nbsp;;</li>
+                <li>Choisissez l’application pour laquelle vous souhaitez créer un mot de passe&nbsp;;</li>
+                <li>Cliquez sur «&nbsp;Sélectionner un appareil&nbsp;» et choisissez l’appareil que vous utilisez&nbsp;;</li>
+                <li>Cliquez sur «&nbsp;Générer&nbsp;»&nbsp;;</li>
+                <li>Suivez les instructions pour saisir le mot de passe d’application sur votre appareil&nbsp;;</li>
+                <li>Cliquez sur «&nbsp;OK&nbsp;».</li>
+            </ol>
+
+        </div>
+    </div>
+</div>

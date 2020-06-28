@@ -29,6 +29,7 @@ import { FactureListComponent } from './view/facture/facture-list/facture-list.c
 import { UserFormComponent } from './view/users/user-form/user-form.component';
 import { UserListComponent } from './view/users/user-list/user-list.component';
 import { AuthGuardService } from './controller/service/auth-guard.service';
+import { ProfileComponent } from './view/profile/profile.component';
 
 
 const routes: Routes = [
@@ -54,6 +55,8 @@ const routes: Routes = [
   },
   {
     path: "comptable", component: ComptableDashBoardComponent, children: [
+      { path: "profile", component: ProfileComponent},
+
       { path: "ebs", component: EbListComptableComponent},
 
       { path: "achat", component: AchatComponent},

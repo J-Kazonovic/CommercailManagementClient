@@ -1,11 +1,11 @@
-<div class="card shadow bg-dark text-white m-3">
+<div *ngIf="user!==null && user.roles[0]!=undefined" class="card shadow bg-dark text-white m-3">
     <h3 class="mt-2">{{user.name}}</h3>
     <p>{{user.email}}</p>
 
     <h5><span class="badge badge-pill badge-info m-2" *ngIf="user.roles[0].role.libelle==roles[0].libelle">Doyen</span></h5>
     <h5><span class="badge badge-pill badge-info m-2" *ngIf="user.roles[0].role.libelle==roles[1].libelle">Comptable</span></h5>
     <h5><span class="badge badge-pill badge-info m-2" *ngIf="user.roles[0].role.libelle==roles[2].libelle">Responable</span></h5>
-    <p>Département: {{user.dept.libelle}}</p>
+    <p *ngIf="user.dept!=null">Département: {{user.dept.libelle}}</p>
     <hr>
     <p>Fstg Marrakech</p>
 </div>
