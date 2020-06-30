@@ -1,4 +1,4 @@
-<h2>List De Tout Les Expression Des Besoin</h2>
+<h2>Liste Des Tous Les Expressions Des Besoins</h2>
 <div class="card text-white bg-dark shadow mt-3 mb-3">
     <div class="card-header">
         <div class="container">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="dept">Filter By Dept</label>
+                        <label for="dept">Filter By Departement</label>
                         <select class="form-control" id="dept" [(ngModel)]=dept (change)="onFilterAction()">
                             <option selected></option>
                             <option *ngFor="let dept of deptList" value="{{dept.libelle}}">
@@ -59,7 +59,7 @@
             <thead>
                 <tr>
                     <th>Titre</th>
-                    <th>Created At</th>
+                    <th>Date de création</th>
                     <th>Personnel</th>
                     <th>Departement</th>
                     <th class="w-25">Description</th>
@@ -106,7 +106,7 @@
                     <thead>
                         <tr>
                             <th>Produit</th>
-                            <th>Desc</th>
+                            <th>Description</th>
                             <th>Statut</th>
                             <th>Q-Demander</th>
                             <th>Q-Accorder</th>

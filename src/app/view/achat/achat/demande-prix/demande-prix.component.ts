@@ -34,7 +34,7 @@ export class DemandePrixComponent implements OnInit{
   fournisseurs = Array<Fournisseur>();
   fourn = new Fournisseur();
   nom: string;
-  items = new Array<AchatItem>();
+  items=new Array<AchatItem>();
 
   constructor(private achatService: AchatService
     , private dpService: DemmandePrixService

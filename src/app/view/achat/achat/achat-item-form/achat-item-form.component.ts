@@ -51,6 +51,7 @@ export class AchatItemFormComponent implements OnInit {
     myClone.qteRecu= achatItem.qteRecu;
     myClone.produit.libelle= achatItem.produit.libelle;
     myClone.produit.cat.libelle= achatItem.produit.cat.libelle;
+    myClone.produit.unite.libelle= achatItem.produit.unite.libelle;
     return myClone;
   }
   findAllCats( ) {

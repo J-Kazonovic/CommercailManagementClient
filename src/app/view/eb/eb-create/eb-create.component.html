@@ -4,7 +4,7 @@
         <div class="col-md-8 shadow rounded bg-dark mb-2" id="eb-form">
             <div class="row mt-2">
                 <div class="col-md-12 mb-3 text-white">
-                    <h4 style="display: inline;">Crée Une Nouvelle Expression Du Besoin</h4>
+                    <h4 style="display: inline;">Créer Un nouveau Expression De Besoin</h4>
                 </div>
             </div>
             <div class="row mt-2">
@@ -13,12 +13,12 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Titre</label>
-                                <input [(ngModel)]=eb.title class="form-control" placeholder="TitreExample..." type="text">
+                                <input [(ngModel)]=eb.title class="form-control" placeholder="Titre Example..." type="text">
                             </div>
 
                             <div class="form-group">
-                                <label>Descreption</label>
-                                <textarea [(ngModel)]=eb.eb_desc class="form-control" placeholder="MyDescreption..." type="text"></textarea>
+                                <label>Description</label>
+                                <textarea [(ngModel)]=eb.eb_desc class="form-control" placeholder="Description..." type="text"></textarea>
                             </div>
                         </div>
                     </div>
@@ -36,13 +36,13 @@
                 <span class="badge badge-light">{{ebListFiltered.length}}</span> Expression
             </span>
             <a (click)="onShowEbsClick()" style="float: right;" type="button" class="btn btn-secondary text-white inline float-right">Voir
-                La List Detaile  <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                La Liste Detailée  <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
 
             <div class="input-group mb-3 mt-2">
                 <div class="input-group-prepend">
                     <span class="input-group-text rounded bg-dark text-white fa fa-search"></span>
                 </div>
-                <input placeholder="search by eb title..." id="key" type="text" class="form-control bg-secondary text-white" [(ngModel)]=title (keyup)="onFilterAction()">
+                <input placeholder="search by eb titre..." id="key" type="text" class="form-control bg-secondary text-white" [(ngModel)]=title (keyup)="onFilterAction()">
                 <div class="input-group-prepend ml-1">
                     <span (click)="sortByCreatedDate()" class="input-group-text bg-dark text-white rounded fa fa-sort"></span>
                 </div>

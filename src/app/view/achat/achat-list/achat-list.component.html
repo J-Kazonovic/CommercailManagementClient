@@ -6,7 +6,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="dept">Search By Ref</label>
-                        <input [(ngModel)]=searchKey (keyup)="onFilterAction()" placeholder="eb title..." id="key" type="text" class="form-control">
+                        <input [(ngModel)]=searchKey (keyup)="onFilterAction()" placeholder="achat ref..." id="key" type="text" class="form-control">
                     </div>
                 </div>
 
@@ -39,11 +39,11 @@
         <table class="table table-light table-hover table-bordered">
             <thead>
                 <tr>
-                    <th>Ref</th>
+                    <th>Référence</th>
                     <th>Statut</th>
                     <th>Fournisseur</th>
-                    <th>Creation en</th>
-                    <th>Livraison en</th>
+                    <th>Date de création</th>
+                    <th>Date de livraison</th>
                     <th>Total</th>
                 </tr>
             </thead>
@@ -98,7 +98,7 @@
                             <th>Unité</th>
                             <th>Quantite</th>
                             <th>Prix Unit (DH)</th>
-                            <th>Sous-Total (DH)</th>
+                            <th>Montant (DH)</th>
                         </tr>
                     </thead>
                     <tbody>

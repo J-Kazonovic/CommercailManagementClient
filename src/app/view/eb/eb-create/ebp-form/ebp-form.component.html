@@ -16,7 +16,7 @@
         </div>
 
         <div class="form-group">
-            <label for="cat">Produits</label>
+            <label for="cat">Produit</label>
             <select class="form-control" id="cat" [(ngModel)]="ebp.produit.libelle">
                 <option *ngFor="let produit of products" value="{{produit.libelle}}">
                     {{produit.libelle}}
@@ -27,12 +27,12 @@
 
         <div class="form-group">
             <label>Quantité</label>
-            <input min="1" [(ngModel)]=ebp.qteDemande class="form-control" placeholder="Quantiter Demander" type="number">
+            <input min="1" [(ngModel)]=ebp.qteDemande class="form-control" placeholder="Quantiter Demandé" type="number">
         </div>
 
         <div class="form-group">
             <label>Description</label>
-            <textarea [(ngModel)]=ebp.product_desc name="" class="form-control" placeholder="Descreption" type="text"></textarea>
+            <textarea [(ngModel)]=ebp.product_desc name="" class="form-control" placeholder="Description" type="text"></textarea>
         </div>
     </div>
 
@@ -47,7 +47,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Nouvelle Produit</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Nouveau Produit</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

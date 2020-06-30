@@ -8,10 +8,10 @@
         <table class="table text-white table-bordered">
             <thead class=" thead-inverse ">
                 <tr>
-                    <th>Designation</th>
-                    <th>Quantite Stocker</th>
-                    <th>Quantite Alerte</th>
+                    <th>Désignation</th>
+                    <th>Quantite Stocké</th>
                     <th>Quantite Rester</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,7 +23,6 @@
                 <tr *ngFor="let item of stockItems">
                     <td>{{item.produit.libelle}}</td>
                     <td>{{item.qteStock}}</td>
-                    <td>{{item.qtAlerte}}</td>
                     <td>{{item.qtFinal}}</td>
                     <td><button class="btn btn-danger fa fa-trash" (click)="deleteProduct(item)" type="button"></button></td>
                 </tr>

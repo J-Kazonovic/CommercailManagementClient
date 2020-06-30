@@ -10,8 +10,8 @@
     </div>
     <div class="shadow card text-white bg-dark mb-3">
         <div class="card-body">
-            <button style="float: left;" type="button" class="btn btn-primary fa fa-file-pdf-o mr-2"></button>
-            <button style="float: left;" type="button" class="btn btn-primary fa fa-download mr-2"></button>
+            <button style="float: left;" type="button" class="btn btn-primary fa fa-file-pdf-o mr-2" (click)="openPDF()"></button>
+            <button style="float: left;" type="button" class="btn btn-primary fa fa-download mr-2" (click)="downloadPDF()"></button>
             <button style="float: left;" type="button" class="btn btn-primary fa fa-envelope"></button>
         </div>
     </div>
@@ -30,9 +30,9 @@
                             <h3>{{achat.fournisseur.nom}}</h3>
                             <h5><i class="fa fa-telegram mr-2" aria-hidden="true"></i><b>Email:
                                 </b>{{achat.fournisseur.email}}</h5>
-                            <h5><i class="fa fa-phone-square mr-2" aria-hidden="true"></i><b>Tel:
+                            <h5><i class="fa fa-phone-square mr-2" aria-hidden="true"></i><b>Tél:
                                 </b>{{achat.fournisseur.tel}}</h5>
-                            <h5><i class="fa fa-address-card mr-2" aria-hidden="true"></i><b>Address:
+                            <h5><i class="fa fa-address-card mr-2" aria-hidden="true"></i><b>Adresse:
                                 </b>{{achat.fournisseur.adress}}</h5>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                     <div class="card bg-dark text-white">
                         <div class="card-body ">
                             <div class="form-group">
-                                <label for="d">Date De Facturartion</label>
+                                <label for="d">Date De Facturation</label>
                                 <input id=d type="date" [(ngModel)]=facture.dateDeFac class="form-control" aria-describedby="helpId">
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                         <div class="col-md-6">
                             <div class="card bg-success text-white">
                                 <div class="card-body ">
-                                    <h3>Total Paier {{achat.totalPaier}} DH</h3>
+                                    <h3>Total Payé {{achat.totalPaier}} DH</h3>
                                 </div>
                             </div>
                         </div>

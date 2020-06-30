@@ -1,4 +1,4 @@
-<h2>List Des Personnel</h2>
+<h2>Liste Des Personnels</h2>
 <div class="card text-white bg-dark">
     <div class="card-header">
         <div class="input-group input-group-sm" style=" width: 260px;">
@@ -33,7 +33,7 @@
                 <td>{{u.tel}}</td>
                 <td *ngIf="u.roles[0].role.libelle==roles[0].libelle">Comptable</td>
 
-                <td *ngIf="u.roles[0].role.libelle==roles[1].libelle">Responable</td>
+                <td *ngIf="u.roles[0].role.libelle==roles[1].libelle">Responsable</td>
                 <td *ngIf="u.dept==null">N/A</td>
                 <td *ngIf="!(u.dept==null)">{{u.dept.libelle}}</td>
                 <td>

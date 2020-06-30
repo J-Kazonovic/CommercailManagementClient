@@ -1,4 +1,4 @@
-<h2>Stock Products</h2>
+<h2>Products</h2>
 <div class="card text-white bg-dark">
     <div class="card-header">
         <div class="container">
@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="cat">Unite</label>
+                        <label for="cat">Unité</label>
                         <select class="form-control" id="cat" [(ngModel)]="uniteLib" (change)="onFilterAction()">
                             <option selected></option>
                             <option *ngFor="let unite of unites" value="{{unite.libelle}}">
@@ -43,10 +43,10 @@
         <table class="table bg-light table table-striped table-inverse">
             <thead class="thead-inverse">
                 <tr>
-                    <th>Ref</th>
+                    <th>Référence</th>
                     <th>Libelle</th>
-                    <th>Category</th>
-                    <th>Unite</th>
+                    <th>Catégorie</th>
+                    <th>Unité</th>
                 </tr>
             </thead>
             <tbody >

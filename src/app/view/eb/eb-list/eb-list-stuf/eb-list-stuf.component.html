@@ -1,6 +1,6 @@
-<h4 style="display: inline;">List De Tout Les Expression Des Besoin</h4>
-<button (click)="onNewEbClick()" style="float: right;" type="button" class="btn btn-success">Crée Une Nouvelle
-    Expression</button>
+<h4 style="display: inline;">Liste Des Tous Les Expressions Des Besoins</h4>
+<button (click)="onNewEbClick()" style="float: right;" type="button" class="btn btn-success">Créer Un Nouveau
+    Expression de besoin</button>
 
 
 
@@ -17,7 +17,7 @@
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="dept">Filter By Dept</label>
+                        <label for="dept">Filter By Departement</label>
                         <select class="form-control" id="dept" [(ngModel)]=dept (change)="onFilterAction()">
                             <option selected></option>
                             <option *ngFor="let dept of deptList" value="{{dept.libelle}}">
@@ -60,9 +60,9 @@
             <thead>
                 <tr>
                     <th>Titre</th>
-                    <th>Created At</th>
+                    <th>Date de création</th>
                     <th>Departement</th>
-                    <th class="w-25">Déscreption</th>
+                    <th class="w-25">Déscription</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -106,7 +106,7 @@
                     <thead>
                         <tr>
                             <th>Produit</th>
-                            <th>Desc</th>
+                            <th>Description</th>
                             <th>Statut</th>
                             <th>Q-Demander</th>
                             <th>Q-Accorder</th>

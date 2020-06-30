@@ -3,7 +3,7 @@
     </div>
     <div class="card-body">
         <div class="form-group">
-            <label>Reference:</label>
+            <label>Référence:</label>
             <input type="text" placeholder="entrer la ref du produit" class="form-control" [(ngModel)]=product.ref>
         </div>
 
@@ -12,7 +12,7 @@
             <input type="text" placeholder="entrer la designation du produit" class="form-control" [(ngModel)]=product.libelle>
         </div>
         <div class="form-group">
-            <label>Category:</label><button style="float: right;" data-toggle="modal" data-target="#f-cat" class="btn btn-success mb-2">+</button>
+            <label>Catégorie:</label><button style="float: right;" data-toggle="modal" data-target="#f-cat" class="btn btn-success mb-2">+</button>
             <select class="form-control" id="cat" [(ngModel)]=product.cat.libelle>
                 <option *ngFor="let cat of cats" value="{{cat.libelle}}">
                     {{cat.libelle}}

@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-7">
-            <h2>List Des Factures</h2>
+            <h2>Liste Des Factures</h2>
             <div class="card text-white bg-dark shadow mt-3 mb-3">
                 <div class="card-header">
                     <div class="container">
@@ -18,10 +18,10 @@
                     <table class="table table-light table-hover table-bordered">
                         <thead>
                             <tr>
-                                <th>Ref</th>
-                                <th>DateDeFac</th>
+                                <th>Reference</th>
+                                <th>Date De Facturation</th>
                                 <th>Origine</th>
-                                <th>Total Paier</th>
+                                <th>Total Payé</th>
                                 <th>Etat</th>
                             </tr>
                         </thead>
@@ -45,7 +45,7 @@
         <div class="col-md-5">
             <div class="card text-white bg-dark shadow mt-3 mb-3">
                 <div class="card-header">
-                    List Du Paiement of {{facture.ref}}
+                    Liste Des Paiements of {{facture.ref}}
                     <button data-toggle="modal" data-target="#myModal" type="button" style="float: right;" class="btn btn-primary fa fa-plus"></button>
                 </div>
 
@@ -53,7 +53,7 @@
                     <table class="table table-light table-hover table-bordered">
                         <thead>
                             <tr>
-                                <th>Montent (DH)</th>
+                                <th>Montant (DH)</th>
                                 <th>Date</th>
                                 <th></th>
                             </tr>
@@ -93,7 +93,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="p">Montent Payer</label>
+                        <label for="p">Montant Payé</label>
                         <input [(ngModel)]=paiement.montent type="number" class="form-control" id="p" aria-describedby="helpId" placeholder="">
                     </div>
 
