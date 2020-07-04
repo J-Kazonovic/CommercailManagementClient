@@ -6,7 +6,6 @@ import { Ebp } from 'src/app/controller/entity/ebp.model';
 import { UtilList } from 'src/app/util/utillist.module';
 import { UtilStatuts } from 'src/app/util/utilstatuts.module';
 import { DeptService } from 'src/app/controller/service/dept.service';
-import { PersonnelService } from 'src/app/controller/service/personnel.service';
 import { Dept } from 'src/app/controller/entity/dept.model';
 import { Personnel } from 'src/app/controller/entity/personnel.model';
 import { Route } from '@angular/compiler/src/core';

@@ -5,10 +5,11 @@ import { EbService } from 'src/app/controller/service/eb.service';
 import { Eb } from 'src/app/controller/entity/eb.model';
 import { DeptService } from 'src/app/controller/service/dept.service';
 import { Dept } from 'src/app/controller/entity/dept.model';
-import { PersonnelService } from 'src/app/controller/service/personnel.service';
 import { UtilStatuts } from 'src/app/util/utilstatuts.module';
 import { Personnel } from 'src/app/controller/entity/personnel.model';
 import { UtilList } from 'src/app/util/utillist.module';
+import { UserService } from 'src/app/controller/service/user.service';
+import { User } from 'src/app/controller/entity/user.model';
 declare var $: any;
 @Component({
   selector: 'app-eb-list-chef',
@@ -46,15 +47,17 @@ export class EbListChefComponent implements OnInit {
   ebListFiltered = new Array<Eb>();
   ebpList = new Array<Ebp>();
 
+  personnels=new Array<User>();
+
   constructor(private ebService: EbService
     , private ebpService: EbpService
     , private deptService: DeptService
-    , private personnelService: PersonnelService) { }
+    , private personnelService: UserService) { }
 
   ngOnInit() {
     this.onShowAll();
     this.deptService.getAllDept();
-    this.personnelService.getAllPersonnel();
+    this.getAllPersonnel();
   }
 
 
@@ -162,6 +165,17 @@ export class EbListChefComponent implements OnInit {
   }
 
 
+  getAllPersonnel(){
+    this.personnelService.getAllUsers().subscribe(
+      data => {
+        this.personnels = data;
+      }, error => {
+        console.log(error);
+      }
+    );
+  }
+
+
   /** Getter */
   public get eb(): Eb {
     return this.ebService.eb;
@@ -171,10 +185,7 @@ export class EbListChefComponent implements OnInit {
     return this.deptService.deptList;
   }
 
-  public get personnelList(): Array<Personnel> {
 
-    return this.personnelService.personnelList;
-  }
   /** Getter */
 
 

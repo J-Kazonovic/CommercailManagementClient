@@ -22,8 +22,9 @@ export class CommandeBonFinalComponent implements OnInit{
   
   private sub: any;
   ref: string;
-    //PDF
-    pdfName="fstg-demande-prix-";
+
+  //PDF
+  pdfName="fstg-comande-prix-";
   statuts=[UtilStatuts.DEMMANDE_BROUILLON
     ,UtilStatuts.DEMMANDE
     ,UtilStatuts.DEVI_RECU
@@ -79,6 +80,7 @@ export class CommandeBonFinalComponent implements OnInit{
         this.alertService.setSuccessAlert("Commande Created Successfuly.");
         console.log(data);
       }, error => {
+        this.alertService.setDangerAlert("Please Try Again.");
         console.log(error);
       }
     );
@@ -108,7 +110,7 @@ export class CommandeBonFinalComponent implements OnInit{
       data => {
         this.fournisseurs = data;
       }, error => {
-        console.log("error" + error);
+        console.log( error);
       }
     );
   }

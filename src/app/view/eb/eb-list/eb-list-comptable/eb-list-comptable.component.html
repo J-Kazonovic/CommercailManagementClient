@@ -14,7 +14,7 @@
                         <label for="personnel">Filter By Personnel</label>
                         <select class="form-control" id="personnel" [(ngModel)]=personnel (change)="onFilterAction()">
                             <option selected></option>
-                            <option *ngFor="let personnel of personnelList" value="{{personnel.name}}">
+                            <option *ngFor="let personnel of personnels" value="{{personnel.name}}">
                                 {{personnel.name}}
                             </option>
                         </select>

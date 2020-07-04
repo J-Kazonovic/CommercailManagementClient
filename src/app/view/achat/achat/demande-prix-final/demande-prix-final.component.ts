@@ -104,7 +104,7 @@ export class DemandePrixFinalComponent implements OnInit {
           this.router.navigate(['comptable/bc/ref', this.achat.ref]);
         }
       }, error => {
-        this.alertService.setSuccessAlert("Please Try Again!");
+        this.alertService.setDangerAlert("Please Try Again!");
         console.log(error);
       }
     );
