@@ -44,6 +44,7 @@ const routes: Routes = [
       { path: "achats", component: AchatListComponent },
       { path: "fournisseurs", component: FournisseurListComponent},
       { path: "produits", component: ProductListComponent},
+      { path: "stocks", component: StockListComponent},
     ],
   },
   {

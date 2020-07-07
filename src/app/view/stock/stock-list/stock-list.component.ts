@@ -84,7 +84,6 @@ export class StockListComponent implements OnInit {
     myClone.id= stockItem.id;
     myClone.ref= stockItem.ref;
     myClone.qteStock= stockItem.qteStock;
-    myClone.qtAlerte= stockItem.qtAlerte;
     myClone.qtFinal= stockItem.qtFinal;
     myClone.stock= stockItem.stock;
     myClone.produit= stockItem.produit;

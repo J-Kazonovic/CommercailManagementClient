@@ -6,7 +6,6 @@ export class StockItem {
     id:number;
     ref:string;
     qteStock:number;
-    qtAlerte:number;
     qtFinal:number;
 	produit=new Product();
     stock=new Stock();

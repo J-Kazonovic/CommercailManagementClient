@@ -8,27 +8,17 @@
     <div class="card-header">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="date">Filter By Date</label>
                         <input id="date" type="date" class="form-control" (change)="onFilterAction()" [(ngModel)]=date>
                     </div>
                 </div>
 
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="dept">Filter By Departement</label>
-                        <select class="form-control" id="dept" [(ngModel)]=dept (change)="onFilterAction()">
-                            <option selected></option>
-                            <option *ngFor="let dept of deptList" value="{{dept.libelle}}">
-                                {{dept.libelle}}
-                            </option>
-                        </select>
-                    </div>
-                </div>
+                
 
 
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="sort">Sort By <i class="fa fa-sort mr-1" (click)="onSortAction()"
                                 aria-hidden="true"></i></label>
@@ -40,7 +30,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label>Search</label>
                         <div class="input-group mb-3">
